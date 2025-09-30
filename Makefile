@@ -3,7 +3,7 @@ CC      		= cc
 CFLAGS  		= -Wall -Wextra -Werror
 LIBFT			= ./libft/libft.a
 INC				= -I$(LIBFT_HDR_DIR) -I$(HDR_DIR)
-HDR_DIR			= include
+HDR_DIR			= inc
 LIBFT_HDR_DIR	= libft/include
 
 LIBFLAGS 		= -lm
@@ -24,7 +24,6 @@ YELLOW			= \033[0;33m
 ############################# SOURCES #############################
 
 SRCS_DIR 		= src/
-PARSING_DIR 	= src/parsing/
 SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)parse.c \
 				$(SRCS_DIR)main.c 
@@ -32,7 +31,7 @@ SRCS    	=	$(SRCS_DIR)file.c \
 ############################# DIRECTORIES ##############################
 
 OBJS_DIR = .objs/
-OBJS    = $($(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
+OBJS    = $($(SRCS_DIR):%.c=$(OBJS_DIR)%.o)
 DEPS := $(OBJS:.o=.d)
 
 ############################# RULES ##############################
@@ -52,15 +51,11 @@ fi
 
 force:
 $(NAME):	mlx $(OBJS) libft/libft.a
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LINKFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LINKFLAGS) $(LIBFLAGS)
 	@echo "$(GREEN)Compilation successful! 🎉$(RESET)"
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_DIR) $(MLX_DIR)/$(MLX_HDR)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(MLX_DIR)/$(MLX_HDR)
 	@mkdir -p  $(OBJS_DIR)
-	@mkdir -p $(OBJS_DIR)/parsing
-	@mkdir -p $(OBJS_DIR)/builtins
-	@mkdir -p $(OBJS_DIR)/utils
-	@mkdir -p $(OBJS_DIR)/exec
 	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@ $(MLXFLAGS)
 	@echo "$(BLUE)Compiling : $< 🔧$(RESET)"
 
