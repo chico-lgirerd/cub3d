@@ -5,6 +5,15 @@ LIBFT			= ./libft/libft.a
 INC				= -I$(LIBFT_HDR_DIR) -I$(HDR_DIR)
 HDR_DIR			= include
 LIBFT_HDR_DIR	= libft/include
+
+LIBFLAGS 		= -lm
+MLXFLAGS 		= -I/usr/include -Imlx
+LINKFLAGS 		= -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+
+MLX_DIR			= mlx/
+MLX_HDR			= mlx.h
+MLX_REPO		= https://github.com/42paris/minilibx-linux.git
+
 GREEN			= \033[1;32m
 RESET			= \033[0m
 RED				= \033[0;31m
@@ -31,18 +40,26 @@ all: $(LIBFT) $(NAME)
 $(LIBFT): force $(LIBFT_HDR_DIR)
 	@make --no-print-directory -C ./libft
 
+mlx:
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "Cloning MiniLibX..."; \
+		git clone $(MLX_REPO) $(MLX_DIR) && cd $(MLX_DIR) && ./configure; \
+	else \
+		echo "MiniLibX already present."; \
+fi
+
 force:
-$(NAME): $(OBJS) libft/libft.a
+$(NAME): mlx $(OBJS) libft/libft.a
 	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)Compilation successful! 🎉$(RESET)"
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_DIR)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_DIR) $(MLX_DIR)/$(MLX_HDR)
 	@mkdir -p  $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/parsing
 	@mkdir -p $(OBJS_DIR)/builtins
 	@mkdir -p $(OBJS_DIR)/utils
 	@mkdir -p $(OBJS_DIR)/exec
-	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@ $(MLXFLAGS)
 	@echo "$(BLUE)Compiling : $< 🔧$(RESET)"
 
 clean:
@@ -57,16 +74,6 @@ fclean:
 	
 re: fclean all
 
-norm:
-	@norminette srcs || true
-	@norminette include || true
-	@norminette libft | grep Error || true 
-
-val: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
-	--show-mismatched-frees=yes --trace-children=yes \
-	--suppressions=rl_leaks.supp --track-fds=yes --quiet ./$(NAME)
-
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mlx 
