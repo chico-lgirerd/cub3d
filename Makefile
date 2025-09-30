@@ -25,19 +25,21 @@ YELLOW			= \033[0;33m
 
 SRCS_DIR 		= src/
 PARSING_DIR 	= src/parsing/
-SRCS    	=
+SRCS    	=	$(SRCS_DIR)file.c \
+				$(SRCS_DIR)parse.c \
+				$(SRCS_DIR)main.c 
 
 ############################# DIRECTORIES ##############################
 
 OBJS_DIR = .objs/
-OBJS    = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
+OBJS    = $($(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 DEPS := $(OBJS:.o=.d)
 
 ############################# RULES ##############################
 
 all: $(LIBFT) $(NAME)
 
-$(LIBFT): force $(LIBFT_HDR_DIR)
+$(LIBFT):	force $(LIBFT_HDR_DIR)
 	@make --no-print-directory -C ./libft
 
 mlx:
@@ -49,8 +51,8 @@ mlx:
 fi
 
 force:
-$(NAME): mlx $(OBJS) libft/libft.a
-	@$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME):	mlx $(OBJS) libft/libft.a
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LINKFLAGS)
 	@echo "$(GREEN)Compilation successful! 🎉$(RESET)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_DIR) $(MLX_DIR)/$(MLX_HDR)
