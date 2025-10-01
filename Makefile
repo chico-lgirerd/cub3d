@@ -1,6 +1,6 @@
 NAME    		= cub3D
 CC      		= cc
-CFLAGS  		= -Wall -Wextra -Werror
+CFLAGS  		= -Wall -Wextra -Werror -g3
 LIBFT			= ./libft/libft.a
 INC				= -I$(LIBFT_HDR_DIR) -I$(HDR_DIR)
 HDR_DIR			= inc
@@ -53,8 +53,6 @@ force:
 $(NAME):	mlx $(OBJS) libft/libft.a
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LINKFLAGS) $(LIBFLAGS) -o $(NAME) 
 	@echo "$(GREEN)Compilation successful! 🎉$(RESET)"
-
-# $(INC) $(MLX_DIR)/$(MLX_HDR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c 
 	@mkdir -p  $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:58:41 by lgirerd           #+#    #+#             */
-/*   Updated: 2024/12/04 16:18:33 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/01 12:54:22 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#	define BUFFER_SIZE 65536
 # endif
 
 int		line_checker(char	*str);

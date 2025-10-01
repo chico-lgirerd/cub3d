@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/01 10:16:39 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/01 11:30:04 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_world
 	t_player	player;
 }	t_world;
 
-char	**get_map(t_world *world, int fd, int lines);
 int		check_args(int ac, char **av);
+char	**map_from_file(t_world *world, char *filename, char** map);
 
 #endif
