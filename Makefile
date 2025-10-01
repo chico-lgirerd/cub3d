@@ -26,12 +26,12 @@ YELLOW			= \033[0;33m
 SRCS_DIR 		= src/
 SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)parse.c \
-				$(SRCS_DIR)main.c 
+				$(SRCS_DIR)main.c
 
 ############################# DIRECTORIES ##############################
 
 OBJS_DIR = .objs/
-OBJS    = $($(SRCS_DIR):%.c=$(OBJS_DIR)%.o)
+OBJS    = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 DEPS := $(OBJS:.o=.d)
 
 ############################# RULES ##############################
@@ -44,18 +44,20 @@ $(LIBFT):	force $(LIBFT_HDR_DIR)
 mlx:
 	@if [ ! -d "$(MLX_DIR)" ]; then \
 		echo "Cloning MiniLibX..."; \
-		git clone $(MLX_REPO) $(MLX_DIR) && cd $(MLX_DIR) && ./configure; \
+		git clone $(MLX_REPO) $(MLX_DIR) && cd $(MLX_DIR) && ./configure && make; \
 	else \
 		echo "MiniLibX already present."; \
 fi
 
 force:
 $(NAME):	mlx $(OBJS) libft/libft.a
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LINKFLAGS) $(LIBFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LINKFLAGS) $(LIBFLAGS) -o $(NAME) 
 	@echo "$(GREEN)Compilation successful! 🎉$(RESET)"
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(MLX_DIR)/$(MLX_HDR)
-	@mkdir -p  $(OBJS_DIR)
+# $(INC) $(MLX_DIR)/$(MLX_HDR)
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c 
+	@mkdir -p  $(dir $@)
 	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@ $(MLXFLAGS)
 	@echo "$(BLUE)Compiling : $< 🔧$(RESET)"
 

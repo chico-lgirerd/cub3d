@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/09/30 17:14:00 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/01 09:55:32 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,20 @@ int	line_count(int fd)
 
 char	**get_map(t_world *world, int fd, int lines)
 {
+	(void)world;
 	char	**map;
 	int		i;
 	char	*line;
 
 	map = malloc(sizeof(char *) * (lines + 1));
 	if (!map)
-		ft_error(world, "Failed to allocate memory : map");
+		// ft_error(world, "Failed to allocate memory : map");
 	i = 0;
 	line = get_next_line(fd);
 	if (!line)
 	{
 		free(map);
-		ft_error(world, "Failed get_next_line");
+		// ft_error(world, "Failed get_next_line");
 	}
 	while (line != NULL)
 	{

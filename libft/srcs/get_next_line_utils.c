@@ -6,39 +6,12 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:59:01 by lgirerd           #+#    #+#             */
-/*   Updated: 2024/12/04 17:40:15 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/01 10:17:49 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	src_len;
-
-	i = 0;
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	while (src[i] && i < size - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (src_len);
-}
+#include "libft.h"
 
 char	*ft_strjoin_mod(char *s1, char *s2)
 {
