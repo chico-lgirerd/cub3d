@@ -6,12 +6,13 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/01 12:54:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/01 14:39:42 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "get_next_line.h"
+#include "libft.h"
 
 int	line_count(int fd)
 {
@@ -84,3 +85,22 @@ char	**map_from_file(t_world *world, char *filename, char** map)
 	map = get_map(world, filefd, linecount + 1);
 	return (map);
 }
+
+
+// int	check_textures(t_world *world)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (world->map[i])
+// 	{
+// 		j = 0;
+// 		while (world->map[j])
+// 		{
+// 			skip_space(world->map[i], *j);
+// 			j++;
+// 		}
+// 		i++;	
+// 	}	
+// }
