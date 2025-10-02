@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 16:08:58 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:08:43 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,36 @@ void	skip_spaces(char **str)
 	return (str);
 }
 
-int	fill_rgb(t_world *world, char key, char *mapline)
+int	fill_rgb(t_world *world, char *key, char *mapline)
 {
-	if (key == 'F')
+	if (key[0] == 'F')
 	{
 		world->textures.floor.red = color_until_comma(mapline);
 		world->textures.floor.green = color_until_comma(mapline);
 		world->textures.floor.blue = color_until_comma(mapline);
 	}
-	else
+	else if (key[0] == 'C')
+	{
+		world->textures.ceiling.red = color_until_comma(mapline);
+		world->textures.ceiling.green = color_until_comma(mapline);
+		world->textures.ceiling.blue = color_until_comma(mapline);
+	}
 }
 
 int	load_texture(t_world *world, char *key, char **mapline)
 {
 	if (!ft_strcmp(key, "NO"))
-		world->textures.north = mlx_xpm_file_to_image(world->mlx_ptr, *mapline, world->width, world->height);
+		world->textures.north = mlx_xpm_file_to_image(world->mlx_ptr,
+				*mapline, world->textures.width, world->textures.height);
 	else if (!ft_strcmp(key, "SO"))
-		world->textures.south = mlx_xpm_file_to_image(world->mlx_ptr, *mapline, world->width, world->height);
+		world->textures.south = mlx_xpm_file_to_image(world->mlx_ptr,
+				*mapline, world->textures.width, world->textures.height);
 	else if (!ft_strcmp(key, "WE"))
-		world->textures.west = mlx_xpm_file_to_image(world->mlx_ptr, *mapline, world->width, world->height);
+		world->textures.west = mlx_xpm_file_to_image(world->mlx_ptr,
+				*mapline, world->textures.width, world->textures.height);
 	else if (!ft_strcmp(key, "EA"))
-		world->textures.east = mlx_xpm_file_to_image(world->mlx_ptr, *mapline, world->width, world->height);
+		world->textures.east = mlx_xpm_file_to_image(world->mlx_ptr,
+				*mapline, world->textures.width, world->textures.height);
 	else if ((key[0] == 'F' || key[0] == 'F') && !key[1]) // have to check for second character in case of CX/FX
 		fill_rgb(world, key[0], mapline);
 	else

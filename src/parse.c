@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 14:59:07 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:05:01 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	line_count(int fd)
 
 char	**get_map(t_world *world, int fd, int lines)
 {
-	(void)world;
 	char	**map;
 	int		i;
 	char	*line;
+
+	(void)world;
 
 	map = malloc(sizeof(char *) * (lines + 1));
 	if (!map)
@@ -69,11 +70,11 @@ char	**get_map(t_world *world, int fd, int lines)
 	return (map);
 }
 
-char	**map_from_file(t_world *world, char *filename, char** map)
+char	**map_from_file(t_world *world, char *filename, char **map)
 {
 	int	filefd;
 	int	linecount;
-	
+
 	filefd = open(filename, O_RDONLY);
 	if (filefd < 0)
 		return (NULL);
@@ -98,6 +99,6 @@ int	check_textures(t_world *world)
 	{
 		if (!get_texture(world, world->map[i]))
 			return (0);
-		i++;		
-	}	
+		i++;
+	}
 }

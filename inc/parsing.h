@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 13:48:16 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 16:24:51 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_color
 
 typedef struct s_textures
 {
+	int		width;
+	int		height;
 	void	*north;
 	void	*south;
 	void	*east;
@@ -39,6 +41,8 @@ typedef struct s_player
 typedef struct s_world
 {
 	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
 	t_textures	textures;
 	t_player	player;
 }	t_world;

@@ -6,13 +6,11 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 16:01:01 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:03:18 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-
 
 int	color_until_comma(char **color)
 {
