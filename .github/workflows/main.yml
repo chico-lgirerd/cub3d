@@ -1,0 +1,31 @@
+name: make && norminette
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build_and_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+
+      - name: Refuse merge if 'mlx' is present
+        run: |
+          if [ -d "mlx" ]; then
+            echo "'mlx' detected! Aborting."
+            exit 1
+          fi
+
+      - name: Build  Makefile
+        run: make
+
+      - name: Norminette Check
+        uses: alexandregv/norminette-action@v3
+        with:
+          flags: '.'
