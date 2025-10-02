@@ -6,7 +6,7 @@
 #    By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 12:08:57 by tiaperei          #+#    #+#              #
-#    Updated: 2025/09/30 16:55:14 by lgirerd          ###   ########lyon.fr    #
+#    Updated: 2025/10/02 11:30:57 by lgirerd          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SOURCES_FILES = 	ft_atoi.c \
 					ft_strcmp.c \
 					ft_splt_charset.c \
 					ft_splt_utils.c \
+					ft_isspace.c \
 					get_next_line.c \
 					get_next_line_utils.c \
 

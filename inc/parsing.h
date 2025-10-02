@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/01 12:57:46 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 13:48:16 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_world
 }	t_world;
 
 int		check_args(int ac, char **av);
+void	trim_map(char **map);
+int		empty(char *str);
 char	**map_from_file(t_world *world, char *filename, char** map);
 
 #endif

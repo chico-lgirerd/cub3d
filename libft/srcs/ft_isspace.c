@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 10:37:38 by lgirerd          ###   ########lyon.fr   */
+/*   Created: 2025/10/02 11:29:54 by lgirerd           #+#    #+#             */
+/*   Updated: 2025/10/02 11:30:32 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
-#include <stdio.h>
-
-int	main(int ac, char **av)
+int	ft_isspace(char c)
 {
-	t_world	world1;
-
-	if (!check_args(ac, av))
-		return (1);
-	char	**map;
-	map = NULL;
-	map = map_from_file(&world1, av[1], map);
-	for (int i = 0; map[i]; i++)
-		printf("%s", map[i]);
-	return (0);
+	return (c == ' ' || c == '\t' || c == '\v' || c == '\f');
 }

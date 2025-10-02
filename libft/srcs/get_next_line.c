@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:58:28 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/01 14:39:10 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 13:47:16 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_next_line(int fd)
 	ft_cleaner(buffer);
 	if (line[0] == '\0')
 		return (free(line), NULL);
-	return (ft_strtrim(line, " \t\f\v"));
+	return (line);
 }
 
 // int	main(void)
