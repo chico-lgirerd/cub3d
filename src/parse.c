@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 13:48:03 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 14:59:07 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,15 @@ char	**map_from_file(t_world *world, char *filename, char** map)
 	return (map);
 }
 
-// int	check_textures(t_world *world)
-// {
-// 	int	i;
-// 	int	j;
+int	check_textures(t_world *world)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (world->map[i])
-// 	{
-// 		j = 0;
-// 		while (world->map[j])
-// 		{
-// 			skip_space(world->map[i], *j);
-// 			j++;
-// 		}
-// 		i++;	
-// 	}	
-// }
+	i = 0;
+	while (world->map[i] && !have_textures(world))
+	{
+		if (!get_texture(world, world->map[i]))
+			return (0);
+		i++;		
+	}	
+}

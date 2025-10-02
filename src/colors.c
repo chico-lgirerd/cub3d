@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 14:43:48 by lgirerd          ###   ########lyon.fr   */
+/*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
+/*   Updated: 2025/10/02 16:01:01 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "libft.h"
 
-#include <stdio.h>
 
-int	main(int ac, char **av)
+
+int	color_until_comma(char **color)
 {
-	t_world	world1;
+	int	value;
 
-	if (!check_args(ac, av))
-		return (1);
-	char	**map;
-	map = NULL;
-	map = map_from_file(&world1, av[1], map);
-	for (int i = 0; map[i]; i++)
-		printf("%s", map[i]);
-	printf("\n");
-	
-	return (0);
+	value = ft_atoi(*color);
+	while (**color && (**color >= '0' && **color <= '9'))
+		(*color)++;
+	skip_spaces(color);
+	if (**color == ',')
+	{
+		(*color)++;
+		skip_spaces(color);
+	}
+	return (value);
 }
