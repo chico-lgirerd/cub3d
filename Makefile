@@ -27,6 +27,8 @@ SRCS_DIR 		= src/
 SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)parse.c \
 				$(SRCS_DIR)trim.c \
+				$(SRCS_DIR)textures.c \
+				$(SRCS_DIR)colors.c \
 				$(SRCS_DIR)main.c
 
 ############################# DIRECTORIES ##############################

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 16:24:51 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:46:18 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ int		check_args(int ac, char **av);
 void	trim_map(char **map);
 int		empty(char *str);
 char	**map_from_file(t_world *world, char *filename, char** map);
+int		color_until_comma(char **color);
+int		get_textures(t_world *world, char *mapline);
+void	skip_spaces(char **str);
+int		valid_colors(t_textures textures);
 
 #endif

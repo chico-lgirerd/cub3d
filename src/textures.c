@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:08:43 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:51:00 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	skip_spaces(char **str)
 {
 	while (**str && ft_isspace(**str))
 		(*str)++;
-	return (str);
 }
 
-int	fill_rgb(t_world *world, char *key, char *mapline)
+int	fill_rgb(t_world *world, char *key, char **mapline)
 {
 	if (key[0] == 'F')
 	{
@@ -35,24 +34,27 @@ int	fill_rgb(t_world *world, char *key, char *mapline)
 		world->textures.ceiling.green = color_until_comma(mapline);
 		world->textures.ceiling.blue = color_until_comma(mapline);
 	}
+	if (!valid_colors(world->textures))
+		return (0);
+	return (1);
 }
 
 int	load_texture(t_world *world, char *key, char **mapline)
 {
 	if (!ft_strcmp(key, "NO"))
 		world->textures.north = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, world->textures.width, world->textures.height);
+				*mapline, &world->textures.width, &world->textures.height);
 	else if (!ft_strcmp(key, "SO"))
 		world->textures.south = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, world->textures.width, world->textures.height);
+				*mapline, &world->textures.width, &world->textures.height);
 	else if (!ft_strcmp(key, "WE"))
 		world->textures.west = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, world->textures.width, world->textures.height);
+				*mapline, &world->textures.width, &world->textures.height);
 	else if (!ft_strcmp(key, "EA"))
 		world->textures.east = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, world->textures.width, world->textures.height);
+				*mapline, &world->textures.width, &world->textures.height);
 	else if ((key[0] == 'F' || key[0] == 'F') && !key[1]) // have to check for second character in case of CX/FX
-		fill_rgb(world, key[0], mapline);
+		fill_rgb(world, key, mapline);
 	else
 		return (1); // Texture not recognized
 	return (0);
@@ -71,4 +73,13 @@ int	get_textures(t_world *world, char *mapline)
 	mapline += 2;
 	skip_spaces(&mapline);
 	load_texture(world, key, &mapline);
+	return (0);
+}
+
+int	have_textures(t_textures textures)
+{
+	if (!textures.east || !textures.north || !textures.south
+		|| !textures.west)
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:05:01 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/02 17:35:30 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int	check_textures(t_world *world)
 	int	i;
 
 	i = 0;
-	while (world->map[i] && !have_textures(world))
+	while (world->map[i]) // !have_textures(world)
 	{
-		if (!get_texture(world, world->map[i]))
+		if (!get_textures(world, world->map[i]))
 			return (0);
 		i++;
 	}
+	return (1);
 }
