@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:51:00 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/03 11:03:40 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	have_textures(t_textures textures)
 {
 	if (!textures.east || !textures.north || !textures.south
 		|| !textures.west)
+		return (0);
+	if (!valid_colors(textures))
 		return (0);
 	return (1);
 }

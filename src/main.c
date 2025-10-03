@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:51:47 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/03 12:56:07 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "mlx.h"
 
 #include <stdio.h>
+
+int	is_map_line(char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+        line++;
+    return *line == '0' || *line == '1';
+}
 
 int	main(int ac, char **av)
 {
@@ -29,5 +36,17 @@ int	main(int ac, char **av)
 	printf("\n");
 	world1.mlx_ptr = mlx_init();
 	world1.win_ptr = mlx_new_window(world1.mlx_ptr, 800, 400, "test1");
+	world1.map = map;
+	int	line_idx = 0;
+	while (map[line_idx])
+	{
+		if (is_map_line(map[line_idx]))
+			break ;
+		if (!get_textures(&world1, map[line_idx]))
+			return (1);
+		line_idx++;
+	}
+	if (have_textures(world1.textures))
+		printf("Parsed all textures !\n");
 	return (0);
 }
