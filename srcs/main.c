@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/09/30 18:16:26 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:23:21 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,127 @@
 #include <X11/X.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
-
-void	draw_wall(t_exec_data *data, int x)
+int worldmap[MAP_WIDTH][MAP_HEIGHT] =
 {
-	int	wall_height;
-	int	start;
-	int	end;
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+};
+
+void	init_map(t_exec_data *data)
+{
+	int	x;
 	int	y;
 	
-	wall_height = data->win_height / 10;
-	start = (data->win_height - wall_height) / 2;
-	end = start + wall_height;
-	y = start;
-	while (y < end)
+	data->map_width = MAP_WIDTH;
+	data->map_height = MAP_HEIGHT;
+	data->map = malloc(sizeof(int *) * MAP_WIDTH);
+	if (!data->map)
+		;
+	x = 0;
+	while (x < MAP_WIDTH)
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, 0x00FF0000);
-		y++;
+		data->map[x] = malloc(sizeof(int) * MAP_HEIGHT);
+		if (!data->map)
+			;
+		y = 0;
+		while (y < MAP_HEIGHT)
+		{
+			data->map[x][y] = worldmap[x][y];
+			y++;
+		}
+		x++;
 	}
 }
 
-int	render(t_exec_data *data)
+void	init_player(t_player *player)
 {
-	draw_wall(data, 1000);
+	player->pos_x = 20;
+	player->pos_y = 20;
+	player->dir_x = 0;
+	player->dir_y = -1;
+	player->plane_x = 0.66;
+	player->plane_y = 0;
+}
+
+void draw_block(t_exec_data *data, int x, int y, int color)
+{
+    int i, j;
+
+    for (i = 0; i < 50; ++i)
+        for (j = 0; j < 50; ++j)
+            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x * 50 + i, y * 50 + j, color);
+}
+
+int render(t_exec_data *data)
+{
+    int x;
+    //int y;
+	t_player	*player;
+	t_raycast	*raycast;
+
+	player = &data->player;
+	raycast = &data->raycast;
+	x = 0;
+	//printf("%d\n", data->map[0][0]);
+	while (x < data->win_width)
+	{
+		raycast->camera_x = 2 * x / (double)data->win_width - 1;
+		raycast->raydir_x = player->dir_x + player->plane_x * raycast->camera_x;
+		raycast->raydir_y = player->dir_y + player->plane_y * raycast->camera_x;
+		raycast->map_x = (int)player->pos_x;
+		raycast->map_y = (int)player->pos_y;
+		//raycast->deltadist_x = abs(1 / raycast->raydir_x); //if raydir_x or raydir_y == 0 (1e30)
+		//raycast->deltadist_x = abs(1 / raycast->raydir_y); //if raydir_x or raydir_y == 0 (1e30)
+		
+		x++;
+	}
+	return (0);
+}
+
+int	move_front(t_exec_data *data)
+{
+	int	i;
+
+	i = 0;
+	(void)data;
+	while (i < 400)
+	{
+		//draw_wall(data, i + 900);
+		i++;
+	}
 	return (0); 
 }
+
 int	handle_input(int keysym, t_exec_data *data)
 {
 	if (keysym == XK_Escape)
 		end_game(data);
+	else if (keysym == XK_Up)
+		move_front(data);
 	return (0);
 }
 
@@ -77,6 +169,8 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		;
+	init_map(&data);
+	init_player(&data.player);
 	exec_game(&data);
 	(void)ac;
 	(void)av;

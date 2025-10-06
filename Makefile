@@ -6,13 +6,13 @@
 #    By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 17:00:03 by lgirerd           #+#    #+#              #
-#    Updated: 2025/09/30 12:54:38 by tiaperei         ###   ########.fr        #
+#    Updated: 2025/10/06 16:24:18 by tiaperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    		= cub3D
 CC      		= cc
-CFLAGS  		= -Wall -Wextra -Werror
+CFLAGS  		= -Wall -Wextra -Werror -g3
 HDR_DIR			= include
 LIBFT_DIR		= libft
 MLX_DIR			= minilibx-linux
