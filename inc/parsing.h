@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/03 11:05:05 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 16:57:03 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int		get_textures(t_world *world, char *mapline);
 void	skip_spaces(char **str);
 int		valid_colors(t_textures textures);
 int		have_textures(t_textures textures);
+void	trim(char *str);
 
 #endif

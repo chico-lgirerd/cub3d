@@ -70,6 +70,7 @@ clean:
 fclean:
 	@make --no-print-directory fclean -C libft
 	@rm -rf $(NAME) && rm -rf $(OBJS_DIR)
+	@rm -rf mlx/
 	@echo "$(RED)Fully cleaned project 🗑️$(RESET)"
 	
 re: fclean all

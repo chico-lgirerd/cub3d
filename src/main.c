@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/05 20:50:35 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 17:28:46 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	is_map_line(char *line)
     return *line == '0' || *line == '1';
 }
 
+void	init_world(t_world *world)
+{
+	world->textures.width = 800;
+	world->textures.height = 400;
+}
+
 int	main(int ac, char **av)
 {
 	t_world	world1;
@@ -37,16 +43,13 @@ int	main(int ac, char **av)
 	for (int i = 0; map[i]; i++)
 		printf("%s", map[i]);
 	printf("\n");
-	world1.mlx_ptr = mlx_init();
-	world1.win_ptr = mlx_new_window(world1.mlx_ptr, 800, 400, "test1");
+	// world1.mlx_ptr = mlx_init();
+	// world1.win_ptr = mlx_new_window(world1.mlx_ptr, 800, 400, "test1");
 	world1.map = map;
+	init_world(&world1);
 	int	line_idx = 0;
-	while (map[line_idx])
+	while (map[line_idx] && !is_map_line(map[line_idx]))
 	{
-		if (is_map_line(map[line_idx])) {
-			printf("Out of loop index : %d\n", line_idx);
-			break ;
-		}
 		if (!get_textures(&world1, map[line_idx]))
 			return (1);
 		line_idx++;

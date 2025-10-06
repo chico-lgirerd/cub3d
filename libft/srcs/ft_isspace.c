@@ -6,11 +6,11 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:29:54 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:02:54 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 16:56:20 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\v' || c == '\f');
+	return (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\n');
 }

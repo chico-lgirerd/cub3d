@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/05 20:51:28 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 17:12:56 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	fill_rgb(t_world *world, char *key, char **mapline)
 	return (1);
 }
 
+#include <stdio.h>
+#include <fcntl.h>
+
 int	load_texture(t_world *world, char *key, char **mapline)
 {
 	if (!ft_strcmp(key, "NO"))
@@ -56,10 +59,12 @@ int	load_texture(t_world *world, char *key, char **mapline)
 	else if ((key[0] == 'F' || key[0] == 'C') && !key[1]) // have to check for second character in case of CX/FX
 		fill_rgb(world, key, mapline);
 	else
+	{
+		printf("Key not recognized\n");
 		return (1); // Texture not recognized
+	}
 	return (0);
 }
-#include <stdio.h>
 
 int	get_textures(t_world *world, char *mapline)
 {
@@ -68,13 +73,18 @@ int	get_textures(t_world *world, char *mapline)
 
 	printf("------- IN GET TEXTURES -------\n");
 	skip_spaces(&mapline);
+	printf("Next chars : %c, %c\n", *mapline, *mapline + 1);
 	// if (!*mapline || !*mapline + 1)
-	// 	return (1); // No key found!
-	key[0] = mapline[0];
-	key[1] = mapline[1];
+		// return (1); // No key found!
+	key[0] = *mapline;
+	mapline++;
+	key[1] = *mapline;
+	mapline++;
 	key[2] = '\0';
+	mapline++;
+	trim(mapline);
 	printf("---------- KEY ----------\n%s\n", key);
-	mapline += 3;
+	// mapline += 3;
 	// skip_spaces(&mapline);
 	load_texture(world, key, &mapline);
 	return (0);

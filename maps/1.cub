@@ -1,4 +1,4 @@
-NO ./assets/walls/north.xpm
+NO assets/walls/north.xpm
 SO ./assets/walls/south.xpm
 WE ./assets/walls/west.xpm
 EA ./assets/walls/east.xpm
