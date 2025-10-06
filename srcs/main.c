@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/06 19:23:21 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/06 22:50:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,23 +95,61 @@ int render(t_exec_data *data)
 {
     int x;
     //int y;
+	int	hit;
 	t_player	*player;
 	t_raycast	*raycast;
-
+ 
 	player = &data->player;
 	raycast = &data->raycast;
 	x = 0;
 	//printf("%d\n", data->map[0][0]);
 	while (x < data->win_width)
 	{
+		raycast->map_x = (int)player->pos_x;
+		raycast->map_y = (int)player->pos_y;
 		raycast->camera_x = 2 * x / (double)data->win_width - 1;
 		raycast->raydir_x = player->dir_x + player->plane_x * raycast->camera_x;
 		raycast->raydir_y = player->dir_y + player->plane_y * raycast->camera_x;
-		raycast->map_x = (int)player->pos_x;
-		raycast->map_y = (int)player->pos_y;
-		//raycast->deltadist_x = abs(1 / raycast->raydir_x); //if raydir_x or raydir_y == 0 (1e30)
-		//raycast->deltadist_x = abs(1 / raycast->raydir_y); //if raydir_x or raydir_y == 0 (1e30)
-		
+		raycast->deltadist_x = fabs(1 / raycast->raydir_x); //if raydir_x or raydir_y == 0 (1e30)
+		raycast->deltadist_x = fabs(1 / raycast->raydir_y); //if raydir_x or raydir_y == 0 (1e30)
+		if (raycast->raydir_x < 0)
+		{
+			raycast->step_x = -1;
+			raycast->dist_x = (player->pos_x - raycast->map_x) * raycast->deltadist_x;
+		}
+		else
+		{
+			raycast->step_x = 1;
+			raycast->dist_x = ((raycast->map_x + 1) - player->pos_x) * raycast->deltadist_x;
+		}
+		if (raycast->raydir_y < 0)
+		{
+			raycast->step_y = -1;
+			raycast->dist_y = (player->pos_y - raycast->map_y) * raycast->deltadist_y;
+		}
+		else
+		{
+			raycast->step_y = 1;
+			raycast->dist_y = ((raycast->map_y + 1) - player->pos_y) * raycast->deltadist_y;
+		}
+		hit = 0;
+		while (hit == 0)
+		{
+			if (raycast->dist_x < raycast->dist_y)
+			{
+				raycast->dist_x += raycast->deltadist_x;
+				raycast->map_x += raycast->step_x;
+				raycast->side = 0;
+			}
+			else
+			{
+				raycast->dist_y += raycast->deltadist_y;
+				raycast->map_y += raycast->step_y;
+				raycast->side = 1;
+			}
+			if (data->map[raycast->map_x][raycast->map_y] > 0)
+				hit = 1;
+		}
 		x++;
 	}
 	return (0);

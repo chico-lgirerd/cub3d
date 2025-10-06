@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/06 19:22:23 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:15:27 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_raycast
 	double	wall_dist;
 	int		step_x;	//next step of DDA algo
 	int		step_y;
+	int		side;
 }	t_raycast;
 
 typedef struct s_exec_data
