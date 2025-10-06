@@ -1,7 +1,7 @@
 NO assets/walls/north.xpm
-SO ./assets/walls/south.xpm
-WE ./assets/walls/west.xpm
-EA ./assets/walls/east.xpm
+SO assets/walls/south.xpm
+WE assets/walls/west.xpm
+EA assets/walls/east.xpm
 
 
 F 255,255,255

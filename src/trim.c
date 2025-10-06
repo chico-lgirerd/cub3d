@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:29:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:05:40 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 22:10:13 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	trim_map(char **map)
 	while (map[i])
 	{
 		trim(map[i]);
-		i++;	
+		i++;
 	}
 }
 

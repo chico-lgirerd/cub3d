@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:35:30 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/06 22:10:34 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**get_map(t_world *world, int fd, int lines)
 	char	*line;
 
 	(void)world;
-
 	map = malloc(sizeof(char *) * (lines + 1));
 	if (!map)
 		return (NULL);
