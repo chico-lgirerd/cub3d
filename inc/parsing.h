@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/06 16:57:03 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 17:01:02 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	skip_spaces(char **str);
 int		valid_colors(t_textures textures);
 int		have_textures(t_textures textures);
 void	trim(char *str);
+int		is_valid_map(char **map, int start);
 
 #endif
