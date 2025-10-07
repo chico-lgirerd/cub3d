@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:58:41 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/01 12:54:22 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 12:07:24 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
-# ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 65536
-# endif
+# define BUFFER_SIZE 65536
 
 int		line_checker(char	*str);
 size_t	ft_strlen(const char *s);

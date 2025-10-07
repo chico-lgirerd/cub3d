@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/07 11:55:07 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 12:35:02 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 int	is_map_line(char *line)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
-        line++;
-    return *line == '0' || *line == '1';
+		line++;
+	return (*line == '0' || *line == '1');
 }
 
 void	init_world(t_world *world)

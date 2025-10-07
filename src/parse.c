@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/06 22:10:34 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 12:33:21 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,5 @@ char	**map_from_file(t_world *world, char *filename, char **map)
 	if (linecount == 0)
 		return (NULL);
 	map = get_map(world, filefd, linecount + 1);
-	// trim_map(map);
 	return (map);
-}
-
-int	check_textures(t_world *world)
-{
-	int	i;
-
-	i = 0;
-	while (world->map[i]) // !have_textures(world)
-	{
-		if (!get_textures(world, world->map[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }

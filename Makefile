@@ -72,7 +72,8 @@ fclean:
 	@rm -rf $(NAME) && rm -rf $(OBJS_DIR)
 	@rm -rf mlx/
 	@echo "$(RED)Fully cleaned project 🗑️$(RESET)"
-	
+	@echo "$(RED)Removed mlx$(RESET)"
+
 re: fclean all
 
 -include $(DEPS)
