@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/07 11:23:39 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/07 11:55:07 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,21 @@ void	destroy_images(t_world *world, t_textures textures)
 		mlx_destroy_image(world->mlx_ptr, textures.west);
 }
 
+void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return;
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 int	main(int ac, char **av)
 {
 	t_world	*world1;
@@ -87,6 +102,7 @@ int	main(int ac, char **av)
 	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
 	mlx_destroy_display(world1->mlx_ptr);
 	free(world1->mlx_ptr);
+	free_map(map);
 	free(world1);
 	return (0);
 }
