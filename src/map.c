@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/08 11:03:48 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/08 13:54:29 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	get_map_rows(char **map)
 	return (i);
 }
 
+int	offset_spaces(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	return (i);
+}
+
 int	is_valid_map(char **map, int start)
 {
 	int	player_count;
@@ -37,11 +47,11 @@ int	is_valid_map(char **map, int start)
 	player_count = 0;
 	while (i < rows)
 	{
+		// skip_spaces(&map[i]);
 		cols = ft_strlen(map[i]);
-		j = 0;
-		while (j < cols - 1)
+		j = offset_spaces(map[i]);
+		while (j < cols)
 		{
-			skip_spaces(&map[i]);
 			char c = map[i][j];
 			if (!c)
 			{
@@ -62,7 +72,7 @@ int	is_valid_map(char **map, int start)
 			}
 			else if (c != '0' && c != '1' && c != ' ' && c != '\n')
 			{
-				printf("Unrecognized character at position %d, %d : \033[31;47m'%c'\033[0m", i + start, j, c);
+				printf("Unrecognized character at position %d, %d : \033[31;47m'%c'\033[0m", i + start + 1, j, c);
 				j++;
 				continue;
 				// return (0);
@@ -90,5 +100,6 @@ int	is_valid_map(char **map, int start)
 		printf("No starting position found\n");
 		return (0);
 	}
+	printf("\n");
 	return (1);
 }
