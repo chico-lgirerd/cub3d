@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/06 21:15:27 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:45:17 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,32 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
-typedef struct s_raycast
+typedef struct s_line
+{
+	int	tex_x;
+	int	tex_y;
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+}	t_line;
+
+typedef struct s_raycasting
 {
 	double	camera_x;
 	double	raydir_x;
 	double	raydir_y;
 	int		map_x;
 	int		map_y;
-	int		dist_x; // dist ray travel for the 1st x_side case
-	int		dist_y;
+	int		walldist_x; // dist ray travel for the 1st x_side case
+	int		walldist_y;
 	double	deltadist_x; // dist horizontal to next case
 	double	deltadist_y; // dist vertical to next case
-	double	wall_dist;
+	double	perp_walldist;
 	int		step_x;	//next step of DDA algo
 	int		step_y;
 	int		side;
-}	t_raycast;
+	t_line	line;
+}	t_raycasting;
 
 typedef struct s_exec_data
 {
@@ -54,7 +64,7 @@ typedef struct s_exec_data
 	int			map_height;
 	int			**map;
 	t_player	player;
-	t_raycast	raycast;
+	t_raycasting	raycasting;
 }	t_exec_data;
 
 

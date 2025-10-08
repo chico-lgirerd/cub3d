@@ -6,7 +6,7 @@
 #    By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 17:00:03 by lgirerd           #+#    #+#              #
-#    Updated: 2025/10/06 16:24:18 by tiaperei         ###   ########.fr        #
+#    Updated: 2025/10/08 20:04:28 by tiaperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ INC				= -I$(HDR_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 LIBFT 			= $(LIBFT_DIR)/libft.a
 MLX 			= $(MLX_DIR)/libmlx.a
 MLX_LIB 		= -L$(MLX_DIR) -lmlx -lX11 -lXext
+MATH_LIB		= -lm
 MLX_REPO 		= https://github.com/42paris/minilibx-linux.git
 
 ############################# SOURCES #############################
@@ -48,7 +49,7 @@ $(MLX): $(MLX_DIR)
 	$(MAKE) -C $(MLX_DIR)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) $(MATH_LIB) -o $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_DIR)
 	@mkdir -p $(OBJS_DIR)

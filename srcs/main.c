@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/06 22:50:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/08 20:38:45 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,74 +82,146 @@ void	init_player(t_player *player)
 	player->plane_y = 0;
 }
 
-void draw_block(t_exec_data *data, int x, int y, int color)
+int rgb_to_int(int r, int g, int b)
 {
-    int i, j;
+    return ((r << 16) | (g << 8) | b);
+}
 
-    for (i = 0; i < 50; ++i)
-        for (j = 0; j < 50; ++j)
-            mlx_pixel_put(data->mlx_ptr, data->win_ptr, x * 50 + i, y * 50 + j, color);
+void	draw_simple_wall(t_exec_data *data, int x, int draw_start, int draw_end)
+{
+	int				y;
+	int				color;
+	t_raycasting	rc;
+
+	rc = data->raycasting;
+	if (data->map[rc.map_x][rc.map_y] == 1)
+		color = rgb_to_int(128, 128, 128);
+	else if (data->map[rc.map_x][rc.map_y] == 2)
+		color = rgb_to_int(255, 0, 0);
+	else if (data->map[rc.map_x][rc.map_y] == 3)
+		color = rgb_to_int(0, 255, 0);
+	else if (data->map[rc.map_x][rc.map_y] == 4)
+		color = rgb_to_int(0, 0, 255);
+	else
+		color = rgb_to_int(255, 255, 255);
+	y = draw_start;
+	while (y < draw_end)
+	{
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
+		y++;
+	}
+}
+
+void	draw_ceiling_floor(t_exec_data *data, int x, int draw_start, int draw_end)
+{
+	int	y;
+	int	ceiling_color;
+	int	floor_color;
+
+	ceiling_color = rgb_to_int(100, 100, 255);
+	floor_color = rgb_to_int(50, 50, 50);
+	y = 0;
+	while (y < draw_start)
+	{
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, ceiling_color);
+		y++;
+	}
+	y = draw_end;
+	while (y < data->win_height)
+	{
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, floor_color);
+		y++;
+	}
+}
+
+void	draw_map(t_exec_data *data, int x)
+{
+	double			wall_x;
+	t_player		*player;
+	t_raycasting	*rc;
+	t_line			*line;
+
+	player = &data->player;
+	rc = &data->raycasting;
+	line = &data->raycasting.line;
+	if (rc->side == 0)
+		wall_x = player->pos_y + rc->perp_walldist * rc->raydir_y;
+	else
+		wall_x = player->pos_x + rc->perp_walldist * rc->raydir_x;
+	wall_x -= floor(wall_x);
+	line->tex_x = wall_x;
+	line->line_height = data->win_height / rc->perp_walldist;
+	line->draw_start = -(line->line_height) / 2 + data->win_height / 2;
+	line->draw_end = line->line_height / 2 + data->win_height / 2;
+	draw_ceiling_floor(data, x, line->draw_start, line->draw_end);
+	draw_simple_wall(data, x, line->draw_start, line->draw_end);
 }
 
 int render(t_exec_data *data)
 {
-    int x;
-    //int y;
-	int	hit;
-	t_player	*player;
-	t_raycast	*raycast;
- 
+    int 			x;
+	int				hit;
+	t_player		*player;
+	t_raycasting	*rc;
+	t_line			*line;
+	
 	player = &data->player;
-	raycast = &data->raycast;
+	rc = &data->raycasting;
+	line = &data->raycasting.line;
 	x = 0;
 	//printf("%d\n", data->map[0][0]);
 	while (x < data->win_width)
 	{
-		raycast->map_x = (int)player->pos_x;
-		raycast->map_y = (int)player->pos_y;
-		raycast->camera_x = 2 * x / (double)data->win_width - 1;
-		raycast->raydir_x = player->dir_x + player->plane_x * raycast->camera_x;
-		raycast->raydir_y = player->dir_y + player->plane_y * raycast->camera_x;
-		raycast->deltadist_x = fabs(1 / raycast->raydir_x); //if raydir_x or raydir_y == 0 (1e30)
-		raycast->deltadist_x = fabs(1 / raycast->raydir_y); //if raydir_x or raydir_y == 0 (1e30)
-		if (raycast->raydir_x < 0)
+		rc->map_x = (int)player->pos_x;
+		rc->map_y = (int)player->pos_y;
+		rc->camera_x = 2 * x / (double)data->win_width - 1;
+		rc->raydir_x = player->dir_x + player->plane_x * rc->camera_x;
+		rc->raydir_y = player->dir_y + player->plane_y * rc->camera_x;
+		rc->deltadist_x = fabs(1 / rc->raydir_x); //if raydir_x or raydir_y == 0 (1e30)
+		rc->deltadist_y = fabs(1 / rc->raydir_y); //if raydir_x or raydir_y == 0 (1e30)
+		if (rc->raydir_x < 0)
 		{
-			raycast->step_x = -1;
-			raycast->dist_x = (player->pos_x - raycast->map_x) * raycast->deltadist_x;
+			rc->step_x = -1;
+			rc->walldist_x = (player->pos_x - rc->map_x) * rc->deltadist_x;
 		}
 		else
 		{
-			raycast->step_x = 1;
-			raycast->dist_x = ((raycast->map_x + 1) - player->pos_x) * raycast->deltadist_x;
+			rc->step_x = 1;
+			rc->walldist_x = ((rc->map_x + 1) - player->pos_x) * rc->deltadist_x;
 		}
-		if (raycast->raydir_y < 0)
+		if (rc->raydir_y < 0)
 		{
-			raycast->step_y = -1;
-			raycast->dist_y = (player->pos_y - raycast->map_y) * raycast->deltadist_y;
+			rc->step_y = -1;
+			rc->walldist_y = (player->pos_y - rc->map_y) * rc->deltadist_y;
 		}
 		else
 		{
-			raycast->step_y = 1;
-			raycast->dist_y = ((raycast->map_y + 1) - player->pos_y) * raycast->deltadist_y;
+			rc->step_y = 1;
+			rc->walldist_y = ((rc->map_y + 1) - player->pos_y) * rc->deltadist_y;
 		}
 		hit = 0;
 		while (hit == 0)
 		{
-			if (raycast->dist_x < raycast->dist_y)
+			if (rc->walldist_x < rc->walldist_y)
 			{
-				raycast->dist_x += raycast->deltadist_x;
-				raycast->map_x += raycast->step_x;
-				raycast->side = 0;
+				rc->walldist_x += rc->deltadist_x;
+				rc->map_x += rc->step_x;
+				rc->side = 0;
 			}
 			else
 			{
-				raycast->dist_y += raycast->deltadist_y;
-				raycast->map_y += raycast->step_y;
-				raycast->side = 1;
+				rc->walldist_y += rc->deltadist_y;
+				rc->map_y += rc->step_y;
+				rc->side = 1;
 			}
-			if (data->map[raycast->map_x][raycast->map_y] > 0)
+			if (data->map[rc->map_x][rc->map_y] > 0)
 				hit = 1;
 		}
+		if (rc->side == 0)
+			rc->perp_walldist = rc->walldist_x - rc->deltadist_x;
+		else
+			rc->perp_walldist = rc->walldist_y - rc->deltadist_y;
+		draw_map(data, x);
 		x++;
 	}
 	return (0);
@@ -157,15 +229,11 @@ int render(t_exec_data *data)
 
 int	move_front(t_exec_data *data)
 {
-	int	i;
+	t_player		*player;
+	t_raycasting	*rc;
 
-	i = 0;
-	(void)data;
-	while (i < 400)
-	{
-		//draw_wall(data, i + 900);
-		i++;
-	}
+	player = &data->player;
+	rc = &data->raycasting;	
 	return (0); 
 }
 
