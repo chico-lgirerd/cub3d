@@ -6,11 +6,12 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/07 17:46:55 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/08 11:03:48 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "parsing.h"
 
 #include <stdio.h>
 
@@ -40,9 +41,16 @@ int	is_valid_map(char **map, int start)
 		j = 0;
 		while (j < cols - 1)
 		{
+			skip_spaces(&map[i]);
 			char c = map[i][j];
+			if (!c)
+			{
+				j++;
+				continue;
+			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
+				printf("\033[31;47m%c\033[0m", c);
 				player_count++;
 				j++;
 				continue;
@@ -52,10 +60,12 @@ int	is_valid_map(char **map, int start)
 				printf("Too many players\n");
 				return (0);
 			}
-			else if (c != '0' && c != '1' && c != ' ')
+			else if (c != '0' && c != '1' && c != ' ' && c != '\n')
 			{
-				printf("Unrecognized character at position %d, %d : '%c'\n", i, j, c);
-				return (0);
+				printf("Unrecognized character at position %d, %d : \033[31;47m'%c'\033[0m", i + start, j, c);
+				j++;
+				continue;
+				// return (0);
 			}
 			if (c == '0')
 			{
@@ -70,6 +80,7 @@ int	is_valid_map(char **map, int start)
 					return (0);
 				}
 			}
+			printf("%c", c);
 			j++;
 		}
 		i++;
