@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/08 11:09:27 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/08 15:13:01 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main(int ac, char **av)
 	destroy_images(world1, world1->textures);
 	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
 	mlx_destroy_display(world1->mlx_ptr);
-	if (is_valid_map(map, line_idx))
+	if (is_valid_map(world1, map, line_idx))
 		printf("Map is Valid \n");
 	else
 		printf("Invalid map\n");

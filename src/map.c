@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/08 13:54:29 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/08 15:31:58 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,37 @@ int	offset_spaces(char *line)
 	return (i);
 }
 
-int	is_valid_map(char **map, int start)
+int	is_valid_map(t_world *world, char **map, int start)
 {
 	int	player_count;
-	int rows = get_map_rows(map);
-	int cols;
+	int	rows;
+	int	cols;
 	int	i;
 	int	j;
 
 	i = start;
+	rows = get_map_rows(map);
 	player_count = 0;
 	while (i < rows)
 	{
-		// skip_spaces(&map[i]);
 		cols = ft_strlen(map[i]);
 		j = offset_spaces(map[i]);
 		while (j < cols)
 		{
-			char c = map[i][j];
+			char	c = map[i][j];
 			if (!c)
 			{
 				j++;
-				continue;
+				continue ;
 			}
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				printf("\033[31;47m%c\033[0m", c);
 				player_count++;
+				world->player.start_x = i + start;
+				world->player.start_y = j;
 				j++;
-				continue;
+				continue ;
 			}
 			if (player_count > 1)
 			{
@@ -74,17 +76,21 @@ int	is_valid_map(char **map, int start)
 			{
 				printf("Unrecognized character at position %d, %d : \033[31;47m'%c'\033[0m", i + start + 1, j, c);
 				j++;
-				continue;
-				// return (0);
+				continue ;
 			}
 			if (c == '0')
 			{
-				if (i == 0 || j == 0 || i == rows - 1 || j == cols - 1)
+				if (i == start || j == 0 || i == rows - 1)
 				{
-					printf("0 on edge of map\n");
+					printf("\n0 on edge of map\n");
 					return (0);
 				}
-				if (map[i - 1][j] == ' '|| map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+				if (!map[i][j + 1] || map[i][j + 1] == '\n')
+				{
+					printf("\n0 on edge of map\n");
+					return (0);
+				}
+				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 				{
 					printf("Hole in the map\n");
 					return (0);
