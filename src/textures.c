@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/07 12:31:23 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 16:38:32 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	fill_rgb(t_world *world, char *key, char **mapline)
 
 int	load_texture(t_world *world, char *key, char **mapline)
 {
-	printf("----- LOAD TEXTURES ----- \n");
 	if (!ft_strcmp(key, "NO"))
 		world->textures.north = mlx_xpm_file_to_image(world->mlx_ptr,
 				*mapline, &world->textures.width, &world->textures.height);

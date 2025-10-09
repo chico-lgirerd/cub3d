@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/06 22:08:25 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 16:37:57 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	color_until_comma(char **color)
 	int	value;
 
 	value = ft_atoi(*color);
+	if (value == 0 && **color != '0')
+		return (-1);
 	while (**color && (**color >= '0' && **color <= '9'))
 		(*color)++;
 	skip_spaces(color);

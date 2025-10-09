@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/08 15:31:58 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/09 13:59:08 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,62 @@ int	offset_spaces(char *line)
 	return (i);
 }
 
-int	is_valid_map(t_world *world, char **map, int start)
+int	is_map_char(char c, int *player_count)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		(*player_count)++;
+		if (*player_count > 1)
+			return (0);
+		return (1);
+	}
+	return (c == '0' || c == '1');
+}
+
+int	check_above(char **map, int i, int j)
+{
+	int	above_cols;
+
+	above_cols = ft_strlen(map[i - 1]);
+	if (j >= above_cols - 1 || map[i - 1][j] == ' ' || map[i - 1][j] == '\n')
+		return (0);
+	return (1); 
+}
+
+int	check_below(char **map, int i, int j)
+{
+	int	below_cols;
+
+	below_cols = ft_strlen(map[i + 1]);
+	if (j >= below_cols - 1 || map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
+		return (0);
+	return (1); 
+}
+
+int	check_surround(char **map, int i, int j, int rows)
+{
+	int	cols;
+
+	cols = ft_strlen(map[i]);
+	if (j == 0)
+		return (0); // 0 left edge
+	if (!map[i][j + 1] || map[i][j + 1] == '\n')
+		return (0); // 0 right edge
+	if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+		return (0); // hole in map horizontal
+	if (i > 0 && !check_above(map, i, j))
+		return (0); // hole in map above
+	if (i < rows - 1 && !check_below(map, i, j))
+		return (0); // hole in map below
+	return (1);
+}
+
+int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int	is_valid_map(char **map, int start)
 {
 	int	player_count;
 	int	rows;
@@ -58,43 +113,21 @@ int	is_valid_map(t_world *world, char **map, int start)
 				j++;
 				continue ;
 			}
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				printf("\033[31;47m%c\033[0m", c);
-				player_count++;
-				world->player.start_x = i + start;
-				world->player.start_y = j;
-				j++;
-				continue ;
-			}
-			if (player_count > 1)
-			{
-				printf("Too many players\n");
-				return (0);
-			}
-			else if (c != '0' && c != '1' && c != ' ' && c != '\n')
-			{
-				printf("Unrecognized character at position %d, %d : \033[31;47m'%c'\033[0m", i + start + 1, j, c);
-				j++;
-				continue ;
-			}
+			if (!is_map_char(c, &player_count) && !ft_isspace(c))
+				return (0); // Unrecognized character or 2 much players
 			if (c == '0')
 			{
-				if (i == start || j == 0 || i == rows - 1)
-				{
-					printf("\n0 on edge of map\n");
+				if (i == start || i == rows - 1)
+					return (0); // 0 on edge of map
+				if (!check_surround(map, i, j, rows))
 					return (0);
-				}
-				if (!map[i][j + 1] || map[i][j + 1] == '\n')
-				{
-					printf("\n0 on edge of map\n");
+			}
+			else if (is_player_char(c))
+			{
+				if (i == start || i == rows - 1)
+					return (0); // player on top/bottom edge
+				if (!check_surround(map, i, j, rows))
 					return (0);
-				}
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-				{
-					printf("Hole in the map\n");
-					return (0);
-				}
 			}
 			printf("%c", c);
 			j++;
