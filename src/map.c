@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/14 14:58:19 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/14 16:54:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ int	check_below(char **map, int i, int j)
 
 int	check_surround(char **map, int i, int j, int rows)
 {
-	int	cols;
-
-	cols = ft_strlen(map[i]);
 	if (j == 0)
 		return (0);
 	if (!map[i][j + 1] || map[i][j + 1] == '\n')
@@ -94,51 +91,31 @@ int	is_valid_map(char **map, int start)
 {
 	int	player_count;
 	int	rows;
-	int	cols;
 	int	i;
 	int	j;
 
-	i = start;
+	i = start - 1;
 	rows = get_map_rows(map);
 	player_count = 0;
-	while (i < rows)
+	while (++i < rows)
 	{
-		cols = ft_strlen(map[i]);
-		j = 0;
-		while (j < cols)
+		j = -1;
+		while (map[i][++j])
 		{
 			if (!map[i][j])
-			{
-				j++;
 				continue ;
-			}
-			if (map[i][j] == '\t')
-			{
-				printf("Tab at pos [%d, %d]", i + 1 + start, j);
-			}
 			if (!is_map_char(map[i][j], &player_count) && !ft_isspace(map[i][j]))
 				return (0);
-			if (map[i][j] == '0')
+			if (map[i][j] == '0' || is_player_char(map[i][j]))
 			{
 				if (i == start || i == rows - 1)
 					return (0);
 				if (!check_surround(map, i, j, rows))
 					return (0);
 			}
-			else if (is_player_char(map[i][j]))
-			{
-				if (i == start || i == rows - 1)
-					return (0);
-				if (!check_surround(map, i, j, rows))
-					return (0);
-			}
-			printf("%c", map[i][j]);
-			j++;
 		}
-		i++;
 	}
 	if (player_count != 1)
 		return (0);
-	printf("\n");
 	return (1);
 }
