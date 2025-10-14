@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/09 16:40:26 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/14 14:58:36 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	free_map(char **map)
 	int	i;
 
 	if (!map)
-		return;
+		return ;
 	i = 0;
 	while (map[i])
 	{
@@ -70,27 +70,23 @@ int	main(int ac, char **av)
 {
 	t_world	*world1;
 	char	**map;
+	int		line_idx;
 
 	world1 = malloc(sizeof(t_world));
 	if (!world1)
 		return (1);
 	ft_memset(world1, 0, sizeof(t_world));
-
 	if (!check_args(ac, av))
 		return (1);
 	map = NULL;
-	map = map_from_file(world1, av[1], map);
-	// for (int i = 0; map[i]; i++)
-	// 	printf("%s", map[i]);
-	// printf("\n");
+	map = map_from_file(av[1], map);
 	world1->mlx_ptr = mlx_init();
 	world1->win_ptr = mlx_new_window(world1->mlx_ptr, 800, 400, "test1");
 	world1->map = map;
 	init_world(world1);
-	int	line_idx = 0;
+	line_idx = 0;
 	while (map[line_idx] && !is_map_line(map[line_idx]))
 	{
-		// printf("line_idx : %d\n", line_idx);
 		if (get_textures(world1, map[line_idx]))
 			return (1);
 		line_idx++;

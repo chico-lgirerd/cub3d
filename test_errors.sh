@@ -2,7 +2,7 @@
 
 for mapfile in maps/errmaps/*; do
   if [ -f "$mapfile" ]; then
-    result=$(./cub3D "$mapfile" 2>&1 | grep -E "Valid|Invalid map")
+    result=$(valgrind --leak-check=full --track-origins=yes --trace-children=yes --track-fds=yes --quiet ./cub3D "$mapfile" 2>&1)
     echo "$mapfile: $result"
   fi
 done

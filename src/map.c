@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/09 13:59:08 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/14 14:58:19 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_above(char **map, int i, int j)
 	above_cols = ft_strlen(map[i - 1]);
 	if (j >= above_cols - 1 || map[i - 1][j] == ' ' || map[i - 1][j] == '\n')
 		return (0);
-	return (1); 
+	return (1);
 }
 
 int	check_below(char **map, int i, int j)
@@ -64,7 +64,7 @@ int	check_below(char **map, int i, int j)
 	below_cols = ft_strlen(map[i + 1]);
 	if (j >= below_cols - 1 || map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
 		return (0);
-	return (1); 
+	return (1);
 }
 
 int	check_surround(char **map, int i, int j, int rows)
@@ -73,15 +73,15 @@ int	check_surround(char **map, int i, int j, int rows)
 
 	cols = ft_strlen(map[i]);
 	if (j == 0)
-		return (0); // 0 left edge
+		return (0);
 	if (!map[i][j + 1] || map[i][j + 1] == '\n')
-		return (0); // 0 right edge
+		return (0);
 	if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-		return (0); // hole in map horizontal
+		return (0);
 	if (i > 0 && !check_above(map, i, j))
-		return (0); // hole in map above
+		return (0);
 	if (i < rows - 1 && !check_below(map, i, j))
-		return (0); // hole in map below
+		return (0);
 	return (1);
 }
 
@@ -104,41 +104,41 @@ int	is_valid_map(char **map, int start)
 	while (i < rows)
 	{
 		cols = ft_strlen(map[i]);
-		j = offset_spaces(map[i]);
+		j = 0;
 		while (j < cols)
 		{
-			char	c = map[i][j];
-			if (!c)
+			if (!map[i][j])
 			{
 				j++;
 				continue ;
 			}
-			if (!is_map_char(c, &player_count) && !ft_isspace(c))
-				return (0); // Unrecognized character or 2 much players
-			if (c == '0')
+			if (map[i][j] == '\t')
+			{
+				printf("Tab at pos [%d, %d]", i + 1 + start, j);
+			}
+			if (!is_map_char(map[i][j], &player_count) && !ft_isspace(map[i][j]))
+				return (0);
+			if (map[i][j] == '0')
 			{
 				if (i == start || i == rows - 1)
-					return (0); // 0 on edge of map
+					return (0);
 				if (!check_surround(map, i, j, rows))
 					return (0);
 			}
-			else if (is_player_char(c))
+			else if (is_player_char(map[i][j]))
 			{
 				if (i == start || i == rows - 1)
-					return (0); // player on top/bottom edge
+					return (0);
 				if (!check_surround(map, i, j, rows))
 					return (0);
 			}
-			printf("%c", c);
+			printf("%c", map[i][j]);
 			j++;
 		}
 		i++;
 	}
 	if (player_count != 1)
-	{
-		printf("No starting position found\n");
 		return (0);
-	}
 	printf("\n");
 	return (1);
 }

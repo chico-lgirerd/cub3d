@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/09 16:38:32 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/14 14:29:58 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ int	load_texture(t_world *world, char *key, char **mapline)
 	else if ((key[0] == 'F' || key[0] == 'C') && (!key[1] || key[1] == ' '))
 		fill_rgb(world, key, mapline);
 	else
-	{
-		printf("Key not recognized : \"%s\"\n", key);
 		return (1);
-	}
 	return (0);
 }
 

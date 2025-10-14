@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/09 13:59:19 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/14 14:28:39 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_world
 int		check_args(int ac, char **av);
 void	trim_map(char **map);
 int		empty(char *str);
-char	**map_from_file(t_world *world, char *filename, char **map);
+char	**map_from_file(char *filename, char **map);
 int		color_until_comma(char **color);
 int		get_textures(t_world *world, char *mapline);
 void	skip_spaces(char **str);
