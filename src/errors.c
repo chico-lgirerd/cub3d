@@ -6,9 +6,11 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:33:39 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 13:10:51 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 14:24:54 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 int	handle_map_error(int errcode)
 {

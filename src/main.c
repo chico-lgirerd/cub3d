@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 14:17:11 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 14:37:20 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int	main(int ac, char **av)
 		return (1);
 	map = NULL;
 	map = map_from_file(av[1], map);
+	if (!map)
+	{
+		printf("Error\nCould not get map from file : %s\n", av[1]);
+		free(world1);
+		return (1);
+	}
 	world1->mlx_ptr = mlx_init();
 	world1->win_ptr = mlx_new_window(world1->mlx_ptr, 800, 400, "test1");
 	world1->map = map;
@@ -98,10 +104,11 @@ int	main(int ac, char **av)
 	destroy_images(world1, world1->textures);
 	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
 	mlx_destroy_display(world1->mlx_ptr);
-	if (is_valid_map(map, line_idx) == 0)
-		printf("Map is Valid \n");
+	int errcode = is_valid_map(map, line_idx);
+	if (errcode == 0)
+		printf("Map is valid\n");
 	else
-		printf("Invalid map\n");
+		handle_map_error(errcode);
 	print_textures(world1->textures);
 	free(world1->mlx_ptr);
 	free_map(map);
