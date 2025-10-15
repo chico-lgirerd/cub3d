@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 14:16:33 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:39:20 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	have_textures(t_textures textures)
 	}
 	if (!valid_colors(textures))
 	{
-		printf("Error\nInvalid color(s)\n");	
+		printf("Error\nInvalid color(s)\n");
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 14:37:20 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 17:36:09 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int	main(int ac, char **av)
 		return (1);
 	ft_memset(world1, 0, sizeof(t_world));
 	if (!check_args(ac, av))
+	{
+		free(world1);
 		return (1);
+	}
 	map = NULL;
 	map = map_from_file(av[1], map);
 	if (!map)
@@ -94,13 +97,23 @@ int	main(int ac, char **av)
 	while (map[line_idx] && !is_map_line(map[line_idx]))
 	{
 		if (get_textures(world1, map[line_idx]))
+		{
+			free(world1);
 			return (1);
+		}
 		line_idx++;
 	}
 	if (have_textures(world1->textures))
 		printf("Parsed all textures\n");
 	else
+	{
+		free_map(world1->map);
+		mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
+		mlx_destroy_display(world1->mlx_ptr);
+		free(world1->mlx_ptr);
+		free(world1);
 		return (1);
+	}
 	destroy_images(world1, world1->textures);
 	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
 	mlx_destroy_display(world1->mlx_ptr);

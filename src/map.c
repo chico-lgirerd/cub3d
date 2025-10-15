@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 13:23:54 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 15:55:57 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,11 @@ int	is_valid_map(char **map, int start)
 	i = start - 1;
 	rows = get_map_rows(map);
 	player_count = 0;
-	while (++i < rows)
+	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
 		{
-			// if (!map[i][j])
-			// 	continue ;
 			if (!is_map_char(map[i][j], &player_count) && !ft_isspace(map[i][j]))
 				return (3);
 			if (player_count > 1)
