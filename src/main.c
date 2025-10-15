@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/14 14:58:36 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/15 14:17:11 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,15 @@ int	main(int ac, char **av)
 	if (have_textures(world1->textures))
 		printf("Parsed all textures\n");
 	else
-	{
-		printf("Error\nInvalid texture\n");
 		return (1);
-	}
-	print_textures(world1->textures);
 	destroy_images(world1, world1->textures);
 	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
 	mlx_destroy_display(world1->mlx_ptr);
-	if (is_valid_map(map, line_idx))
+	if (is_valid_map(map, line_idx) == 0)
 		printf("Map is Valid \n");
 	else
 		printf("Invalid map\n");
+	print_textures(world1->textures);
 	free(world1->mlx_ptr);
 	free_map(map);
 	free(world1);
