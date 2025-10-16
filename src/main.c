@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 17:36:09 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 11:46:12 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(int ac, char **av)
 	line_idx = 0;
 	while (map[line_idx] && !is_map_line(map[line_idx]))
 	{
+		// printf("%s", map[line_idx]);
 		if (get_textures(world1, map[line_idx]))
 		{
 			free(world1);

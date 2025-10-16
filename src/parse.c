@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 15:51:41 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 11:27:11 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ char	**get_map(int fd, int lines)
 	}
 	while (line != NULL)
 	{
-		if (!empty(line))
+		// if (!empty(line))
 			map[i++] = expand_tabs(line);
-		else
-			free(line);
+		// else
+			// free(line);
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;

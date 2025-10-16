@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 17:39:20 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 11:26:44 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ int	load_texture(t_world *world, char *key, char **mapline)
 	else if ((key[0] == 'F' || key[0] == 'C') && (!key[1] || key[1] == ' '))
 		fill_rgb(world, key, mapline);
 	else
-		return (1);
-	return (0);
+	{
+		printf("Error\nKey not recognized\n");
+		return (0);
+	}
+	return (1);
 }
 
 int	get_textures(t_world *world, char *mapline)
@@ -68,14 +71,15 @@ int	get_textures(t_world *world, char *mapline)
 
 	skip_spaces(&mapline);
 	if (!mapline[0] || !mapline[1])
-		return (1);
+		return (0);
 	key[0] = *mapline;
 	mapline++;
 	key[1] = *mapline;
 	mapline++;
 	key[2] = '\0';
 	trim(mapline);
-	load_texture(world, key, &mapline);
+	if (!load_texture(world, key, &mapline))
+		return (1);
 	return (0);
 }
 

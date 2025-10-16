@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 15:55:57 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 10:52:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ int	check_above(char **map, int i, int j)
 
 	above_cols = ft_strlen(map[i - 1]);
 	if (j >= above_cols - 1 || map[i - 1][j] == ' ' || map[i - 1][j] == '\n')
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	return (1);
 }
 
@@ -64,40 +61,22 @@ int	check_below(char **map, int i, int j)
 
 	below_cols = ft_strlen(map[i + 1]);
 	if (j >= below_cols - 1 || map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	return (1);
 }
 
 int	check_surround(char **map, int i, int j, int rows)
 {
 	if (j == 0)
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	if (!map[i][j + 1] || map[i][j + 1] == '\n')
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	if (i > 0 && !check_above(map, i, j))
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	if (i < rows - 1 && !check_below(map, i, j))
-	{
-		printf("Error\nHole in the map\n");
 		return (0);
-	}
 	return (1);
 }
 
@@ -118,6 +97,7 @@ int	is_valid_map(char **map, int start)
 	player_count = 0;
 	while (map[++i])
 	{
+		printf("%s", map[i]);
 		j = -1;
 		while (map[i][++j])
 		{
@@ -134,4 +114,3 @@ int	is_valid_map(char **map, int start)
 		return (1);
 	return (0);
 }
-// If I return player count, I might just check this and if its != 1
