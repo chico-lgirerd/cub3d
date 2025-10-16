@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 13:11:48 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 16:03:56 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ void	init_colors(t_world *w)
 	w->textures.floor.blue = -1;
 }
 
-void	init_world(t_world *world)
+int	init_world(t_world *world)
 {
 	world->textures.width = 800;
 	world->textures.height = 400;
 	init_colors(world);
+	world->mlx_ptr = mlx_init();
+	world->win_ptr = mlx_new_window(world->mlx_ptr, 800, 400, "test1");
+	if (!world->mlx_ptr || !world->win_ptr)
+		return (0);
+	return (1);
 }
 
 void	print_textures(t_textures textures)
@@ -60,6 +65,10 @@ void	destroy_images(t_world *world, t_textures textures)
 		mlx_destroy_image(world->mlx_ptr, textures.east);
 	if (textures.west)
 		mlx_destroy_image(world->mlx_ptr, textures.west);
+	textures.north = NULL;
+	textures.south = NULL;
+	textures.east = NULL;
+	textures.west = NULL;
 }
 
 void	free_map(char **map)
@@ -75,6 +84,18 @@ void	free_map(char **map)
 		i++;
 	}
 	free(map);
+	map = NULL;
+}
+
+void	free_world(t_world *world)
+{
+	free_map(world->map);
+	destroy_images(world, world->textures);
+	mlx_destroy_window(world->mlx_ptr, world->win_ptr);
+	mlx_destroy_display(world->mlx_ptr);
+	free(world->mlx_ptr);
+	free(world);
+	world = NULL;
 }
 
 int	main(int ac, char **av)
@@ -100,17 +121,19 @@ int	main(int ac, char **av)
 		free(world1);
 		return (1);
 	}
-	world1->mlx_ptr = mlx_init();
-	world1->win_ptr = mlx_new_window(world1->mlx_ptr, 800, 400, "test1");
 	world1->map = map;
-	init_world(world1);
+	if (!init_world(world1))
+	{
+		free_map(world1->map);
+		free(world1);
+		return (1);
+	}
 	line_idx = 0;
 	while (map[line_idx] && !is_map_line(map[line_idx]))
 	{
-		// printf("%s", map[line_idx]);
 		if (get_textures(world1, map[line_idx]))
 		{
-			free(world1);
+			free_world(world1);
 			return (1);
 		}
 		line_idx++;
@@ -119,24 +142,15 @@ int	main(int ac, char **av)
 		printf("Parsed all textures\n");
 	else
 	{
-		free_map(world1->map);
-		mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
-		mlx_destroy_display(world1->mlx_ptr);
-		free(world1->mlx_ptr);
-		free(world1);
+		free_world(world1);
 		return (1);
 	}
-	destroy_images(world1, world1->textures);
-	mlx_destroy_window(world1->mlx_ptr, world1->win_ptr);
-	mlx_destroy_display(world1->mlx_ptr);
 	int errcode = is_valid_map(map, line_idx);
 	if (errcode == 0)
 		printf("Map is valid\n");
 	else
 		handle_map_error(errcode);
 	print_textures(world1->textures);
-	free(world1->mlx_ptr);
-	free_map(map);
-	free(world1);
+	free_world(world1);
 	return (0);
 }
