@@ -32,6 +32,7 @@ SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)map.c \
 				$(SRCS_DIR)check_map.c \
 				$(SRCS_DIR)errors.c \
+				$(SRCS_DIR)garbage_collector.c \
 				$(SRCS_DIR)main.c
 
 ############################# DIRECTORIES ##############################
