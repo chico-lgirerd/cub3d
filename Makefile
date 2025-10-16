@@ -6,7 +6,7 @@
 #    By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 17:00:03 by lgirerd           #+#    #+#              #
-#    Updated: 2025/10/08 20:04:28 by tiaperei         ###   ########.fr        #
+#    Updated: 2025/10/16 17:23:14 by tiaperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,11 @@ MLX_REPO 		= https://github.com/42paris/minilibx-linux.git
 
 SRCS_DIR 	= srcs/
 SRCS    	= $(SRCS_DIR)main.c \
+			$(SRCS_DIR)init.c \
+			$(SRCS_DIR)raycasting.c \
+			$(SRCS_DIR)draw.c \
+			$(SRCS_DIR)draw_utils.c \
+			$(SRCS_DIR)controls.c \
 
 ############################# OBJECTS/DEPENDANCES ##############################
 
