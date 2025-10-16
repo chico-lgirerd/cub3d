@@ -1,7 +1,7 @@
 NO assets/walls/north.xpm
 SO assets/walls/south.xpm
 WE assets/walls/west.xpm
-EA EA assets/walls/east.xpm
+EA assets/walls/east.xpm
 
 F zawe,50,50
 C 150,150,100

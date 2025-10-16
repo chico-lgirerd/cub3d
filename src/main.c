@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 11:46:12 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 13:11:48 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,21 @@ int	is_map_line(char *line)
 	return (*line == '0' || *line == '1');
 }
 
+void	init_colors(t_world *w)
+{
+	w->textures.ceiling.red = -1;
+	w->textures.ceiling.green = -1;
+	w->textures.ceiling.blue = -1;
+	w->textures.floor.red = -1;
+	w->textures.floor.green = -1;
+	w->textures.floor.blue = -1;
+}
+
 void	init_world(t_world *world)
 {
 	world->textures.width = 800;
 	world->textures.height = 400;
+	init_colors(world);
 }
 
 void	print_textures(t_textures textures)

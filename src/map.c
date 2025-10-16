@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 10:52:47 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 11:55:10 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	is_valid_map(char **map, int start)
 	player_count = 0;
 	while (map[++i])
 	{
-		printf("%s", map[i]);
 		j = -1;
 		while (map[i][++j])
 		{
