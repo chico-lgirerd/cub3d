@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/15 14:24:39 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 13:38:09 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ void	trim(char *str);
 int		is_valid_map(char **map, int start);
 void	print_textures(t_textures textures);
 int		handle_map_error(int errcode);
+int		check_surround(char **map, int i, int j, int rows);
+int		check_below(char **map, int i, int j);
+int		check_above(char **map, int i, int j);
 
 #endif

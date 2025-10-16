@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 11:27:11 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/16 13:36:55 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ char	**get_map(int fd, int lines)
 	}
 	while (line != NULL)
 	{
-		// if (!empty(line))
-			map[i++] = expand_tabs(line);
-		// else
-			// free(line);
+		map[i++] = expand_tabs(line);
 		line = get_next_line(fd);
 	}
 	map[i] = NULL;
@@ -107,11 +104,6 @@ char	**map_from_file(char *filename, char **map)
 		return (NULL);
 	linecount = line_count(filefd);
 	close(filefd);
-	// if (linecount < 6)
-	// {
-	// 	printf("Error\nMap might be empty\n");
-	// 	return (NULL);
-	// }
 	filefd = open(filename, O_RDONLY);
 	if (filefd < 0)
 		return (NULL);
