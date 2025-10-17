@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/16 19:30:15 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:17:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 24
-#define MINIMAP_SCALE 10
 
 typedef struct s_player
 {
@@ -83,10 +82,13 @@ typedef	struct	s_exec_data
 	int				win_height;
 	int				map_width;
 	int				map_height;
+	int				minimap_width;
+	int				minimap_height;
 	int				**map;
 	t_player		player;
 	t_raycasting	raycasting;
-	t_img			img;
+	t_img			game_img;
+	t_img			minimap_img;
 	t_key			key;
 }	t_exec_data;
 
@@ -109,5 +111,7 @@ void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int 	rgb_to_int(int r, int g, int b);
 
 int		end_game(t_exec_data *data);
+void draw_ray_minimap(t_exec_data *data);
+
 
 #endif

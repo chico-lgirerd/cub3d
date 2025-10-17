@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/16 19:30:58 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:05:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ int	end_game(t_exec_data *data)
 int	render(t_exec_data *data)
 {
 	update_player(data);
-	perform_raycasting(data);
 	draw_minimap(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	perform_raycasting(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->game_img.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->minimap_img.img_ptr, 0, 0);
 	return (0);
 }
 
 void	exec_game(t_exec_data *data)
-{
+{	
 	mlx_get_screen_size(data->mlx_ptr, &data->win_width, &data->win_height);
+	data->minimap_width = data->win_height / 6;
+	data->minimap_height = data->win_height / 6;
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win_width, data->win_height, "cub3D");
 	if (!data->win_ptr)
 		;

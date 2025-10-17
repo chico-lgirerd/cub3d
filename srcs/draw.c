@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/16 19:22:08 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/17 18:42:08 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	draw_cases(t_exec_data *data, int x, int y, int case_w, int case_h)
 		py = 0;
 		while (py < case_h)
 		{
-			my_mlx_pixel_put(&data->img,
+			my_mlx_pixel_put(&data->minimap_img,
 				x * case_w + px, y * case_h + py, color);
 			py++;
 		}
@@ -45,8 +45,8 @@ void	draw_minimap(t_exec_data *data)
 	int x;
 	int y;
 
-	case_w = 15;
-	case_h = 15;
+	case_w = data->minimap_width / data->map_width;
+	case_h = data->minimap_height / data->map_height;
 	x = 0;
 	while (x < data->map_width)
 	{
@@ -66,7 +66,7 @@ void	draw_minimap(t_exec_data *data)
 		int dx = -2;
 		while (dx <= 2)
 		{
-			my_mlx_pixel_put(&data->img,
+			my_mlx_pixel_put(&data->minimap_img,
 				player_x + dx, player_y + dy, rgb_to_int(255, 0, 0));
 			dx++;
 		}
@@ -88,7 +88,7 @@ void	draw_simple_wall(t_exec_data *data, int x, int draw_start, int draw_end)
 	y = draw_start;
 	while (y < draw_end)
 	{
-		my_mlx_pixel_put(&data->img, x, y, color);
+		my_mlx_pixel_put(&data->game_img, x, y, color);
 		y++;
 	}
 }
@@ -104,13 +104,13 @@ void	draw_ceiling_floor(t_exec_data *data, int x, int draw_start, int draw_end)
 	y = 0;
 	while (y < draw_start)
 	{
-		my_mlx_pixel_put(&data->img, x, y, ceiling_color);
+		my_mlx_pixel_put(&data->game_img, x, y, ceiling_color);
 		y++;
 	}
 	y = draw_end;
 	while (y < data->win_height)
 	{
-		my_mlx_pixel_put(&data->img, x, y, floor_color);
+		my_mlx_pixel_put(&data->game_img, x, y, floor_color);
 		y++;
 	}
 }

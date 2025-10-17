@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/16 16:04:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:17:03 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,27 @@ int rgb_to_int(int r, int g, int b)
 	return ((r << 16) | (g << 8) | b);
 }
 
-void	draw_ray_minimap(t_exec_data *data, double ray_end_x, double ray_end_y)
+void draw_ray_minimap(t_exec_data *data)
 {
-	int scale = 20; // taille d'une case	
-	int start_x = (int)(data->player.pos_x * scale);
-	int start_y = (int)(data->player.pos_y * scale);
-	//printf("ray_end_x = %f\n", ray_end_x);
-	//printf("ray_end_y = %f\n", ray_end_y);
-	int end_x = (int)(ray_end_x * scale);
-	int end_y = (int)(ray_end_y * scale);
+	t_raycasting	*rc = &data->raycasting;
+    t_player 		*player = &data->player;
+    int scale = data->minimap_width / data->map_width;
+	int x0 = (int)(player->pos_x * scale);
+	int y0 = (int)(player->pos_y * scale);
+	int x1 = (int)((player->pos_x + rc->perp_walldist * rc->raydir_x) * scale);
+	int y1 = (int)((player->pos_y + rc->perp_walldist * rc->raydir_y) * scale);
 
-	int dx = end_x - start_x;
-	int dy = end_y - start_y;
+    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    int err = dx + dy, e2;
 
-	int steps;
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	else
-		steps = abs(dy);
-
-	if (steps == 0)
-		return;
-
-	double x_inc = dx / (double)steps;
-	double y_inc = dy / (double)steps;
-
-	double x = (double)start_x;
-	double y = (double)start_y;
-
-	int i = 0;
-	while (i <= steps)
-	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, (int)x, (int)y, rgb_to_int(0,255,0));
-		x += x_inc;
-		y += y_inc;
-		i++;
-	}
+    while (1)
+    {
+        my_mlx_pixel_put(&data->minimap_img, x0, y0, rgb_to_int(0, 255, 0));
+        if (x0 == x1 && y0 == y1)
+            break;
+        e2 = 2 * err;
+        if (e2 >= dy) { err += dy; x0 += sx; }
+        if (e2 <= dx) { err += dx; y0 += sy; }
+    }
 }

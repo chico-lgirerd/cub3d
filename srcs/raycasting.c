@@ -6,12 +6,13 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/16 19:22:12 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:18:28 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <math.h>
+//#include <stdio.h>
 
 int perform_raycasting(t_exec_data *data)
 {
@@ -86,11 +87,11 @@ int perform_raycasting(t_exec_data *data)
 			//printf("data->map[%d][%d] = %d\n", rc->map_y, rc->map_x, data->map[rc->map_y][rc->map_x]);
 		}
 		if (rc->side == 0)
-			rc->perp_walldist = rc->walldist_x - rc->deltadist_x;
+    		rc->perp_walldist = (rc->map_x - player->pos_x + (1 - rc->step_x) / 2) / rc->raydir_x;
 		else
-			rc->perp_walldist = rc->walldist_y - rc->deltadist_y;
-		//if (x == data->win_width / 2)
-			//draw_ray_minimap(data, rc->map_x, rc->map_y);
+   			rc->perp_walldist = (rc->map_y - player->pos_y + (1 - rc->step_y) / 2) / rc->raydir_y;
+		if (x == data->win_width / 2)
+			draw_ray_minimap(data);
 		draw_map(data, x);
 		x++;
 	}
