@@ -6,13 +6,20 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 13:36:55 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/19 17:45:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "get_next_line.h"
 #include "libft.h"
+
+int	is_map_line(char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	return (*line == '0' || *line == '1');
+}
 
 int	line_count(int fd)
 {
@@ -94,10 +101,11 @@ char	**get_map(int fd, int lines)
 	return (map);
 }
 
-char	**map_from_file(char *filename, char **map)
+char	**map_from_file(char *filename)
 {
-	int	filefd;
-	int	linecount;
+	int		filefd;
+	int		linecount;
+	char	**map;
 
 	filefd = open(filename, O_RDONLY);
 	if (filefd < 0)

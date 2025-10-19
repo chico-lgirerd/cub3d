@@ -26,6 +26,7 @@ YELLOW			= \033[0;33m
 SRCS_DIR 		= src/
 SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)parse.c \
+				$(SRCS_DIR)init.c \
 				$(SRCS_DIR)trim.c \
 				$(SRCS_DIR)textures.c \
 				$(SRCS_DIR)colors.c \
