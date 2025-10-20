@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:23:12 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 17:26:45 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/20 09:37:07 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	free_map(char **map)
 
 void	free_world(t_world *world)
 {
+	if (!world)
+		return ;
 	free_map(world->map);
 	destroy_images(world, world->textures);
 	mlx_destroy_window(world->mlx_ptr, world->win_ptr);

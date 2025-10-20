@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/19 17:46:45 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/20 09:32:31 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		check_below(char **map, int i, int j);
 int		check_above(char **map, int i, int j);
 int		is_map_line(char *line);
 
-int		init_world(t_world *world);
+t_world	*init_world(void);
 int		init_parsing(t_world *world, char *filename);
 
 void	free_map(char **map);

@@ -6,13 +6,14 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 16:42:08 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/19 18:16:16 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/20 09:44:21 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "parsing.h"
-#include <stdlib.h>
+#include "libft.h"
+
 #include <stdio.h>
 
 void	init_colors(t_world *w)
@@ -25,16 +26,22 @@ void	init_colors(t_world *w)
 	w->textures.floor.blue = -1;
 }
 
-int	init_world(t_world *world)
+t_world	*init_world(void)
 {
-	world->textures.width = 800;
-	world->textures.height = 400;
-	init_colors(world);
-	world->mlx_ptr = mlx_init();
-	world->win_ptr = mlx_new_window(world->mlx_ptr, 800, 400, "test1");
-	if (!world->mlx_ptr || !world->win_ptr)
-		return (1);
-	return (0);
+	t_world	*w;
+
+	w = malloc(sizeof(t_world));
+	if (!w)
+		return (NULL);
+	ft_memset(w, 0, sizeof(t_world));
+	w->textures.width = 800;
+	w->textures.height = 400;
+	init_colors(w);
+	w->mlx_ptr = mlx_init();
+	w->win_ptr = mlx_new_window(w->mlx_ptr, 800, 400, "test1");
+	if (!w->mlx_ptr || !w->win_ptr)
+		return (NULL);
+	return (w);
 }
 
 int	init_parsing(t_world *world, char *filename)
