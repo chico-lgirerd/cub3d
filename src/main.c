@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:00 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/20 09:37:22 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/21 15:31:31 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 void	print_textures(t_textures textures)
 {
-	printf("North : %p\n", textures.north);
-	printf("South : %p\n", textures.south);
-	printf("West : %p\n", textures.west);
-	printf("East : %p\n", textures.east);
+	printf("North : %p\n", textures.north.img);
+	printf("South : %p\n", textures.south.img);
+	printf("West : %p\n", textures.west.img);
+	printf("East : %p\n", textures.east.img);
 	printf("Ceiling : %d, %d, %d\n", textures.ceiling.red, textures.ceiling.green, textures.ceiling.blue);
 	printf("Floor : %d, %d, %d\n", textures.floor.red, textures.floor.green, textures.floor.blue);
 }

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:23:12 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/20 09:37:07 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/21 15:39:55 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 #include "mlx.h"
 #include <stdlib.h>
 
-void	destroy_images(t_world *world, t_textures textures)
+void	destroy_images(t_world *w, t_textures *textures)
 {
-	if (textures.north)
-		mlx_destroy_image(world->mlx_ptr, textures.north);
-	if (textures.south)
-		mlx_destroy_image(world->mlx_ptr, textures.south);
-	if (textures.east)
-		mlx_destroy_image(world->mlx_ptr, textures.east);
-	if (textures.west)
-		mlx_destroy_image(world->mlx_ptr, textures.west);
-	textures.north = NULL;
-	textures.south = NULL;
-	textures.east = NULL;
-	textures.west = NULL;
+	if (textures->north.img)
+		mlx_destroy_image(w->mlx_ptr, textures->north.img);
+	if (textures->south.img)
+		mlx_destroy_image(w->mlx_ptr, textures->south.img);
+	if (textures->east.img)
+		mlx_destroy_image(w->mlx_ptr, textures->east.img);
+	if (textures->west.img)
+		mlx_destroy_image(w->mlx_ptr, textures->west.img);
+	textures->north.img = NULL;
+	textures->south.img = NULL;
+	textures->east.img = NULL;
+	textures->west.img = NULL;
 }
 
 void	free_map(char **map)
@@ -51,7 +51,7 @@ void	free_world(t_world *world)
 	if (!world)
 		return ;
 	free_map(world->map);
-	destroy_images(world, world->textures);
+	destroy_images(world, &world->textures);
 	mlx_destroy_window(world->mlx_ptr, world->win_ptr);
 	mlx_destroy_display(world->mlx_ptr);
 	free(world->mlx_ptr);

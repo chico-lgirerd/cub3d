@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/20 09:32:31 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/21 15:21:27 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,24 @@ typedef struct s_color
 	int	blue;
 }	t_color;
 
+typedef struct s_wall
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		length;
+	int		endian;
+	int		loaded;
+}	t_wall;
+
 typedef struct s_textures
 {
 	int		width;
 	int		height;
-	void	*north;
-	void	*south;
-	void	*east;
-	void	*west;
+	t_wall	north;
+	t_wall	south;
+	t_wall	east;
+	t_wall	west;
 	t_color	floor;
 	t_color	ceiling;
 }	t_textures;
@@ -65,6 +75,11 @@ int		check_surround(char **map, int i, int j, int rows);
 int		check_below(char **map, int i, int j);
 int		check_above(char **map, int i, int j);
 int		is_map_line(char *line);
+
+void	load_north(t_world *w, char *mapline);
+void	load_south(t_world *w, char *mapline);
+void	load_west(t_world *w, char *mapline);
+void	load_east(t_world *w, char *mapline);
 
 t_world	*init_world(void);
 int		init_parsing(t_world *world, char *filename);

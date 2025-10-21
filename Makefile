@@ -29,6 +29,7 @@ SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)init.c \
 				$(SRCS_DIR)trim.c \
 				$(SRCS_DIR)textures.c \
+				$(SRCS_DIR)load_walls.c \
 				$(SRCS_DIR)colors.c \
 				$(SRCS_DIR)map.c \
 				$(SRCS_DIR)check_map.c \

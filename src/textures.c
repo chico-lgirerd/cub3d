@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 11:26:44 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/21 15:37:19 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,13 @@ int	fill_rgb(t_world *world, char *key, char **mapline)
 int	load_texture(t_world *world, char *key, char **mapline)
 {
 	if (!ft_strcmp(key, "NO"))
-		world->textures.north = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, &world->textures.width, &world->textures.height);
+		load_north(world, *mapline);
 	else if (!ft_strcmp(key, "SO"))
-		world->textures.south = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, &world->textures.width, &world->textures.height);
+		load_south(world, *mapline);
 	else if (!ft_strcmp(key, "WE"))
-		world->textures.west = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, &world->textures.width, &world->textures.height);
+		load_west(world, *mapline);
 	else if (!ft_strcmp(key, "EA"))
-		world->textures.east = mlx_xpm_file_to_image(world->mlx_ptr,
-				*mapline, &world->textures.width, &world->textures.height);
+		load_east(world, *mapline);
 	else if ((key[0] == 'F' || key[0] == 'C') && (!key[1] || key[1] == ' '))
 		fill_rgb(world, key, mapline);
 	else
@@ -85,8 +81,14 @@ int	get_textures(t_world *world, char *mapline)
 
 int	have_textures(t_textures textures)
 {
-	if (!textures.east || !textures.north || !textures.south
-		|| !textures.west)
+	if (!textures.east.loaded || !textures.north.loaded
+		|| !textures.south.loaded || !textures.west.loaded)
+	{
+		printf("Error\nMissing texture, please check its path\n");
+		return (0);
+	}
+	if (!textures.east.img || !textures.north.img
+		|| !textures.south.img || !textures.west.img)
 	{
 		printf("Error\nMissing texture, please check its path\n");
 		return (0);
