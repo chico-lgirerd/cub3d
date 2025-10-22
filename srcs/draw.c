@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 14:17:13 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/22 19:44:38 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,39 @@ void	draw_minimap(t_exec_data *data)
 	draw_player(data, player_x, player_y);
 }
 
-void	draw_simple_wall(t_exec_data *data, int x, int start, int end)
+void	draw_textured_wall(t_exec_data *data, int x, int start, int end)
 {
 	int				y;
 	int				color;
+	double			step;
+	double			tex_pos;
 	t_raycasting	rc;
+	t_draw			*draw;
 
 	rc = data->raycasting;
-	if (data->map[rc.map_y][rc.map_x] > 0)
-		color = rgb_to_int(128, 128, 128);
+	draw = &data->raycasting.draw;
+	if (rc.side == 0 && rc.raydir_x < 0)
+		draw->tex = data->textures.east.img;
+	else if (rc.side == 0 && rc.raydir_x > 0)
+		draw->tex = data->textures.west.img;
+	else if (rc.side == 1 && rc.raydir_y < 0)
+		draw->tex = data->textures.north.img;
 	else
-		color = rgb_to_int(255, 255, 255);
+		draw->tex = data->textures.south.img;
+	draw->tex_x *= TEXTURE_WIDTH;
+	if ((rc.side == 0 && rc.raydir_x < 0) || (rc.side == 1 && rc.raydir_y < 0))
+		draw->tex_x = TEXTURE_WIDTH - draw->tex_x - 1;
+	step = 1.0 * TEXTURE_HEIGHT / draw->line_height;
+	tex_pos = (start - data->win_height / 2 + draw->line_height / 2) * step;
 	y = start;
 	while (y < end)
 	{
+		draw->tex_y = (int)tex_pos % TEXTURE_HEIGHT;
+		tex_pos += step;
+		color = get_texture_color();
 		my_mlx_pixel_put(&data->game_img, x, y, color);
 		y++;
-	}
+	}	
 }
 
 void	draw_ceiling_floor(t_exec_data *data, int x, int start, int end)
@@ -83,27 +99,27 @@ void	draw_ceiling_floor(t_exec_data *data, int x, int start, int end)
 void	draw_map(t_exec_data *data, int x)
 {
 	double			wall_x;
-	t_player		*player;
-	t_raycasting	*rc;
-	t_line			*line;
+	t_player		player;
+	t_raycasting	rc;
+	t_draw			*draw;
 
-	player = &data->player;
-	rc = &data->raycasting;
-	line = &data->raycasting.line;
-	if (rc->side == 0)
-		wall_x = player->pos_y + rc->perp_walldist * rc->raydir_y;
+	player = data->player;
+	rc = data->raycasting;
+	draw = &data->raycasting.draw;
+	if (rc.side == 0)
+		wall_x = player.pos_y + rc.perp_walldist * rc.raydir_y;
 	else
-		wall_x = player->pos_x + rc->perp_walldist * rc->raydir_x;
+		wall_x = player.pos_x + rc.perp_walldist * rc.raydir_x;
 	wall_x -= floor(wall_x);
-	line->tex_x = wall_x;
-	line->line_height = (int)data->win_height / rc->perp_walldist;
-	line->draw_start = -line->line_height / 2 + data->win_height / 2;
-	if (line->draw_start < 0)
-		line->draw_start = 0;
-	line->draw_end = line->line_height / 2 + data->win_height / 2;
-	if (line->draw_end > data->win_height)
-		line->draw_end = data->win_height - 1;
-	draw_ceiling_floor(data, x, line->draw_start, line->draw_end);
-	draw_simple_wall(data, x, line->draw_start, line->draw_end);
+	draw->tex_x = wall_x;
+	draw->line_height = (int)data->win_height / rc.perp_walldist;
+	draw->draw_start = -draw->line_height / 2 + data->win_height / 2;
+	if (draw->draw_start < 0)
+		draw->draw_start = 0;
+	draw->draw_end = draw->line_height / 2 + data->win_height / 2;
+	if (draw->draw_end > data->win_height)
+		draw->draw_end = data->win_height - 1;
+	draw_ceiling_floor(data, x, draw->draw_start, draw->draw_end);
+	draw_textured_wall(data, x, draw->draw_start, draw->draw_end);
 	(void)x;
 }
