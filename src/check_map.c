@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:37:25 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/22 15:30:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 16:52:20 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	check_surround(t_exec_data *data, char **map, int i, int j)
 	rows = data->map_height;
 	if (j > data->map_width)
 		data->map_width = j;
+	if (is_player_char(map[i][j]))
+	{
+		data->player.start_x = i;
+		data->player.start_y = j;
+	}
 	if (i == rows - 1)
 		return (0);
 	if (j == 0)

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/22 15:31:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 16:52:36 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		check_surround(t_exec_data *data, char **map, int i, int j);
 int		check_below(char **map, int i, int j);
 int		check_above(char **map, int i, int j);
 int		is_map_line(char *line);
+int		is_player_char(char c);
 
 void	load_north(t_exec_data *d, char *mapline);
 void	load_south(t_exec_data *d, char *mapline);
