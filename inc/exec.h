@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 16:50:28 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 19:11:55 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,18 @@ void	init_image(t_exec_data *data);
 int 	perform_raycasting(t_exec_data *data);
 void	update_player(t_exec_data *data);
 
+void	draw_cases(t_exec_data *data, int x, int y);
+void	draw_player(t_exec_data *data, int player_x, int player_y);
+
 void	draw_minimap(t_exec_data *data);
 void	draw_simple_wall(t_exec_data *data, int x, int draw_start, int draw_end);
 void	draw_ceiling_floor(t_exec_data *data, int x, int draw_start, int draw_end);
 void	draw_map(t_exec_data *data, int x);
+
+void	move_forward(t_exec_data *data, t_player *player, float speed);
+void	move_backward(t_exec_data *data, t_player *player, float speed);
+void	move_left(t_exec_data *data, t_player *player, float speed);
+void	move_right(t_exec_data *data, t_player *player, float speed);
 
 int		key_press(int keycode, t_exec_data *data);
 int		key_release(int keycode, t_exec_data *data);
@@ -118,7 +126,6 @@ void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int 	rgb_to_int(int r, int g, int b);
 
 int		end_game(t_exec_data *data);
-void draw_ray_minimap(t_exec_data *data);
 
 
 #endif
