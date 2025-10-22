@@ -6,15 +6,15 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/17 19:17:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:49:16 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
-#define EXEC_H
+# define EXEC_H
 
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
 
 typedef struct s_player
 {
@@ -35,7 +35,7 @@ typedef struct s_line
 	int	draw_end;
 }	t_line;
 
-typedef struct	s_raycasting
+typedef struct s_raycasting
 {
 	double	camera_x;
 	double	raydir_x;
@@ -53,7 +53,7 @@ typedef struct	s_raycasting
 	t_line	line;
 }	t_raycasting;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img_ptr;
 	char	*addr;
@@ -64,7 +64,7 @@ typedef struct	s_img
 	int		height;
 }	t_img;
 
-typedef struct	s_key
+typedef struct s_key
 {
 	int	key_forward;
 	int	key_backward;
@@ -74,7 +74,7 @@ typedef struct	s_key
 	int	key_turn_right;
 }	t_key;
 
-typedef	struct	s_exec_data
+typedef struct s_exec_data
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -96,22 +96,28 @@ void	init_map(t_exec_data *data);
 void	init_player(t_player *player);
 void	init_image(t_exec_data *data);
 
-int 	perform_raycasting(t_exec_data *data);
+int		perform_raycasting(t_exec_data *data);
 void	update_player(t_exec_data *data);
 
+void	draw_cases(t_exec_data *data, int x, int y);
+void	draw_player(t_exec_data *data, int player_x, int player_y);
+
 void	draw_minimap(t_exec_data *data);
-void	draw_simple_wall(t_exec_data *data, int x, int draw_start, int draw_end);
-void	draw_ceiling_floor(t_exec_data *data, int x, int draw_start, int draw_end);
+void	draw_simple_wall(t_exec_data *data, int x, int start, int end);
+void	draw_ceiling_floor(t_exec_data *data, int x, int start, int end);
 void	draw_map(t_exec_data *data, int x);
+
+void	move_forward(t_exec_data *data, t_player *player, float speed);
+void	move_backward(t_exec_data *data, t_player *player, float speed);
+void	move_left(t_exec_data *data, t_player *player, float speed);
+void	move_right(t_exec_data *data, t_player *player, float speed);
 
 int		key_press(int keycode, t_exec_data *data);
 int		key_release(int keycode, t_exec_data *data);
 
-void    my_mlx_pixel_put(t_img *img, int x, int y, int color);
-int 	rgb_to_int(int r, int g, int b);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		rgb_to_int(int r, int g, int b);
 
 int		end_game(t_exec_data *data);
-void draw_ray_minimap(t_exec_data *data);
-
 
 #endif

@@ -6,7 +6,7 @@
 #    By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 17:00:03 by lgirerd           #+#    #+#              #
-#    Updated: 2025/10/16 17:23:14 by tiaperei         ###   ########.fr        #
+#    Updated: 2025/10/22 13:35:33 by tiaperei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS    	= $(SRCS_DIR)main.c \
 			$(SRCS_DIR)draw.c \
 			$(SRCS_DIR)draw_utils.c \
 			$(SRCS_DIR)controls.c \
+			$(SRCS_DIR)move.c \
 
 ############################# OBJECTS/DEPENDANCES ##############################
 

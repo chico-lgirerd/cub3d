@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/17 17:53:24 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:50:05 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../minilibx-linux/mlx.h"
 #include <stdlib.h>
 
-int worldmap[MAP_WIDTH][MAP_HEIGHT] =
+/* int worldmap[MAP_WIDTH][MAP_HEIGHT] =
 {
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -40,7 +40,7 @@ int worldmap[MAP_WIDTH][MAP_HEIGHT] =
 	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
+}; */
 
 void	init_map(t_exec_data *data)
 {
@@ -87,7 +87,7 @@ void	init_image(t_exec_data *data)
 			&data->game_img.size_line,
 			&data->game_img.endian);
 	data->game_img.width = data->win_width;
-	data->game_img.height = data->win_height;	
+	data->game_img.height = data->win_height;
 	data->minimap_img.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->minimap_width, data->minimap_height);
 	data->minimap_img.addr = mlx_get_data_addr(data->minimap_img.img_ptr,

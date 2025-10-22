@@ -6,56 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/17 16:42:51 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/22 13:38:12 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-//#include "../minilibx-linux/mlx.h"
 #include <math.h>
-#include <stdio.h>
 
-void	move_forward(t_exec_data *data, t_player *player, float speed)
-{
-	//float	new_x;
-	//float	new_y;
-	(void)data;
-
-	player->pos_x += player->dir_x * speed;
-	player->pos_y += player->dir_y * speed;
-}
-
-void	move_backward(t_exec_data *data, t_player *player, float speed)
-{
-	//float	new_x;
-	//float	new_y;
-	(void)data;
-
-	player->pos_x -= player->dir_x * speed;
-	player->pos_y -= player->dir_y * speed;
-}
-
-void	move_left(t_exec_data *data, t_player *player, float speed)
-{
-	//float	new_x;
-	//float	new_y;
-	(void)data;
-
-	player->pos_x -= player->plane_x * speed;
-	player->pos_y -= player->plane_y * speed;
-}
-
-void	move_right(t_exec_data *data, t_player *player, float speed)
-{
-	//float	new_x;
-	//float	new_y;
-	(void)data;
-
-	player->pos_x += player->plane_x * speed;
-	player->pos_y += player->plane_y * speed;
-}
-
-void	turn_left(t_player *player, double rot)
+static void	turn_left(t_player *player, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -68,7 +26,7 @@ void	turn_left(t_player *player, double rot)
 	player->plane_y = old_plane_x * sin(-rot) + player->plane_y * cos(-rot);
 }
 
-void	turn_right(t_player *player, double rot)
+static void	turn_right(t_player *player, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -80,8 +38,6 @@ void	turn_right(t_player *player, double rot)
 	player->plane_x = player->plane_x * cos(rot) - player->plane_y * sin(rot);
 	player->plane_y = old_plane_x * sin(rot) + player->plane_y * cos(rot);
 }
-
-
 
 int	key_press(int keycode, t_exec_data *data)
 {
@@ -127,7 +83,7 @@ void	update_player(t_exec_data *data)
 	t_player	*player;
 
 	speed = 0.3;
-	rot = 0.1;
+	rot = 0.2;
 	player = &data->player;
 	if (data->key.key_forward)
 		move_forward(data, player, speed);

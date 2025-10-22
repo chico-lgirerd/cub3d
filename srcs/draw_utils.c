@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/17 19:17:03 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:13:38 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 #include "../minilibx-linux/mlx.h"
 #include <stdlib.h>
 
-void    my_mlx_pixel_put(t_img *img, int x, int y, int color)
+int	rgb_to_int(int r, int g, int b)
 {
-	char    *dst;
+	return ((r << 16) | (g << 8) | b);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
 
 	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
 	{
@@ -25,32 +30,51 @@ void    my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-int rgb_to_int(int r, int g, int b)
+void	draw_cases(t_exec_data *data, int x, int y)
 {
-	return ((r << 16) | (g << 8) | b);
+	int	case_w;
+	int	case_h;
+	int	px;
+	int	py;
+	int	color;
+
+	case_w = data->minimap_width / data->map_width;
+	case_h = data->minimap_height / data->map_height;
+	if (data->map[y][x] > 0)
+		color = rgb_to_int(128, 128, 128);
+	else
+		color = rgb_to_int(30, 30, 30);
+	px = 0;
+	while (px < case_w)
+	{
+		py = 0;
+		while (py < case_h)
+		{
+			my_mlx_pixel_put(&data->minimap_img,
+				x * case_w + px, y * case_h + py, color);
+			py++;
+		}
+		px++;
+	}
 }
 
-void draw_ray_minimap(t_exec_data *data)
+void	draw_player(t_exec_data *data, int player_x, int player_y)
 {
-	t_raycasting	*rc = &data->raycasting;
-    t_player 		*player = &data->player;
-    int scale = data->minimap_width / data->map_width;
-	int x0 = (int)(player->pos_x * scale);
-	int y0 = (int)(player->pos_y * scale);
-	int x1 = (int)((player->pos_x + rc->perp_walldist * rc->raydir_x) * scale);
-	int y1 = (int)((player->pos_y + rc->perp_walldist * rc->raydir_y) * scale);
+	int	px;
+	int	py;
+	int	color;
 
-    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-    int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-    int err = dx + dy, e2;
-
-    while (1)
-    {
-        my_mlx_pixel_put(&data->minimap_img, x0, y0, rgb_to_int(0, 255, 0));
-        if (x0 == x1 && y0 == y1)
-            break;
-        e2 = 2 * err;
-        if (e2 >= dy) { err += dy; x0 += sx; }
-        if (e2 <= dx) { err += dx; y0 += sy; }
-    }
+	color = rgb_to_int(255, 0, 0);
+	px = -2;
+	while (px <= 2)
+	{
+		py = -2;
+		while (py <= 2)
+		{
+			my_mlx_pixel_put(&data->minimap_img,
+				player_x + px, player_y + py, color);
+			py++;
+		}
+		px++;
+	}
 }
