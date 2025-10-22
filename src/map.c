@@ -6,11 +6,12 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 13:38:22 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 15:30:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "exec.h"
 #include "parsing.h"
 
 int	get_map_rows(char **map)
@@ -52,15 +53,14 @@ int	is_player_char(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int	is_valid_map(char **map, int start)
+int	is_valid_map(t_exec_data *data, char **map, int start)
 {
 	int	player_count;
-	int	rows;
 	int	i;
 	int	j;
 
 	i = start - 1;
-	rows = get_map_rows(map);
+	data->map_height = get_map_rows(map);
 	player_count = 0;
 	while (map[++i])
 	{
@@ -72,7 +72,7 @@ int	is_valid_map(char **map, int start)
 			if (player_count > 1)
 				return (1);
 			if (map[i][j] == '0' || is_player_char(map[i][j]))
-				if (i == start || !check_surround(map, i, j, rows))
+				if (i == start || !check_surround(data, map, i, j))
 					return (2);
 		}
 	}

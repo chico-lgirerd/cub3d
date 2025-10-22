@@ -6,11 +6,12 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:37:25 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 13:39:06 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 15:30:14 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "exec.h"
 
 int	check_above(char **map, int i, int j)
 {
@@ -32,8 +33,13 @@ int	check_below(char **map, int i, int j)
 	return (1);
 }
 
-int	check_surround(char **map, int i, int j, int rows)
+int	check_surround(t_exec_data *data, char **map, int i, int j)
 {
+	int	rows;
+
+	rows = data->map_height;
+	if (j > data->map_width)
+		data->map_width = j;
 	if (i == rows - 1)
 		return (0);
 	if (j == 0)

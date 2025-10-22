@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 16:42:08 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/20 09:44:21 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 14:44:43 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 #include <stdio.h>
 
-void	init_colors(t_world *w)
+void	init_colors(t_color *ceiling, t_color *floor)
 {
-	w->textures.ceiling.red = -1;
-	w->textures.ceiling.green = -1;
-	w->textures.ceiling.blue = -1;
-	w->textures.floor.red = -1;
-	w->textures.floor.green = -1;
-	w->textures.floor.blue = -1;
+	ceiling->red = -1;
+	ceiling->green = -1;
+	ceiling->blue = -1;
+	floor->red = -1;
+	floor->green = -1;
+	floor->blue = -1;
 }
 
 t_world	*init_world(void)
@@ -52,7 +52,7 @@ int	init_parsing(t_world *world, char *filename)
 	if (!world->map)
 	{
 		printf("Error\nCould not get map from file : %s\n", filename);
-		free(world);
+		// free(world);
 		return (1);
 	}
 	line_idx = 0;
@@ -60,7 +60,7 @@ int	init_parsing(t_world *world, char *filename)
 	{
 		if (get_textures(world, world->map[line_idx]))
 		{
-			free_world(world);
+			// free_world(world);
 			return (1);
 		}
 		line_idx++;

@@ -6,20 +6,21 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/21 15:39:46 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/22 14:42:19 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "exec.h"
 #include "mlx.h"
 
-void	load_north(t_world *w, char *mapline)
+void	load_north(t_exec_data *d, char *mapline)
 {
 	t_wall	*n;
 
-	n = &w->textures.north;
-	n->img = mlx_xpm_file_to_image(w->mlx_ptr,
-			mapline, &w->textures.width, &w->textures.height);
+	n = &d->textures.north;
+	n->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &d->textures.width, &d->textures.height);
 	if (n->img)
 		n->addr = mlx_get_data_addr(n->img,
 				&n->bpp, &n->length, &n->endian);
@@ -28,13 +29,13 @@ void	load_north(t_world *w, char *mapline)
 	n->loaded = 1;
 }
 
-void	load_south(t_world *w, char *mapline)
+void	load_south(t_exec_data *d, char *mapline)
 {
 	t_wall	*s;
 
-	s = &w->textures.south;
-	s->img = mlx_xpm_file_to_image(w->mlx_ptr,
-			mapline, &w->textures.width, &w->textures.height);
+	s = &d->textures.south;
+	s->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &d->textures.width, &d->textures.height);
 	if (s->img)
 		s->addr = mlx_get_data_addr(s->img,
 				&s->bpp, &s->length, &s->endian);
@@ -43,13 +44,13 @@ void	load_south(t_world *w, char *mapline)
 	s->loaded = 1;
 }
 
-void	load_west(t_world *w, char *mapline)
+void	load_west(t_exec_data *d, char *mapline)
 {
 	t_wall	*we;
 
-	we = &w->textures.west;
-	we->img = mlx_xpm_file_to_image(w->mlx_ptr,
-			mapline, &w->textures.width, &w->textures.height);
+	we = &d->textures.west;
+	we->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &d->textures.width, &d->textures.height);
 	if (we->img)
 		we->addr = mlx_get_data_addr(we->img,
 				&we->bpp, &we->length, &we->endian);
@@ -58,13 +59,13 @@ void	load_west(t_world *w, char *mapline)
 	we->loaded = 1;
 }
 
-void	load_east(t_world *w, char *mapline)
+void	load_east(t_exec_data *d, char *mapline)
 {
 	t_wall	*e;
 
-	e = &w->textures.east;
-	e->img = mlx_xpm_file_to_image(w->mlx_ptr,
-			mapline, &w->textures.width, &w->textures.height);
+	e = &d->textures.east;
+	e->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &d->textures.width, &d->textures.height);
 	if (e->img)
 		e->addr = mlx_get_data_addr(e->img,
 				&e->bpp, &e->length, &e->endian);

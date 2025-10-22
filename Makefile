@@ -35,7 +35,14 @@ SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)check_map.c \
 				$(SRCS_DIR)errors.c \
 				$(SRCS_DIR)garbage_collector.c \
-				$(SRCS_DIR)main.c
+				$(SRCS_DIR)controls.c \
+				$(SRCS_DIR)draw_utils.c \
+				$(SRCS_DIR)draw.c \
+				$(SRCS_DIR)init_t.c \
+				$(SRCS_DIR)main.c \
+				$(SRCS_DIR)raycasting.c
+
+# $(SRCS_DIR).main_deprecated.c OLD MAIN FILE FOR PARSING ONLY
 
 ############################# DIRECTORIES ##############################
 
