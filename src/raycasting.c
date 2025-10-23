@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 15:45:38 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/23 17:09:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	perform_dda(t_exec_data *data)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] > 0)
+		if (data->map[rc->map_y][rc->map_x] == '1')
 			hit = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 19:11:05 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 17:09:58 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_cases(t_exec_data *data, int x, int y)
 
 	case_w = data->minimap_width / data->map_width;
 	case_h = data->minimap_height / data->map_height;
-	if (data->map[y][x] > 0)
+	if (data->map[y][x] == '1')
 		color = rgb_to_int(128, 128, 128);
 	else
 		color = rgb_to_int(30, 30, 30);

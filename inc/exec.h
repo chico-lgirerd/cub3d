@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 19:11:55 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 17:12:57 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct s_player
 {
+	char	start_char;
 	int		start_x;
 	int		start_y;
 	double	pos_x;
