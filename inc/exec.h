@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/23 17:19:12 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/23 18:03:23 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 #include "parsing.h"
 
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 24
+#define TEXTURE_WIDTH 128
+#define TEXTURE_HEIGHT 128
 
 
 typedef struct s_player
@@ -32,14 +32,18 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
-typedef struct s_line
+typedef struct s_draw
 {
-	int	tex_x;
-	int	tex_y;
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-}	t_line;
+	
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	t_wall	wall_tex;
+}	t_draw;
 
 typedef struct	s_raycasting
 {
@@ -56,7 +60,7 @@ typedef struct	s_raycasting
 	int		step_x;	//next step of DDA algo
 	int		step_y;
 	int		side;
-	t_line	line;
+	t_draw	draw;
 }	t_raycasting;
 
 typedef struct	s_img
