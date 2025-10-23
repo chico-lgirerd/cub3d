@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 19:09:41 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 16:05:21 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	end_game(t_exec_data *data)
 
 int	render(t_exec_data *data)
 {
+	//printf("TTTTTT\n");
 	update_player(data);
 	draw_minimap(data);
 	perform_raycasting(data);

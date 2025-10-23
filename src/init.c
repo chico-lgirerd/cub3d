@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 19:08:39 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/23 17:11:11 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,30 @@ int	init_map(t_exec_data *data, char *filename)
 
 void	init_player(t_player *player)
 {
-	player->pos_x = 20;
-	player->pos_y = 20;
-	player->dir_x = 0;
-	player->dir_y = -1;
-	player->plane_x = 0.66;
-	player->plane_y = 0;
+	player->pos_x = player->start_x;
+	player->pos_y = player->start_y;
+	if (player->start_char == 'N' || player->start_char == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		if (player->start_char == 'S')
+			player->dir_y = 1;
+		player->plane_x = 0.66;
+		if (player->start_char == 'S')
+			player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+	else
+	{
+		player->dir_x = -1;
+		if (player->start_char == 'E')
+			player->dir_x = 1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+		if (player->start_char == 'E')
+			player->plane_y = -0.66;
+	}
 }
 
 void	init_image(t_exec_data *data)

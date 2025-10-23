@@ -6,13 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 15:45:38 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:38:20 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <math.h>
 
+#include <stdio.h>
 static void	init_raycasting(t_exec_data *data, int x)
 {
 	t_player		*player;
@@ -20,6 +21,8 @@ static void	init_raycasting(t_exec_data *data, int x)
 
 	player = &data->player;
 	rc = &data->raycasting;
+	printf("player pos x : %f\n", player->pos_x);
+	printf("player pos y : %f\n", player->pos_y);
 	rc->map_x = (int)player->pos_x;
 	rc->map_y = (int)player->pos_y;
 	rc->camera_x = 2 * x / (double)data->win_width - 1;
@@ -88,7 +91,7 @@ static void	perform_dda(t_exec_data *data)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] > 0)
+		if (data->map[rc->map_y][rc->map_x] == '1')
 			hit = 1;
 	}
 }
