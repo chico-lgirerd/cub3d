@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/23 16:05:21 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/26 19:00:55 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,25 @@ int	end_game(t_exec_data *data)
 
 int	render(t_exec_data *data)
 {
-	//printf("TTTTTT\n");
-	update_player(data);
+	struct timeval	curr_time;
+	static struct timeval	last_time;
+	static int	frame_count;
+	static struct timeval last_check = {0, 0};
+
+	gettimeofday(&curr_time, NULL);
+	if (last_check.tv_sec == 0 && last_check.tv_usec == 0)
+        last_check = curr_time;
+	frame_count++;
+	double elapsed = (curr_time.tv_sec - last_check.tv_sec)
+                  + (curr_time.tv_usec - last_check.tv_usec) / 1000000.0;
+    if (elapsed >= 1.0)
+	{
+        printf("FPS: %d\n", frame_count);
+        frame_count = 0;
+        last_check = curr_time;
+    }
+	update_player(data, curr_time, last_time);
+	last_time = curr_time;
 	draw_minimap(data);
 	perform_raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -40,7 +57,7 @@ int	render(t_exec_data *data)
 }
 
 void	exec_game(t_exec_data *data)
-{	
+{
 	mlx_get_screen_size(data->mlx_ptr, &data->win_width, &data->win_height);
 	data->minimap_width = data->win_height / 6;
 	data->minimap_height = data->win_height / 6;
@@ -60,7 +77,7 @@ void	exec_game(t_exec_data *data)
 int	main(int ac, char **av)
 {
 	t_exec_data	data;
-	
+
 	if (ac != 2)
 	{
 		printf("Error\nUsage : ./cubed <filename.cub>\n");

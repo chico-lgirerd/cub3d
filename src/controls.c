@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/22 13:38:12 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/26 18:57:50 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,31 @@ int	key_release(int keycode, t_exec_data *data)
 	return (0);
 }
 
-void	update_player(t_exec_data *data)
+void	update_player(t_exec_data *data, struct timeval curr_time,
+	struct timeval last_time)
 {
+	double		delta;
 	double		speed;
 	double		rot;
 	t_player	*player;
 
-	speed = 0.3;
-	rot = 0.2;
+
+	if (curr_time.tv_usec < last_time.tv_usec)
+	{
+		delta = (curr_time.tv_sec - last_time.tv_sec - 1)
+			+ ((1000000 + curr_time.tv_usec - last_time.tv_usec) / 1000000.0);
+	}
+	else
+	{
+    	delta = (curr_time.tv_sec - last_time.tv_sec)
+			+ ((curr_time.tv_usec - last_time.tv_usec) / 1000000.0);
+	}
+	//delta = ((curr_time.tv_sec - last_time.tv_sec)
+		//+ (curr_time.tv_usec - last_time.tv_usec)) / 1000000.0;
+	//#include <stdio.h>
+	//printf("delta time = %f\n", delta);
+	speed = BASE_SPEED * delta;
+	rot = BASE_SENSI * delta;
 	player = &data->player;
 	if (data->key.key_forward)
 		move_forward(data, player, speed);

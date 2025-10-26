@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/23 17:04:08 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:14:36 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 		dst = img->addr + (y * img->size_line + x * (img->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
+}
+
+int	get_texture_color(t_wall *texture, int tex_x, int tex_y)
+{
+	int				bytes_per_pixel;
+	int				offset;
+	unsigned char	*pixel;
+	int				color;
+
+	bytes_per_pixel = texture->bpp / 8;		
+	offset = tex_y * texture->length + tex_x * bytes_per_pixel;
+	pixel = (unsigned char *)texture->addr + offset;
+	color = pixel[0] | (pixel[1] << 8) | (pixel[2] << 16) | (pixel[3] << 24);
+	return (color);
 }
 
 void	draw_cases(t_exec_data *data, int x, int y)
