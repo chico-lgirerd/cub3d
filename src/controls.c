@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 18:57:50 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:58:25 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	turn_right(t_player *player, double rot)
 	player->plane_y = old_plane_x * sin(rot) + player->plane_y * cos(rot);
 }
 
-int	key_press(int keycode, t_exec_data *data)
+int	key_press(int keycode, t_data *data)
 {
 	//printf("keycode = %d\n", keycode);
 	if (keycode == 119 || keycode == 65362)
@@ -59,7 +59,7 @@ int	key_press(int keycode, t_exec_data *data)
 	return (0);
 }
 
-int	key_release(int keycode, t_exec_data *data)
+int	key_release(int keycode, t_data *data)
 {
 	if (keycode == 119 || keycode == 65362)
 		data->key.key_forward = 0;
@@ -76,7 +76,7 @@ int	key_release(int keycode, t_exec_data *data)
 	return (0);
 }
 
-void	update_player(t_exec_data *data, struct timeval curr_time,
+void	update_player(t_data *data, struct timeval curr_time,
 	struct timeval last_time)
 {
 	double		delta;
@@ -84,21 +84,8 @@ void	update_player(t_exec_data *data, struct timeval curr_time,
 	double		rot;
 	t_player	*player;
 
-
-	if (curr_time.tv_usec < last_time.tv_usec)
-	{
-		delta = (curr_time.tv_sec - last_time.tv_sec - 1)
-			+ ((1000000 + curr_time.tv_usec - last_time.tv_usec) / 1000000.0);
-	}
-	else
-	{
-    	delta = (curr_time.tv_sec - last_time.tv_sec)
-			+ ((curr_time.tv_usec - last_time.tv_usec) / 1000000.0);
-	}
-	//delta = ((curr_time.tv_sec - last_time.tv_sec)
-		//+ (curr_time.tv_usec - last_time.tv_usec)) / 1000000.0;
-	//#include <stdio.h>
-	//printf("delta time = %f\n", delta);
+	delta = ((curr_time.tv_sec * 1000000L + curr_time.tv_usec)
+		- (last_time.tv_sec * 1000000L + last_time.tv_usec)) / 1000000.0;
 	speed = BASE_SPEED * delta;
 	rot = BASE_SENSI * delta;
 	player = &data->player;

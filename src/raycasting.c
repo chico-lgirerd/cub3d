@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 18:27:08 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 13:55:04 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 
 #include <stdio.h>
-static void	init_raycasting(t_exec_data *data, int x)
+static void	init_raycasting(t_data *data, int x)
 {
 	t_player		*player;
 	t_raycasting	*rc;
@@ -38,7 +38,7 @@ static void	init_raycasting(t_exec_data *data, int x)
 		rc->deltadist_y = fabs(1 / rc->raydir_y);
 }
 
-static void	calcul_dist_next_cases(t_exec_data *data)
+static void	calcul_dist_next_cases(t_data *data)
 {
 	t_player		*player;
 	t_raycasting	*rc;
@@ -67,7 +67,7 @@ static void	calcul_dist_next_cases(t_exec_data *data)
 	}
 }
 
-static void	perform_dda(t_exec_data *data)
+static void	perform_dda(t_data *data)
 {
 	t_player		*player;
 	t_raycasting	*rc;
@@ -96,7 +96,7 @@ static void	perform_dda(t_exec_data *data)
 	}
 }
 
-int	perform_raycasting(t_exec_data *data)
+int	perform_raycasting(t_data *data)
 {
 	t_player		*player;
 	t_raycasting	*rc;

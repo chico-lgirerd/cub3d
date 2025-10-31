@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/22 14:42:19 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/31 11:51:36 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "exec.h"
 #include "mlx.h"
 
-void	load_north(t_exec_data *d, char *mapline)
+void	load_north(t_data *d, char *mapline)
 {
 	t_wall	*n;
 
@@ -29,7 +29,7 @@ void	load_north(t_exec_data *d, char *mapline)
 	n->loaded = 1;
 }
 
-void	load_south(t_exec_data *d, char *mapline)
+void	load_south(t_data *d, char *mapline)
 {
 	t_wall	*s;
 
@@ -44,7 +44,7 @@ void	load_south(t_exec_data *d, char *mapline)
 	s->loaded = 1;
 }
 
-void	load_west(t_exec_data *d, char *mapline)
+void	load_west(t_data *d, char *mapline)
 {
 	t_wall	*we;
 
@@ -59,7 +59,7 @@ void	load_west(t_exec_data *d, char *mapline)
 	we->loaded = 1;
 }
 
-void	load_east(t_exec_data *d, char *mapline)
+void	load_east(t_data *d, char *mapline)
 {
 	t_wall	*e;
 

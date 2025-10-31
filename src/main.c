@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 19:00:55 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 12:57:26 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int	end_game(t_exec_data *data)
+int	end_game(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
@@ -26,37 +26,45 @@ int	end_game(t_exec_data *data)
 	// return (0);
 }
 
-int	render(t_exec_data *data)
+void	fps_counter(t_data *data, struct timeval curr_time)
 {
-	struct timeval	curr_time;
+	static int				frame_count;
+	static struct timeval	last_check;
+	double					elapsed;
+
+	(void)data;
+	if (last_check.tv_sec == 0 && last_check.tv_usec == 0)
+		last_check = curr_time;
+	frame_count++;
+	elapsed = (curr_time.tv_sec - last_check.tv_sec)
+		+ (curr_time.tv_usec - last_check.tv_usec) / 1000000.0;
+	if (elapsed >= 1.0)
+	{
+		printf("FPS: %d\n", frame_count);
+		frame_count = 0;
+		last_check = curr_time;
+	}
+}
+
+int	render(t_data *data)
+{
+	struct timeval			curr_time;
 	static struct timeval	last_time;
-	static int	frame_count;
-	static struct timeval last_check = {0, 0};
 
 	gettimeofday(&curr_time, NULL);
-	if (last_check.tv_sec == 0 && last_check.tv_usec == 0)
-        last_check = curr_time;
-	frame_count++;
-	double elapsed = (curr_time.tv_sec - last_check.tv_sec)
-                  + (curr_time.tv_usec - last_check.tv_usec) / 1000000.0;
-    if (elapsed >= 1.0)
-	{
-        printf("FPS: %d\n", frame_count);
-        frame_count = 0;
-        last_check = curr_time;
-    }
+	fps_counter(data, curr_time);
 	update_player(data, curr_time, last_time);
-	last_time = curr_time;
+	last_time = curr_time;	
 	draw_minimap(data);
 	perform_raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->game_img.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->minimap_img.img_ptr, 0, 0);
+		data->minimap_img.img_ptr, 10, 10);
 	return (0);
 }
 
-void	exec_game(t_exec_data *data)
+void	exec_game(t_data *data)
 {
 	mlx_get_screen_size(data->mlx_ptr, &data->win_width, &data->win_height);
 	data->minimap_width = data->win_height / 6;
@@ -76,14 +84,14 @@ void	exec_game(t_exec_data *data)
 
 int	main(int ac, char **av)
 {
-	t_exec_data	data;
+	t_data	data;
 
 	if (ac != 2)
 	{
 		printf("Error\nUsage : ./cubed <filename.cub>\n");
 		return (1);
 	}
-	ft_memset(&data, 0, sizeof(t_exec_data));
+	ft_memset(&data, 0, sizeof(t_data));
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);

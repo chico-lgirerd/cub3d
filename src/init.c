@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/23 17:11:11 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:51:31 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_colors(t_color *ceiling, t_color *floor)
 	floor->blue = -1;
 }
 
-int	init_map(t_exec_data *data, char *filename)
+int	init_map(t_data *data, char *filename)
 {
 	int	line_idx;
 
@@ -54,8 +54,8 @@ int	init_map(t_exec_data *data, char *filename)
 
 void	init_player(t_player *player)
 {
-	player->pos_x = player->start_x;
-	player->pos_y = player->start_y;
+	player->pos_x = player->start_x ;
+	player->pos_y = player->start_y ;
 	if (player->start_char == 'N' || player->start_char == 'S')
 	{
 		player->dir_x = 0;
@@ -74,13 +74,13 @@ void	init_player(t_player *player)
 			player->dir_x = 1;
 		player->dir_y = 0;
 		player->plane_x = 0;
-		player->plane_y = 0.66;
+		player->plane_y = -0.66;
 		if (player->start_char == 'E')
-			player->plane_y = -0.66;
+			player->plane_y = 0.66;
 	}
 }
 
-void	init_image(t_exec_data *data)
+void	init_image(t_data *data)
 {
 	data->game_img.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->win_width, data->win_height);

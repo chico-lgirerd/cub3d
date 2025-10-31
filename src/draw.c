@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 18:07:06 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:02:54 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,31 @@
 #include "mlx.h"
 #include <math.h>
 
-void	draw_minimap(t_exec_data *data)
+void	draw_minimap(t_data *data)
 {
 	int	x;
 	int	y;
 	int	player_x;
 	int	player_y;
+	int start_x;
+	int start_y;
 
+	start_x = (int)data->player.pos_x - CASE_WIDTH / 2;
+	start_y = (int)data->player.pos_y - CASE_HEIGHT / 2;
 	x = 0;
-	while (x < data->map_width)
+	//#include <stdio.h>
+	//printf("%d\n", data->minimap_height);
+	while (x < CASE_WIDTH)
 	{
 		y = 0;
-		while (y < data->map_height)
+		while (y < CASE_HEIGHT)
 		{
-			draw_cases(data, x, y);
+			int map_x = start_x + x;
+			int map_y = start_y + y;
+			if (map_x >= 0 && map_x < data->map_width && map_y >= 0 && map_y < data->map_height)
+				draw_cases(data, x, y, map_x, map_y);
+			else
+				draw_empty_cases(data, x, y);
 			y++;
 		}
 		x++;
@@ -36,10 +47,10 @@ void	draw_minimap(t_exec_data *data)
 			* (data->minimap_width / data->map_width));
 	player_y = (int)(data->player.pos_y
 			* (data->minimap_width / data->map_height));
-	draw_player(data, player_x, player_y);
+	//draw_player(data, player_x, player_y);
 }
 
-int	compute_tex_x(t_exec_data *data)
+int	compute_tex_x(t_data *data)
 {
 	double			wall_x;
 	int				tex_x;
@@ -59,7 +70,7 @@ int	compute_tex_x(t_exec_data *data)
 	return (tex_x);
 }
 
-void	draw_textured_wall(t_exec_data *data, int x, t_draw *draw)
+void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 {
 	int		y;
 	int		color;
@@ -82,7 +93,7 @@ void	draw_textured_wall(t_exec_data *data, int x, t_draw *draw)
 	}
 }
 
-void	draw_ceiling_floor(t_exec_data *data, int x, int start, int end)
+void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 {
 	int	y;
 	int	ceiling_color;
@@ -104,7 +115,7 @@ void	draw_ceiling_floor(t_exec_data *data, int x, int start, int end)
 	}
 }
 
-void	draw_map(t_exec_data *data, int x)
+void	draw_map(t_data *data, int x)
 {
 	t_raycasting	rc;
 	t_draw			*draw;

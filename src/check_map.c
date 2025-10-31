@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:37:25 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/23 16:58:55 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:50:42 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_below(char **map, int i, int j)
 	return (1);
 }
 
-int	check_surround(t_exec_data *data, char **map, int i, int j)
+int	check_surround(t_data *data, char **map, int i, int j)
 {
 	int	rows;
 

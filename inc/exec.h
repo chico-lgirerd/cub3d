@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 18:35:43 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:03:00 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include "parsing.h"
 #include <sys/time.h>
 
-# define BASE_SPEED 2
-# define BASE_SENSI 1
+# define BASE_SPEED 3
+# define BASE_SENSI 1.5
+# define CASE_WIDTH 20
+# define CASE_HEIGHT 20
 
 typedef struct s_player
 {
@@ -81,7 +83,7 @@ typedef struct s_key
 	int	key_turn_right;
 }	t_key;
 
-typedef struct s_exec_data
+typedef struct s_data
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -99,33 +101,34 @@ typedef struct s_exec_data
 	t_img			minimap_img;
 	t_key			key;
 	t_textures		textures;
-}	t_exec_data;
+}	t_data;
 
-int		init_map(t_exec_data *data, char *filename);
+int		init_map(t_data *data, char *filename);
 void	init_player(t_player *player);
-void	init_image(t_exec_data *data);
+void	init_image(t_data *data);
 
-int		perform_raycasting(t_exec_data *data);
-void	update_player(t_exec_data *data, struct timeval curr_time,
+int		perform_raycasting(t_data *data);
+void	update_player(t_data *data, struct timeval curr_time,
 			struct timeval last_time);
 
-void	draw_minimap(t_exec_data *data);
-void	draw_map(t_exec_data *data, int x);
+void	draw_minimap(t_data *data);
+void	draw_map(t_data *data, int x);
 
-void	move_forward(t_exec_data *data, t_player *player, float speed);
-void	move_backward(t_exec_data *data, t_player *player, float speed);
-void	move_left(t_exec_data *data, t_player *player, float speed);
-void	move_right(t_exec_data *data, t_player *player, float speed);
+void	move_forward(t_data *data, t_player *player, float speed);
+void	move_backward(t_data *data, t_player *player, float speed);
+void	move_left(t_data *data, t_player *player, float speed);
+void	move_right(t_data *data, t_player *player, float speed);
 
-int		key_press(int keycode, t_exec_data *data);
-int		key_release(int keycode, t_exec_data *data);
+int		key_press(int keycode, t_data *data);
+int		key_release(int keycode, t_data *data);
 
 int		rgb_to_int(int r, int g, int b);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
-void	draw_cases(t_exec_data *data, int x, int y);
-void	draw_player(t_exec_data *data, int player_x, int player_y);
+void	draw_cases(t_data *data, int x, int y, int map_x, int map_y);
+void	draw_empty_cases(t_data *data, int x, int y);
+void	draw_player(t_data *data, int player_x, int player_y);
 
-int		end_game(t_exec_data *data);
+int		end_game(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/22 15:39:21 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/10/31 11:51:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	skip_spaces(char **str)
 		(*str)++;
 }
 
-int	fill_rgb(t_exec_data *d, char *key, char **mapline)
+int	fill_rgb(t_data *d, char *key, char **mapline)
 {
 	if (key[0] == 'F')
 	{
@@ -42,7 +42,7 @@ int	fill_rgb(t_exec_data *d, char *key, char **mapline)
 	return (1);
 }
 
-int	load_texture(t_exec_data *data, char *key, char **mapline)
+int	load_texture(t_data *data, char *key, char **mapline)
 {
 	if (!ft_strcmp(key, "NO"))
 		load_north(data, *mapline);
@@ -62,7 +62,7 @@ int	load_texture(t_exec_data *data, char *key, char **mapline)
 	return (1);
 }
 
-int	get_textures(t_exec_data *data, char *mapline)
+int	get_textures(t_data *data, char *mapline)
 {
 	char	key[3];
 

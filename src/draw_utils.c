@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/26 16:14:36 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:05:20 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_texture_color(t_wall *texture, int tex_x, int tex_y)
 	return (color);
 }
 
-void	draw_cases(t_exec_data *data, int x, int y)
+void	draw_empty_cases(t_data *data, int x, int y)
 {
 	int	case_w;
 	int	case_h;
@@ -52,9 +52,37 @@ void	draw_cases(t_exec_data *data, int x, int y)
 	int	py;
 	int	color;
 
-	case_w = data->minimap_width / data->map_width;
-	case_h = data->minimap_height / data->map_height;
-	if (data->map[y][x] == '1')
+	case_w = data->minimap_width / CASE_WIDTH;
+	case_h = data->minimap_height / CASE_HEIGHT;
+	color = rgb_to_int(0, 0, 100);
+	px = 0;
+	while (px < case_w)
+	{
+		py = 0;
+		while (py < case_h)
+		{
+			my_mlx_pixel_put(&data->minimap_img,
+				x * case_w + px, y * case_h + py, color);
+			py++;
+		}
+		px++;
+	}
+}
+
+void	draw_cases(t_data *data, int x, int y, int map_x, int map_y)
+{
+	int	case_w;
+	int	case_h;
+	int	px;
+	int	py;
+	int	color;
+
+	case_w = data->minimap_width / CASE_WIDTH;
+	case_h = data->minimap_height / CASE_HEIGHT;
+	//#include <stdio.h>
+	//printf("map_y = %d\n", map_y);
+	//printf("map_x = %d\n", map_x);
+	if (data->map[map_y][map_x] == '1')
 		color = rgb_to_int(128, 128, 128);
 	else
 		color = rgb_to_int(30, 30, 30);
@@ -72,7 +100,7 @@ void	draw_cases(t_exec_data *data, int x, int y)
 	}
 }
 
-void	draw_player(t_exec_data *data, int player_x, int player_y)
+void	draw_player(t_data *data, int player_x, int player_y)
 {
 	int	px;
 	int	py;
