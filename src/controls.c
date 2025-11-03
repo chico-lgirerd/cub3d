@@ -6,27 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 17:13:35 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:54:48 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <math.h>
 
-void	turn_left(t_player *player, double rot)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = player->dir_x;
-	old_plane_x = player->plane_x;
-	player->dir_x = player->dir_x * cos(-rot) - player->dir_y * sin(-rot);
-	player->dir_y = old_dir_x * sin(-rot) + player->dir_y * cos(-rot);
-	player->plane_x = player->plane_x * cos(-rot) - player->plane_y * sin(-rot);
-	player->plane_y = old_plane_x * sin(-rot) + player->plane_y * cos(-rot);
-}
-
-void	turn_right(t_player *player, double rot)
+void	turn_camera(t_player *player, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -98,7 +85,7 @@ void	update_player(t_data *data, struct timeval curr_time,
 	if (data->key.key_right)
 		move_right(data, player, speed);
 	if (data->key.key_turn_left)
-		turn_left(player, rot);
+		turn_camera(player, -rot);
 	if (data->key.key_turn_right)
-		turn_right(player, rot);
+		turn_camera(player, rot);
 }

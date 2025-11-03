@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 17:24:13 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:43:33 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,25 @@ int	render(t_data *data)
 int	mouse_handler(int x, int y, t_data *data)
 {
 	int		dx;
-	double sensi;
+	double	sensi;
 
-	(void)y;
-	data->mouse.last_x = data->mouse.x;
-	data->mouse.x = x;
-	dx = data->mouse.x - data->mouse.last_x;
-	sensi = 0.005;
-	if (dx > 0)
-		turn_right(&data->player, dx * sensi);
-	if (dx < 0)
-		turn_left(&data->player, -dx * sensi);
-	data->mouse.last_x = x;
-	//printf("Mouse moved to %d, %d\n", x, y);
-	return(0);
+	data->mouse.center_x = data->win_width / 2;
+	data->mouse.center_y = data->win_height / 2;
+	data->mouse.square_radius = 80;
+	dx = x - data->mouse.last_x;
+	sensi = 0.002;
+	if (dx != 0)
+		turn_camera(&data->player, dx * sensi);
+	if (abs(x - data->mouse.center_x) > data->mouse.square_radius
+		|| abs(y - data->mouse.center_y) > data->mouse.square_radius)
+	{
+		mlx_mouse_move(data->mlx_ptr, data->win_ptr,
+			data->mouse.center_x, data->mouse.center_y);
+		data->mouse.last_x = data->mouse.center_x;
+	}
+	else
+		data->mouse.last_x = x;
+	return (0);
 }
 
 void	exec_game(t_data *data)
@@ -95,7 +100,7 @@ void	exec_game(t_data *data)
 	init_image(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
-	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, mouse_handler, data);
+	mlx_hook(data->win_ptr, MotionNotify, 1L<<6, mouse_handler, data);
 	mlx_hook(data->win_ptr, DestroyNotify, 0, &end_game, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);

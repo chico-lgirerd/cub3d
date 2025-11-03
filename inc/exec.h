@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 17:14:51 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:38:18 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ typedef struct s_key
 
 typedef struct s_mouse
 {
-	int	x;
-	int	y;
 	int	last_x;
-	int	last_y;
-	int	button_pressed;
+	int	center_x;
+	int	center_y;
+	int	square_radius;
+	//int	button_pressed;
 }	t_mouse;
 
 typedef struct s_data
@@ -129,8 +129,7 @@ void	move_forward(t_data *data, t_player *player, float speed);
 void	move_backward(t_data *data, t_player *player, float speed);
 void	move_left(t_data *data, t_player *player, float speed);
 void	move_right(t_data *data, t_player *player, float speed);
-void	turn_left(t_player *player, double rot);
-void	turn_right(t_player *player, double rot);
+void	turn_camera(t_player *player, double rot);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
