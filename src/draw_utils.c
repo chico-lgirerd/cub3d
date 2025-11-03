@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 14:05:20 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:27:59 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@ void	draw_cases(t_data *data, int x, int y, int map_x, int map_y)
 
 	case_w = data->minimap_width / CASE_WIDTH;
 	case_h = data->minimap_height / CASE_HEIGHT;
-	//#include <stdio.h>
-	//printf("map_y = %d\n", map_y);
-	//printf("map_x = %d\n", map_x);
 	if (data->map[map_y][map_x] == '1')
 		color = rgb_to_int(128, 128, 128);
 	else

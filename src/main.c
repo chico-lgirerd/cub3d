@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 12:57:26 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:24:13 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	render(t_data *data)
 	gettimeofday(&curr_time, NULL);
 	fps_counter(data, curr_time);
 	update_player(data, curr_time, last_time);
-	last_time = curr_time;	
+	last_time = curr_time;
 	draw_minimap(data);
 	perform_raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -62,6 +62,25 @@ int	render(t_data *data)
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->minimap_img.img_ptr, 10, 10);
 	return (0);
+}
+
+int	mouse_handler(int x, int y, t_data *data)
+{
+	int		dx;
+	double sensi;
+
+	(void)y;
+	data->mouse.last_x = data->mouse.x;
+	data->mouse.x = x;
+	dx = data->mouse.x - data->mouse.last_x;
+	sensi = 0.005;
+	if (dx > 0)
+		turn_right(&data->player, dx * sensi);
+	if (dx < 0)
+		turn_left(&data->player, -dx * sensi);
+	data->mouse.last_x = x;
+	//printf("Mouse moved to %d, %d\n", x, y);
+	return(0);
 }
 
 void	exec_game(t_data *data)
@@ -76,6 +95,7 @@ void	exec_game(t_data *data)
 	init_image(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
+	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, mouse_handler, data);
 	mlx_hook(data->win_ptr, DestroyNotify, 0, &end_game, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);

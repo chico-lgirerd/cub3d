@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 14:02:54 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:43:27 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,9 @@ void	draw_minimap(t_data *data)
 		}
 		x++;
 	}
-	player_x = (int)(data->player.pos_x
-			* (data->minimap_width / data->map_width));
-	player_y = (int)(data->player.pos_y
-			* (data->minimap_width / data->map_height));
-	//draw_player(data, player_x, player_y);
+	player_x = data->minimap_width / 2;
+	player_y = data->minimap_width / 2;
+	draw_player(data, player_x, player_y);
 }
 
 int	compute_tex_x(t_data *data)

@@ -6,14 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 11:58:25 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:13:35 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <math.h>
 
-static void	turn_left(t_player *player, double rot)
+void	turn_left(t_player *player, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -26,7 +26,7 @@ static void	turn_left(t_player *player, double rot)
 	player->plane_y = old_plane_x * sin(-rot) + player->plane_y * cos(-rot);
 }
 
-static void	turn_right(t_player *player, double rot)
+void	turn_right(t_player *player, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;
