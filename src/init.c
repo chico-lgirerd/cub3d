@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 17:40:53 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:47:08 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	init_map(t_data *data, char *filename)
 
 void	init_player(t_player *player)
 {
-	player->pos_x = player->start_x;
-	player->pos_y = player->start_y;
+	player->pos_x = player->start_x + 0.5;
+	player->pos_y = player->start_y + 0.5;
 	if (player->start_char == 'N' || player->start_char == 'S')
 	{
 		player->dir_x = 0;
