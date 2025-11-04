@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/16 13:05:53 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/04 16:32:18 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ int	valid_colors(t_textures textures)
 	else if (textures.floor.blue < 0 || textures.floor.blue > 255)
 		return (0);
 	return (1);
+}
+
+int	rgb_to_int(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
 }

@@ -6,48 +6,42 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 14:15:00 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:31:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
+#include "libft.h"
 #include <math.h>
 
 void	draw_minimap(t_data *data)
 {
 	int	x;
 	int	y;
-	int	player_x;
-	int	player_y;
-	int start_x;
-	int start_y;
-	int	map_x;
-	int map_y;
 
-	start_x = (int)data->player.pos_x - CASE_WIDTH / 2;
-	start_y = (int)data->player.pos_y - CASE_HEIGHT / 2;
+	data->minimap.start_x = (int)data->player.pos_x - MINIMAP_ZOOM / 2;
+	data->minimap.start_y = (int)data->player.pos_y - MINIMAP_ZOOM / 2;
 	x = 0;
-	//#include <stdio.h>
-	//printf("%d\n", data->minimap_width);
-	while (x < CASE_WIDTH)
+	while (x < MINIMAP_ZOOM)
 	{
 		y = 0;
-		while (y < CASE_HEIGHT)
+		while (y < MINIMAP_ZOOM)
 		{
-			map_x = start_x + x;
-			map_y = start_y + y;
-			if (map_x >= 0 && map_x < data->map_width && map_y >= data->map_start && map_y < data->map_height)
-				draw_cases(data, x, y, map_x, map_y);
+			data->minimap.map_x = data->minimap.start_x + x;
+			data->minimap.map_y = data->minimap.start_y + y;
+			if (data->minimap.map_y >= data->map_start
+				&& data->minimap.map_y <= data->map_end
+				&& data->minimap.map_x >= 0 && data->minimap.map_x
+				< (int)ft_strlen(data->map[data->minimap.map_y]))
+				draw_cases(data, x, y);
 			else
 				draw_empty_cases(data, x, y);
 			y++;
 		}
 		x++;
 	}
-	player_x = data->minimap_width / 2;
-	player_y = data->minimap_width / 2;
-	draw_player(data, player_x, player_y);
+	draw_player(data);
 }
 
 int	compute_tex_x(t_data *data)
@@ -76,10 +70,11 @@ void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 	int		color;
 	double	step;
 	double	tex_pos;
-	
+
 	draw->tex_x = compute_tex_x(data);
 	step = 1.0 * data->textures.height / draw->line_height;
-	tex_pos = (draw->start - data->win_height / 2 + draw->line_height / 2) * step;
+	tex_pos = (draw->start - data->win_height / 2 + draw->line_height / 2)
+		* step;
 	y = draw->start;
 	while (y < draw->end)
 	{

@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 19:43:33 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:14:00 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	mouse_handler(int x, int y, t_data *data)
 void	exec_game(t_data *data)
 {
 	mlx_get_screen_size(data->mlx_ptr, &data->win_width, &data->win_height);
-	data->minimap_width = data->win_height / 6;
-	data->minimap_height = data->win_height / 6;
+	data->minimap.width = data->win_height / 6;
+	data->minimap.height = data->win_height / 6;
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 			data->win_width, data->win_height, "cub3D");
 	if (!data->win_ptr)

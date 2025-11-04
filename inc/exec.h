@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 14:16:57 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:32:30 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # define BASE_SPEED 3
 # define BASE_SENSI 1.5
 //# define SENSITIVITY 0.005
-# define CASE_WIDTH 20
-# define CASE_HEIGHT 20
+# define MINIMAP_ZOOM 25
 
 typedef struct s_player
 {
@@ -42,7 +41,6 @@ typedef struct s_draw
 	int		end;
 	int		tex_x;
 	int		tex_y;
-	
 	t_wall	wall_tex;
 }	t_draw;
 
@@ -63,6 +61,18 @@ typedef struct s_raycasting
 	int		side;
 	t_draw	draw;
 }	t_raycasting;
+
+typedef struct s_minimap
+{
+	int	width;
+	int	height;
+	int	start_x;
+	int	start_y;
+	int	map_x;
+	int	map_y;
+	int	player_x;
+	int	player_y;
+}	t_minimap;
 
 typedef struct s_img
 {
@@ -102,13 +112,12 @@ typedef struct s_data
 	int				win_height;
 	int				map_width;
 	int				map_height;
-	int				minimap_width;
-	int				minimap_height;
 	int				map_start;
 	int				map_end;
 	char			**map;
 	t_player		player;
 	t_raycasting	raycasting;
+	t_minimap		minimap;
 	t_img			game_img;
 	t_img			minimap_img;
 	t_key			key;
@@ -136,13 +145,13 @@ void	turn_camera(t_player *player, double rot);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 
-int		rgb_to_int(int r, int g, int b);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
-void	draw_cases(t_data *data, int x, int y, int map_x, int map_y);
+void	draw_cases(t_data *data, int x, int y);
 void	draw_empty_cases(t_data *data, int x, int y);
-void	draw_player(t_data *data, int player_x, int player_y);
+void	draw_player(t_data *data);
 
+int		rgb_to_int(int r, int g, int b);
 int		end_game(t_data *data);
 
 #endif
