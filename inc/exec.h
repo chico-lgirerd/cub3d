@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 13:16:07 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:16:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_data
 	int				minimap_width;
 	int				minimap_height;
 	int				map_start;
+	int				map_end;
 	char			**map;
 	t_player		player;
 	t_raycasting	raycasting;

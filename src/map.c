@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/03 16:58:17 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/04 14:09:40 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,15 @@ int	is_valid_map(t_data *data, char **map, int start)
 		while (map[i][++j])
 		{
 			if (!is_map_char(map[i][j], &player_count))
-			{
 				return (3);
-			}
 			if (player_count > 1)
 				return (1);
 			if (map[i][j] == '0' || is_player_char(map[i][j]))
 				if (i == start || !check_surround(data, map, i, j))
 					return (2);
-			if (is_player_char(map[i][j]))
-				map[i][j] = '0';
 		}
 	}
+	data->map_end = i;
 	if (player_count != 1)
 		return (1);
 	return (0);
