@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:37:25 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/31 11:50:42 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:09:10 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	check_surround(t_data *data, char **map, int i, int j)
 		data->player.start_x = j;
 		data->player.start_y = i;
 		data->player.start_char = map[i][j];
+		map[i][j] = '0';
 	}
 	if (i == rows - 1)
 		return (0);
