@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 15:43:27 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:15:00 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ void	draw_minimap(t_data *data)
 	int	player_y;
 	int start_x;
 	int start_y;
+	int	map_x;
+	int map_y;
 
 	start_x = (int)data->player.pos_x - CASE_WIDTH / 2;
 	start_y = (int)data->player.pos_y - CASE_HEIGHT / 2;
 	x = 0;
 	//#include <stdio.h>
-	//printf("%d\n", data->minimap_height);
+	//printf("%d\n", data->minimap_width);
 	while (x < CASE_WIDTH)
 	{
 		y = 0;
 		while (y < CASE_HEIGHT)
 		{
-			int map_x = start_x + x;
-			int map_y = start_y + y;
-			if (map_x >= 0 && map_x < data->map_width && map_y >= 0 && map_y < data->map_height)
+			map_x = start_x + x;
+			map_y = start_y + y;
+			if (map_x >= 0 && map_x < data->map_width && map_y >= data->map_start && map_y < data->map_height)
 				draw_cases(data, x, y, map_x, map_y);
 			else
 				draw_empty_cases(data, x, y);

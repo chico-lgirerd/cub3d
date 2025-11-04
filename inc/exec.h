@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 19:38:18 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:16:07 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_draw
 	int		end;
 	int		tex_x;
 	int		tex_y;
+	
 	t_wall	wall_tex;
 }	t_draw;
 
