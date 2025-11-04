@@ -34,7 +34,7 @@ SRCS    	=	$(SRCS_DIR)file.c \
 				$(SRCS_DIR)map.c \
 				$(SRCS_DIR)check_map.c \
 				$(SRCS_DIR)errors.c \
-				$(SRCS_DIR)garbage_collector.c \
+ 				$(SRCS_DIR)garbage_collector.c \
 				$(SRCS_DIR)controls.c \
 				$(SRCS_DIR)draw_utils.c \
 				$(SRCS_DIR)draw.c \

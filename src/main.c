@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 12:57:26 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:08:49 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,27 @@
 #include <X11/X.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+void	secure_free(t_data *data)
+{
+	destroy_images(data->mlx_ptr, &data->textures);
+	if (data->map)
+		free_map(data->map);
+	if (data->mlx_ptr && data->win_ptr)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		free(data->win_ptr);
+		exit(EXIT_SUCCESS);
+	}
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		exit(EXIT_SUCCESS);
+	}
+}
 
 int	end_game(t_data *data)
 {
@@ -86,17 +107,17 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac != 2)
-	{
-		printf("Error\nUsage : ./cubed <filename.cub>\n");
+	if (!check_args(ac, av))
 		return (1);
-	}
 	ft_memset(&data, 0, sizeof(t_data));
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
 	if (init_map(&data, av[1]))
+	{
+		secure_free(&data);
 		return (1);
+	}
 	init_player(&data.player);
 	exec_game(&data);
 	return (0);

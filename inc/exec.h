@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 14:07:57 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/04 15:28:03 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void	draw_cases(t_data *data, int x, int y, int map_x, int map_y);
 void	draw_empty_cases(t_data *data, int x, int y);
 void	draw_player(t_data *data, int player_x, int player_y);
 
+void	destroy_images(void *mlx_ptr, t_textures *txs);
+void	free_map(char **map);
 int		end_game(t_data *data);
 
 #endif
