@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/10/31 11:58:25 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/05 10:51:24 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == 65363)
 		data->key.key_turn_right = 1;
 	if (keycode == 65307)
-		end_game(data);
+		secure_free(data);
 	return (0);
 }
 

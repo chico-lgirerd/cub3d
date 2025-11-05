@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 16:08:49 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 11:58:29 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,6 @@
 #include <X11/X.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-void	secure_free(t_data *data)
-{
-	destroy_images(data->mlx_ptr, &data->textures);
-	if (data->map)
-		free_map(data->map);
-	if (data->mlx_ptr && data->win_ptr)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		free(data->win_ptr);
-		exit(EXIT_SUCCESS);
-	}
-	if (data->mlx_ptr)
-	{
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		exit(EXIT_SUCCESS);
-	}
-}
-
-int	end_game(t_data *data)
-{
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	exit(EXIT_SUCCESS);
-	// return (0);
-}
 
 void	fps_counter(t_data *data, struct timeval curr_time)
 {
@@ -97,10 +67,10 @@ void	exec_game(t_data *data)
 	init_image(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
-	mlx_hook(data->win_ptr, DestroyNotify, 0, &end_game, data);
+	mlx_hook(data->win_ptr, DestroyNotify, 0, &secure_free, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);
-	end_game(data);
+	secure_free(data);
 }
 
 int	main(int ac, char **av)
