@@ -6,37 +6,31 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:00:11 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/05 16:01:00 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 17:08:30 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
+#include <math.h>
 
 void	draw_crosshair(t_data *data)
 {
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 3, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 4, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 5, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 6, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 7, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) - 8, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 3, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 4, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 5, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 6, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 7, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, data->win_width / 2, (data->win_height / 2) + 8, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 3, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 4, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 5, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 6, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 7, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) - 8, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 3, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 4, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 5, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 6, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 7, data->win_height / 2, 0xFF0000);
-	my_mlx_pixel_put(&data->game_img, (data->win_width / 2) + 8, data->win_height / 2, 0xFF0000);
+	static float	phase = 0.0f;
+	int				base_len = 8;
+	int				anim_range = 4;
+	int				length = base_len + (int)(sin(phase) * anim_range);
+	int				px = data->win_width / 2;
+	int				py = data->win_height / 2;
+
+	phase += 0.02f;
+	int	offset = 3;
+	while (offset <= length)
+	{
+		my_mlx_pixel_put(&data->game_img, px, py - offset, 0xFF0000);
+		my_mlx_pixel_put(&data->game_img, px, py + offset, 0xFF0000);
+		my_mlx_pixel_put(&data->game_img, px - offset, py, 0xFF0000);
+		my_mlx_pixel_put(&data->game_img, px + offset, py, 0xFF0000);
+		offset++;
+	}
 }
