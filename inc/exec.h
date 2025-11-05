@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/05 11:58:26 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 15:31:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
 void	draw_cases(t_data *data, int x, int y, int map_x, int map_y);
 void	draw_empty_cases(t_data *data, int x, int y);
 void	draw_player(t_data *data, int player_x, int player_y);
+
+void	draw_crosshair(t_data *data);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
 int 	secure_free(t_data *data);

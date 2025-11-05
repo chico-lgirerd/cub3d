@@ -37,6 +37,7 @@ SRCS    	=	$(SRCS_DIR)file.c \
  				$(SRCS_DIR)garbage_collector.c \
 				$(SRCS_DIR)controls.c \
 				$(SRCS_DIR)draw_utils.c \
+				$(SRCS_DIR)crosshair.c \
 				$(SRCS_DIR)draw.c \
 				$(SRCS_DIR)main.c \
 				$(SRCS_DIR)move.c \
