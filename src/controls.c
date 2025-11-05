@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/05 10:51:24 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 13:36:04 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	turn_right(t_player *player, double rot)
 
 int	key_press(int keycode, t_data *data)
 {
-	//printf("keycode = %d\n", keycode);
 	if (keycode == 119 || keycode == 65362)
 		data->key.key_forward = 1;
 	if (keycode == 115 || keycode == 65364)
@@ -85,7 +84,7 @@ void	update_player(t_data *data, struct timeval curr_time,
 	t_player	*player;
 
 	delta = ((curr_time.tv_sec * 1000000L + curr_time.tv_usec)
-		- (last_time.tv_sec * 1000000L + last_time.tv_usec)) / 1000000.0;
+			- (last_time.tv_sec * 1000000L + last_time.tv_usec)) / 1000000.0;
 	speed = BASE_SPEED * delta;
 	rot = BASE_SENSI * delta;
 	player = &data->player;

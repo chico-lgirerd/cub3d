@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/05 11:57:22 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 12:13:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_map(char **map)
 	map = NULL;
 }
 
-int secure_free(t_data *data)
+int	secure_free(t_data *data)
 {
 	destroy_images(data, data->mlx_ptr, &data->textures);
 	if (data->map)

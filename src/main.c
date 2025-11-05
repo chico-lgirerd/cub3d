@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/05 11:58:29 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 12:13:03 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	render(t_data *data)
 	gettimeofday(&curr_time, NULL);
 	fps_counter(data, curr_time);
 	update_player(data, curr_time, last_time);
-	last_time = curr_time;	
+	last_time = curr_time;
 	draw_minimap(data);
 	perform_raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
