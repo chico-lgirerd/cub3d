@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/05 15:31:47 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/05 17:15:55 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_key
 	int	key_right;
 	int	key_turn_left;
 	int	key_turn_right;
+	int	key_sprint;
 }	t_key;
 
 typedef struct s_data
