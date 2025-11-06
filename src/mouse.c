@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 17:20:39 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:09:21 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	mouse_handler(int x, int y, t_data *data)
 	data->mouse.center_y = data->win_height / 2;
 	data->mouse.square_radius = 80;
 	sensi = MOUSE_SENSI;
+	mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
 	if (!data->mouse.recentered)
 	{
 		dx = x - data->mouse.last_x;

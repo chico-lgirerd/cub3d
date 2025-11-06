@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 17:41:53 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:11:33 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "parsing.h"
 # include <sys/time.h>
 
-# define BASE_SPEED 3
+# define BASE_SPEED 2.5
 # define KEY_SENSI 1.5
-# define MOUSE_SENSI 0.002
+# define MOUSE_SENSI 0.0015
 # define MINIMAP_ZOOM 25
 
 typedef struct s_player
