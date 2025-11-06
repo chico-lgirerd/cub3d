@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 17:44:34 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:40:29 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	exec_game(t_data *data)
 	if (!data->win_ptr)
 		secure_free(data);
 	init_image(data);
+	init_mouse(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
 	mlx_hook(data->win_ptr, MotionNotify, 1L << 6, mouse_handler, data);

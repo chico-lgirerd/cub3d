@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 18:11:33 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:41:12 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void	draw_player(t_data *data);
 int		rgb_to_int(int r, int g, int b);
 int		color_to_int(t_color color);
 
+void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
