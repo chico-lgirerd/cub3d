@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/03 17:54:48 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:56:52 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	turn_camera(t_player *player, double rot)
 
 int	key_press(int keycode, t_data *data)
 {
-	//printf("keycode = %d\n", keycode);
 	if (keycode == 119 || keycode == 65362)
 		data->key.key_forward = 1;
 	if (keycode == 115 || keycode == 65364)
@@ -41,8 +40,10 @@ int	key_press(int keycode, t_data *data)
 		data->key.key_turn_left = 1;
 	if (keycode == 65363)
 		data->key.key_turn_right = 1;
+	if (keycode == 65505)
+		data->key.key_sprint = 1;
 	if (keycode == 65307)
-		end_game(data);
+		secure_free(data);
 	return (0);
 }
 
@@ -60,6 +61,8 @@ int	key_release(int keycode, t_data *data)
 		data->key.key_turn_left = 0;
 	if (keycode == 65363)
 		data->key.key_turn_right = 0;
+	if (keycode == 65505)
+		data->key.key_sprint = 0;
 	return (0);
 }
 
@@ -72,8 +75,10 @@ void	update_player(t_data *data, struct timeval curr_time,
 	t_player	*player;
 
 	delta = ((curr_time.tv_sec * 1000000L + curr_time.tv_usec)
-		- (last_time.tv_sec * 1000000L + last_time.tv_usec)) / 1000000.0;
+			- (last_time.tv_sec * 1000000L + last_time.tv_usec)) / 1000000.0;
 	speed = BASE_SPEED * delta;
+	if (data->key.key_sprint)
+		speed *= 2.5;
 	rot = BASE_SENSI * delta;
 	player = &data->player;
 	if (data->key.key_forward)

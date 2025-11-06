@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 16:32:30 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:01:23 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_key
 	int	key_right;
 	int	key_turn_left;
 	int	key_turn_right;
+	int	key_sprint;
 }	t_key;
 
 typedef struct s_mouse
@@ -152,6 +153,12 @@ void	draw_empty_cases(t_data *data, int x, int y);
 void	draw_player(t_data *data);
 
 int		rgb_to_int(int r, int g, int b);
-int		end_game(t_data *data);
+
+void	draw_crosshair(t_data *data);
+
+void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
+int		rgb_to_int(int r, int g, int b);
+int 	secure_free(t_data *data);
+void	free_map(char **map);
 
 #endif

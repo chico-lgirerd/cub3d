@@ -5,29 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 17:23:12 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/21 17:38:24 by lgirerd          ###   ########lyon.fr   */
+/*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
+/*   Updated: 2025/11/05 12:13:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "exec.h"
 #include "mlx.h"
 #include <stdlib.h>
 
-void	destroy_images(t_world *w, t_textures *textures)
+void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs)
 {
-	if (textures->north.img)
-		mlx_destroy_image(w->mlx_ptr, textures->north.img);
-	if (textures->south.img)
-		mlx_destroy_image(w->mlx_ptr, textures->south.img);
-	if (textures->east.img)
-		mlx_destroy_image(w->mlx_ptr, textures->east.img);
-	if (textures->west.img)
-		mlx_destroy_image(w->mlx_ptr, textures->west.img);
-	textures->north.img = NULL;
-	textures->south.img = NULL;
-	textures->east.img = NULL;
-	textures->west.img = NULL;
+	if (txs->north.img)
+		mlx_destroy_image(mlx_ptr, txs->north.img);
+	if (txs->south.img)
+		mlx_destroy_image(mlx_ptr, txs->south.img);
+	if (txs->east.img)
+		mlx_destroy_image(mlx_ptr, txs->east.img);
+	if (txs->west.img)
+		mlx_destroy_image(mlx_ptr, txs->west.img);
+	if (data->game_img.img_ptr)
+		mlx_destroy_image(mlx_ptr, data->game_img.img_ptr);
+	if (data->minimap_img.img_ptr)
+		mlx_destroy_image(mlx_ptr, data->minimap_img.img_ptr);
 }
 
 void	free_map(char **map)
@@ -46,15 +46,23 @@ void	free_map(char **map)
 	map = NULL;
 }
 
-void	free_world(t_world *world)
+int	secure_free(t_data *data)
 {
-	if (!world)
-		return ;
-	free_map(world->map);
-	destroy_images(world, &world->textures);
-	mlx_destroy_window(world->mlx_ptr, world->win_ptr);
-	mlx_destroy_display(world->mlx_ptr);
-	free(world->mlx_ptr);
-	free(world);
-	world = NULL;
+	destroy_images(data, data->mlx_ptr, &data->textures);
+	if (data->map)
+		free_map(data->map);
+	if (data->mlx_ptr && data->win_ptr)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		exit(EXIT_SUCCESS);
+	}
+	if (data->mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }

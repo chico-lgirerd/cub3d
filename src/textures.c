@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/31 11:51:57 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/05 12:13:38 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	fill_rgb(t_data *d, char *key, char **mapline)
 		d->textures.ceiling.green = color_until_comma(mapline);
 		d->textures.ceiling.blue = color_until_comma(mapline);
 	}
-	// if (!valid_colors(d->textures))
-	// 	return (0);
 	return (1);
 }
 

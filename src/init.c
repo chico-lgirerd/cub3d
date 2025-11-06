@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 16:23:27 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:01:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	init_image(t_data *data)
 			&data->game_img.size_line,
 			&data->game_img.endian);
 	data->game_img.width = data->win_width;
-	data->game_img.height = data->win_height;	
+	data->game_img.height = data->win_height;
 	data->minimap_img.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->minimap.width, data->minimap.height);
 	data->minimap_img.addr = mlx_get_data_addr(data->minimap_img.img_ptr,
