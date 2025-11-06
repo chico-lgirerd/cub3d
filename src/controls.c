@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 15:56:52 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:53:14 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	update_player(t_data *data, struct timeval curr_time,
 	speed = BASE_SPEED * delta;
 	if (data->key.key_sprint)
 		speed *= 2.5;
-	rot = BASE_SENSI * delta;
+	rot = KEY_SENSI * delta;
 	player = &data->player;
 	if (data->key.key_forward)
 		move_forward(data, player, speed);

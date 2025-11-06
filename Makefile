@@ -24,24 +24,26 @@ YELLOW			= \033[0;33m
 ############################# SOURCES #############################
 
 SRCS_DIR 		= src/
-SRCS    	=	$(SRCS_DIR)file.c \
-				$(SRCS_DIR)parse.c \
-				$(SRCS_DIR)init.c \
-				$(SRCS_DIR)trim.c \
-				$(SRCS_DIR)textures.c \
-				$(SRCS_DIR)load_walls.c \
-				$(SRCS_DIR)colors.c \
-				$(SRCS_DIR)map.c \
+SRCS    	=	$(SRCS_DIR)main.c \
 				$(SRCS_DIR)check_map.c \
-				$(SRCS_DIR)errors.c \
- 				$(SRCS_DIR)garbage_collector.c \
+				$(SRCS_DIR)colors.c \
 				$(SRCS_DIR)controls.c \
-				$(SRCS_DIR)draw_utils.c \
 				$(SRCS_DIR)crosshair.c \
+				$(SRCS_DIR)draw_utils.c \
 				$(SRCS_DIR)draw.c \
-				$(SRCS_DIR)main.c \
+				$(SRCS_DIR)errors.c \
+				$(SRCS_DIR)file.c \
+ 				$(SRCS_DIR)garbage_collector.c \
+				$(SRCS_DIR)init.c \
+				$(SRCS_DIR)load_walls.c \
+				$(SRCS_DIR)map.c \
+				$(SRCS_DIR)mouse.c \
 				$(SRCS_DIR)move.c \
-				$(SRCS_DIR)raycasting.c
+				$(SRCS_DIR)parse.c \
+				$(SRCS_DIR)raycasting.c \
+				$(SRCS_DIR)render.c \
+				$(SRCS_DIR)textures.c \
+				$(SRCS_DIR)trim.c
 
 # $(SRCS_DIR).main_deprecated.c OLD MAIN FILE FOR PARSING ONLY
 # $(SRCS_DIR).init.deprecated.c

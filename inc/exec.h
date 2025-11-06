@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 16:01:23 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:11:35 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define EXEC_H
 
 # include "parsing.h"
-#include <sys/time.h>
+# include <sys/time.h>
 
 # define BASE_SPEED 3
-# define BASE_SENSI 1.5
-//# define SENSITIVITY 0.005
+# define KEY_SENSI 1.5
+# define MOUSE_SENSI 0.002
 # define MINIMAP_ZOOM 25
 
 typedef struct s_player
@@ -102,6 +102,7 @@ typedef struct s_mouse
 	int	center_x;
 	int	center_y;
 	int	square_radius;
+	int	recentered;
 	//int	button_pressed;
 }	t_mouse;
 
@@ -130,6 +131,7 @@ int		init_map(t_data *data, char *filename);
 void	init_player(t_player *player);
 void	init_image(t_data *data);
 
+void	exec_game(t_data *data);
 int		perform_raycasting(t_data *data);
 void	update_player(t_data *data, struct timeval curr_time,
 			struct timeval last_time);
@@ -154,11 +156,12 @@ void	draw_player(t_data *data);
 
 int		rgb_to_int(int r, int g, int b);
 
+int		mouse_handler(int x, int y, t_data *data);
+
 void	draw_crosshair(t_data *data);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
-int		rgb_to_int(int r, int g, int b);
-int 	secure_free(t_data *data);
+int		secure_free(t_data *data);
 void	free_map(char **map);
 
 #endif

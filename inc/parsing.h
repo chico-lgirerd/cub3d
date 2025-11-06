@@ -6,14 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/31 12:01:30 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:52:15 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_color
 {
