@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/06 16:12:24 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:41:43 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,9 @@ int	valid_colors(t_textures textures)
 int	rgb_to_int(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
+}
+
+int	color_to_int(t_color color)
+{
+	return ((color.red << 16) | (color.green << 8) | color.blue);
 }

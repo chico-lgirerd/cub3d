@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 16:31:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:42:17 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 	int	ceiling_color;
 	int	floor_color;
 
-	ceiling_color = rgb_to_int(20, 50, 50);
-	floor_color = rgb_to_int(50, 50, 50);
+	ceiling_color = color_to_int(data->textures.ceiling);
+	floor_color = color_to_int(data->textures.floor);
 	y = 0;
 	while (y < start)
 	{
