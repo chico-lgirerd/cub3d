@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 18:41:12 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/07 20:18:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+typedef struct s_door
+{
+	double	pos;
+	int		is_open;
+	double	open_pos;
+	double	width;
+}	t_door;
+
 typedef struct s_draw
 {
 	int		line_height;
@@ -42,6 +50,7 @@ typedef struct s_draw
 	int		tex_x;
 	int		tex_y;
 	t_wall	wall_tex;
+	t_wall	door_tex;
 }	t_draw;
 
 typedef struct s_raycasting
@@ -58,7 +67,10 @@ typedef struct s_raycasting
 	double	perp_walldist;
 	int		step_x;	//next step of DDA algo
 	int		step_y;
+	int		hit;
 	int		side;
+	int		is_door;
+	t_door	door;
 	t_draw	draw;
 }	t_raycasting;
 
@@ -122,6 +134,7 @@ typedef struct s_data
 	t_minimap		minimap;
 	t_img			game_img;
 	t_img			minimap_img;
+	t_img			door_img;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;
