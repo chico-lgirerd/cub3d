@@ -71,7 +71,8 @@ SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
 				$(SRCS_BONUS_DIR)raycasting.c \
 				$(SRCS_BONUS_DIR)render.c \
 				$(SRCS_BONUS_DIR)textures.c \
-				$(SRCS_BONUS_DIR)trim.c
+				$(SRCS_BONUS_DIR)trim.c \
+				$(SRCS_BONUS_DIR)pickaxe.c
 
 ############################# DIRECTORIES ##############################
 

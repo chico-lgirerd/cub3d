@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 18:41:12 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:28:53 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_data
 	t_minimap		minimap;
 	t_img			game_img;
 	t_img			minimap_img;
+	t_img			pickaxe;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;
@@ -130,6 +131,7 @@ typedef struct s_data
 int		init_map(t_data *data, char *filename);
 void	init_player(t_player *player);
 void	init_image(t_data *data);
+void	init_pickaxe(t_data *data);
 
 void	exec_game(t_data *data);
 int		perform_raycasting(t_data *data);
@@ -161,6 +163,8 @@ void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
+void	draw_pickaxe(t_data *data, int pos_x, int pos_y);
+void	animate_pickaxe(t_data *data, int base_x, int base_y);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
 int		secure_free(t_data *data);
