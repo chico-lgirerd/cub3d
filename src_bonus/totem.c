@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pickaxe.c                                          :+:      :+:    :+:   */
+/*   totem.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 13:45:45 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/10 19:40:30 by lgirerd          ###   ########lyon.fr   */
+/*   Created: 2025/11/10 19:25:27 by lgirerd           #+#    #+#             */
+/*   Updated: 2025/11/10 19:40:27 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 #include "mlx.h"
 #include <math.h>
 
-void	init_pickaxe(t_data *data)
+void	init_totem(t_data *data)
 {
-	data->pickaxe.width = 512;
-	data->pickaxe.height = 512;
-	data->pickaxe.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-			"assets/pickaxe500.xpm",
-			&data->pickaxe.width, &data->pickaxe.height);
-	data->pickaxe.addr = mlx_get_data_addr(data->pickaxe.img_ptr,
-			&data->pickaxe.bits_per_pixel, &data->pickaxe.size_line,
-			&data->pickaxe.endian);
+	data->totem.width = 500;
+	data->totem.height = 500;
+	data->totem.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/totem.xpm",
+			&data->totem.width, &data->totem.height);
+	data->totem.addr = mlx_get_data_addr(data->totem.img_ptr,
+			&data->totem.bits_per_pixel, &data->totem.size_line,
+			&data->totem.endian);
 }
 
-void	draw_pickaxe(t_data *data, int pos_x, int pos_y, int *game_data)
+void	draw_totem(t_data *data, int pos_x, int pos_y, int *game_data)
 {
 	int	x;
 	int	y;
-	int	*p_data;
+	int	*totem_data;
 	int	color;
 
-	p_data = (int *)data->pickaxe.addr;
+	totem_data = (int *)data->totem.addr;
 	y = 0;
-	while (y < data->pickaxe.height)
+	while (y < data->totem.height)
 	{
 		x = 0;
-		while (x < data->pickaxe.width)
+		while (x < data->totem.width)
 		{
-			color = p_data[y * (data->pickaxe.size_line / 4) + x];
+			color = totem_data[y * (data->totem.size_line / 4) + x];
 			if ((color & 0x00FFFFFF) != 0x000000)
 			{
 				if (pos_x + x >= 0 && pos_x + x < data->game_img.width
@@ -54,9 +54,9 @@ void	draw_pickaxe(t_data *data, int pos_x, int pos_y, int *game_data)
 	}
 }
 
-void	animate_pickaxe(t_data *data, int base_x, int base_y)
+void	animate_totem(t_data *data, int base_x, int base_y)
 {
-	static float	phase = 0.0f;
+	static float	phase = 1.5f;
 	int				offset_y;
 	int				anim_pos_y;
 
@@ -70,5 +70,5 @@ void	animate_pickaxe(t_data *data, int base_x, int base_y)
 		phase += 0.04f;
 	if (phase > 6.283185f)
 		phase -= 6.283185f;
-	draw_pickaxe(data, base_x, anim_pos_y, (int *)data->game_img.addr);
+	draw_totem(data, base_x, anim_pos_y, (int *)data->game_img.addr);
 }

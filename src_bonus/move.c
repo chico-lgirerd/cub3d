@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:24:51 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 16:06:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 19:39:10 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,10 @@ void	move_right(t_data *data, t_player *player, float speed)
 		player->pos_x = new_x;
 	if (data->map[(int)new_y][(int)player->pos_x] == '0')
 		player->pos_y = new_y;
+}
+
+int	is_moving(t_data *data)
+{
+	return (data->key.key_forward || data->key.key_backward
+			|| data->key.key_left || data->key.key_right);
 }

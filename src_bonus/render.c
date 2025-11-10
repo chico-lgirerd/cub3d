@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 18:40:28 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 19:36:46 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	render(t_data *data)
 	perform_raycasting(data);
 	draw_crosshair(data);
 	animate_pickaxe(data, 1300, 600);
+	animate_totem(data, 30, 650);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->game_img.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -68,6 +69,7 @@ void	exec_game(t_data *data)
 	init_image(data);
 	init_mouse(data);
 	init_pickaxe(data);
+	init_totem(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
 	mlx_hook(data->win_ptr, MotionNotify, 1L << 6, mouse_handler, data);

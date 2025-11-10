@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 18:43:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 19:39:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_data
 	t_img			game_img;
 	t_img			minimap_img;
 	t_img			pickaxe;
+	t_img			totem;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;
@@ -132,6 +133,7 @@ int		init_map(t_data *data, char *filename);
 void	init_player(t_player *player);
 void	init_image(t_data *data);
 void	init_pickaxe(t_data *data);
+void	init_totem(t_data *data);
 
 void	exec_game(t_data *data);
 int		perform_raycasting(t_data *data);
@@ -146,6 +148,7 @@ void	move_backward(t_data *data, t_player *player, float speed);
 void	move_left(t_data *data, t_player *player, float speed);
 void	move_right(t_data *data, t_player *player, float speed);
 void	turn_camera(t_player *player, double rot);
+int		is_moving(t_data *data);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
@@ -164,6 +167,7 @@ int		mouse_handler(int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
 void	animate_pickaxe(t_data *data, int base_x, int base_y);
+void	animate_totem(t_data *data, int base_x, int base_y);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
 int		secure_free(t_data *data);
