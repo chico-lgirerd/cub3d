@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
+/*   Updated: 2025/11/06 18:58:24 by tiaperei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+#include "parsing.h"
+
+int	color_until_comma(char **color)
+{
+	int	value;
+
+	value = ft_atoi(*color);
+	if (value == 0 && *color[0] != '0')
+		return (-1);
+	while (**color && (**color >= '0' && **color <= '9'))
+		(*color)++;
+	skip_spaces(color);
+	if (**color == ',')
+	{
+		(*color)++;
+		skip_spaces(color);
+	}
+	return (value);
+}
+
+int	valid_colors(t_textures textures)
+{
+	if (textures.ceiling.red < 0 || textures.ceiling.red > 255)
+		return (0);
+	else if (textures.ceiling.green < 0 || textures.ceiling.green > 255)
+		return (0);
+	else if (textures.ceiling.blue < 0 || textures.ceiling.blue > 255)
+		return (0);
+	else if (textures.floor.red < 0 || textures.floor.red > 255)
+		return (0);
+	else if (textures.floor.green < 0 || textures.floor.green > 255)
+		return (0);
+	else if (textures.floor.blue < 0 || textures.floor.blue > 255)
+		return (0);
+	return (1);
+}
+
+int	rgb_to_int(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	color_to_int(t_color color)
+{
+	return ((color.red << 16) | (color.green << 8) | color.blue);
+}

@@ -48,11 +48,40 @@ SRCS    	=	$(SRCS_DIR)main.c \
 # $(SRCS_DIR).main_deprecated.c OLD MAIN FILE FOR PARSING ONLY
 # $(SRCS_DIR).init.deprecated.c
 
+############################# SOURCES BONUS #############################
+
+
+SRCS_BONUS_DIR 	= src_bonus/
+SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
+				$(SRCS_BONUS_DIR)check_map.c \
+				$(SRCS_BONUS_DIR)colors.c \
+				$(SRCS_BONUS_DIR)controls.c \
+				$(SRCS_BONUS_DIR)crosshair.c \
+				$(SRCS_BONUS_DIR)draw_utils.c \
+				$(SRCS_BONUS_DIR)draw.c \
+				$(SRCS_BONUS_DIR)errors.c \
+				$(SRCS_BONUS_DIR)file.c \
+ 				$(SRCS_BONUS_DIR)garbage_collector.c \
+				$(SRCS_BONUS_DIR)init.c \
+				$(SRCS_BONUS_DIR)load_walls.c \
+				$(SRCS_BONUS_DIR)map.c \
+				$(SRCS_BONUS_DIR)mouse.c \
+				$(SRCS_BONUS_DIR)move.c \
+				$(SRCS_BONUS_DIR)parse.c \
+				$(SRCS_BONUS_DIR)raycasting.c \
+				$(SRCS_BONUS_DIR)render.c \
+				$(SRCS_BONUS_DIR)textures.c \
+				$(SRCS_BONUS_DIR)trim.c
+
 ############################# DIRECTORIES ##############################
 
 OBJS_DIR = .objs/
 OBJS    = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 DEPS := $(OBJS:.o=.d)
+
+OBJS_BONUS_DIR    = .objs_bonus/
+OBJS_BONUS        = $(SRCS_BONUS:$(SRCS_BONUS_DIR)%.c=$(OBJS_BONUS_DIR)%.o)
+DEPS_BONUS        := $(OBJS_BONUS:.o=.d)
 
 ############################# RULES ##############################
 
@@ -79,14 +108,25 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@ $(MLXFLAGS)
 	@echo "$(BLUE)Compiling : $< 🔧$(RESET)"
 
+bonus: $(LIBFT) mlx $(OBJS_BONUS)
+	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT) $(LINKFLAGS) $(LIBFLAGS) -o cub3D_bonus
+	@echo "$(YELLOW)Bonus compilation successful! ✨$(RESET)"
+
+$(OBJS_BONUS_DIR)%.o: $(SRCS_BONUS_DIR)%.c
+	@mkdir -p  $(dir $@)
+	@$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@ $(MLXFLAGS)
+	@echo "$(BLUE)Compiling bonus : $< 🚀$(RESET)"
+
 clean:
 	@make --no-print-directory clean -C libft
 	@rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJS_BONUS_DIR)
 	@echo "$(RED)Cleaned project 🗑️$(RESET)"
 
 fclean:
 	@make --no-print-directory fclean -C libft
 	@rm -rf $(NAME) && rm -rf $(OBJS_DIR)
+	@rm -rf cub3D_bonus && rm -rf $(OBJS_BONUS_DIR)
 	@rm -rf mlx/
 	@echo "$(RED)Fully cleaned project 🗑️$(RESET)"
 	@echo "$(RED)Removed mlx$(RESET)"
@@ -94,5 +134,6 @@ fclean:
 re: fclean all
 
 -include $(DEPS)
+-include $(DEPS_BONUS)
 
-.PHONY: all clean fclean re mlx 
+.PHONY: all clean fclean re bonus mlx 
