@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/07 20:18:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:38:05 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_draw
 	int		tex_x;
 	int		tex_y;
 	t_wall	wall_tex;
-	t_wall	door_tex;
 }	t_draw;
 
 typedef struct s_raycasting
@@ -115,7 +114,7 @@ typedef struct s_mouse
 	int	center_y;
 	int	square_radius;
 	int	recentered;
-	//int	button_pressed;
+	int	button_pressed;
 }	t_mouse;
 
 typedef struct s_data
@@ -172,6 +171,7 @@ int		color_to_int(t_color color);
 
 void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
+int		mouse_button_handler(int button, int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
 

@@ -9,7 +9,7 @@ WE assets/walls/west.xpm
 
 					EA assets/walls/east.xpm
 
-DO assets/walls/west256.xpm
+DO assets/walls/door.xpm
 
 C 0,0,50
 		1111111111111111111111111
