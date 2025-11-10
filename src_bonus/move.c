@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:24:51 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 19:39:10 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 19:47:12 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	move_right(t_data *data, t_player *player, float speed)
 int	is_moving(t_data *data)
 {
 	return (data->key.key_forward || data->key.key_backward
-			|| data->key.key_left || data->key.key_right);
+		|| data->key.key_left || data->key.key_right);
 }
