@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 18:29:11 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 18:40:28 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static int	render(t_data *data)
 		data->game_img.img_ptr, 0, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->minimap_img.img_ptr, 10, 10);
-	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-	// 	data->pickaxe.img_ptr, 0, 0);
 	return (0);
 }
 

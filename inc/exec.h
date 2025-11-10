@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 18:28:53 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 18:43:14 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
-void	draw_pickaxe(t_data *data, int pos_x, int pos_y);
 void	animate_pickaxe(t_data *data, int base_x, int base_y);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
