@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/05 12:13:25 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 19:19:06 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs)
 		mlx_destroy_image(mlx_ptr, data->game_img.img_ptr);
 	if (data->minimap_img.img_ptr)
 		mlx_destroy_image(mlx_ptr, data->minimap_img.img_ptr);
+	if (data->pickaxe.img_ptr)
+		mlx_destroy_image(mlx_ptr, data->pickaxe.img_ptr);
 }
 
 void	free_map(char **map)
