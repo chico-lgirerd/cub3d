@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 13:45:45 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/10 18:45:52 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 19:00:15 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ void	animate_pickaxe(t_data *data, int base_x, int base_y)
 	int				offset_y;
 	int				anim_pos_y;
 
-	offset_y = (int)(sin(phase) * 8);
+	offset_y = (int)(sin(phase) * 12);
 	anim_pos_y = base_y + offset_y;
-	phase += 0.04f;
+	if (data->key.key_sprint)
+		phase += 0.15f;
+	else
+		phase += 0.04f;
 	if (phase > 6.283185f)
 		phase -= 6.283185f;
 	draw_pickaxe(data, base_x, anim_pos_y, (int *)data->game_img.addr);
