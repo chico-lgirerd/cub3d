@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 16:53:14 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 22:54:28 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,36 @@ void	turn_camera(t_player *player, double rot)
 
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == 119 || keycode == 65362)
-		data->key.key_forward = 1;
-	if (keycode == 115 || keycode == 65364)
-		data->key.key_backward = 1;
-	if (keycode == 97)
-		data->key.key_left = 1;
-	if (keycode == 100)
-		data->key.key_right = 1;
-	if (keycode == 65361)
-		data->key.key_turn_left = 1;
-	if (keycode == 65363)
-		data->key.key_turn_right = 1;
-	if (keycode == 65505)
-		data->key.key_sprint = 1;
-	if (keycode == 65307)
-		secure_free(data);
+	if (data->key.key_pause)
+	{
+		if (keycode == 112)
+			data->key.key_pause = 0;
+		else if (keycode == 65307)
+			secure_free(data);
+		else
+			return (0);
+	}
+	else
+	{
+		if (keycode == 119 || keycode == 65362)
+			data->key.key_forward = 1;
+		if (keycode == 115 || keycode == 65364)
+			data->key.key_backward = 1;
+		if (keycode == 97)
+			data->key.key_left = 1;
+		if (keycode == 100)
+			data->key.key_right = 1;
+		if (keycode == 65361)
+			data->key.key_turn_left = 1;
+		if (keycode == 65363)
+			data->key.key_turn_right = 1;
+		if (keycode == 65505)
+			data->key.key_sprint = 1;
+		if (keycode == 112)
+			data->key.key_pause = 1;
+		if (keycode == 65307)
+			secure_free(data);	
+	}
 	return (0);
 }
 

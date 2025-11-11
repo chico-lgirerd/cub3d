@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 19:39:25 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/10 22:24:57 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_key
 	int	key_turn_left;
 	int	key_turn_right;
 	int	key_sprint;
+	int	key_pause;
 }	t_key;
 
 typedef struct s_mouse
@@ -124,6 +125,7 @@ typedef struct s_data
 	t_img			minimap_img;
 	t_img			pickaxe;
 	t_img			totem;
+	t_img			pause;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;
@@ -134,6 +136,7 @@ void	init_player(t_player *player);
 void	init_image(t_data *data);
 void	init_pickaxe(t_data *data);
 void	init_totem(t_data *data);
+void	init_pause(t_data *data);
 
 void	exec_game(t_data *data);
 int		perform_raycasting(t_data *data);
