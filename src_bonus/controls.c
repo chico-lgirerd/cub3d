@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:17:10 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 22:54:28 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/11 13:14:02 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,28 @@ void	turn_camera(t_player *player, double rot)
 	player->plane_y = old_plane_x * sin(rot) + player->plane_y * cos(rot);
 }
 
+void	handle_allkeys(int keycode, t_data *data)
+{
+	if (keycode == 119 || keycode == 65362)
+		data->key.key_forward = 1;
+	if (keycode == 115 || keycode == 65364)
+		data->key.key_backward = 1;
+	if (keycode == 97)
+		data->key.key_left = 1;
+	if (keycode == 100)
+		data->key.key_right = 1;
+	if (keycode == 65361)
+		data->key.key_turn_left = 1;
+	if (keycode == 65363)
+		data->key.key_turn_right = 1;
+	if (keycode == 65505)
+		data->key.key_sprint = 1;
+	if (keycode == 112)
+		data->key.key_pause = 1;
+	if (keycode == 65307)
+		secure_free(data);
+}
+
 int	key_press(int keycode, t_data *data)
 {
 	if (data->key.key_pause)
@@ -38,26 +60,7 @@ int	key_press(int keycode, t_data *data)
 			return (0);
 	}
 	else
-	{
-		if (keycode == 119 || keycode == 65362)
-			data->key.key_forward = 1;
-		if (keycode == 115 || keycode == 65364)
-			data->key.key_backward = 1;
-		if (keycode == 97)
-			data->key.key_left = 1;
-		if (keycode == 100)
-			data->key.key_right = 1;
-		if (keycode == 65361)
-			data->key.key_turn_left = 1;
-		if (keycode == 65363)
-			data->key.key_turn_right = 1;
-		if (keycode == 65505)
-			data->key.key_sprint = 1;
-		if (keycode == 112)
-			data->key.key_pause = 1;
-		if (keycode == 65307)
-			secure_free(data);	
-	}
+		handle_allkeys(keycode, data);
 	return (0);
 }
 
