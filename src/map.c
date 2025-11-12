@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/04 14:09:40 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/07 19:57:47 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_map_char(char c, int *player_count)
 		(*player_count)++;
 		return (1);
 	}
-	if (c == '0' || c == '1')
+	if (c == '0' || c == '1' || c == 'D')
 		return (1);
 	if (ft_isspace(c))
 		return (1);

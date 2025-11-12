@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/11 16:12:20 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 11:29:30 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+typedef struct s_door
+{
+	double	pos;
+	int		is_open;
+	double	open_pos;
+	double	width;
+}	t_door;
+
 typedef struct s_draw
 {
 	int		line_height;
@@ -58,7 +66,10 @@ typedef struct s_raycasting
 	double	perp_walldist;
 	int		step_x;	//next step of DDA algo
 	int		step_y;
+	int		hit;
 	int		side;
+	int		is_door;
+	t_door	door;
 	t_draw	draw;
 }	t_raycasting;
 
@@ -104,7 +115,7 @@ typedef struct s_mouse
 	int	center_y;
 	int	square_radius;
 	int	recentered;
-	//int	button_pressed;
+	int	button_pressed;
 }	t_mouse;
 
 typedef struct s_data
@@ -123,6 +134,7 @@ typedef struct s_data
 	t_minimap		minimap;
 	t_img			game_img;
 	t_img			minimap_img;
+	t_img			door_img;
 	t_img			pickaxe;
 	t_img			totem;
 	t_img			pause;
@@ -169,6 +181,7 @@ int		color_to_int(t_color color);
 
 void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
+int		mouse_button_handler(int button, int x, int y, t_data *data);
 
 void	draw_crosshair(t_data *data);
 void	animate_pickaxe(t_data *data, int base_x, int base_y);

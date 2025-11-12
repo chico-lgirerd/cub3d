@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/05 12:13:25 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/07 19:52:11 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs)
 		mlx_destroy_image(mlx_ptr, txs->east.img);
 	if (txs->west.img)
 		mlx_destroy_image(mlx_ptr, txs->west.img);
+	if (txs->door.img)
+		mlx_destroy_image(mlx_ptr, txs->door.img);
 	if (data->game_img.img_ptr)
 		mlx_destroy_image(mlx_ptr, data->game_img.img_ptr);
 	if (data->minimap_img.img_ptr)

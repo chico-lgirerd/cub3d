@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 16:06:26 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 19:11:35 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static void	init_raycasting(t_data *data, int x)
 
 	player = &data->player;
 	rc = &data->raycasting;
+	rc->hit = 0;
+	rc->is_door = 0;
+	rc->door.open_pos = 0.0;
+	rc->door.width = 0.06;
 	rc->map_x = (int)player->pos_x;
 	rc->map_y = (int)player->pos_y;
 	rc->camera_x = 2 * x / (double)data->win_width - 1;
@@ -66,15 +70,10 @@ static void	calcul_dist_next_cases(t_data *data)
 
 static void	perform_dda(t_data *data)
 {
-	t_player		*player;
 	t_raycasting	*rc;
-	int				hit;
 
-	player = &data->player;
 	rc = &data->raycasting;
-	hit = 0;
-	while (hit == 0 && rc->map_x >= 0 && rc->map_x < data->map_width
-		&& rc->map_y >= 0 && rc->map_y < data->map_height)
+	while (rc->hit == 0)
 	{
 		if (rc->walldist_x < rc->walldist_y)
 		{
@@ -88,8 +87,8 @@ static void	perform_dda(t_data *data)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] == '1')
-			hit = 1;
+		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'D')
+			rc->hit = 1;
 	}
 }
 
@@ -113,6 +112,29 @@ int	perform_raycasting(t_data *data)
 		else
 			rc->perp_walldist = (rc->map_y - player->pos_y
 					+ (1 - rc->step_y) / 2) / rc->raydir_y;
+		if (data->map[rc->map_y][rc->map_x] == 'D')
+		{
+			if (rc->side == 0)
+			{
+				rc->door.pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
+				rc->door.pos -= floor(rc->door.pos);
+			}
+			else
+			{
+				rc->door.pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
+				rc->door.pos -= floor(rc->door.pos);
+			}
+			if (!rc->door.is_open || (rc->door.pos >= rc->door.open_pos
+				&& rc->door.pos <= rc->door.open_pos + rc->door.width))
+			{
+				rc->hit = 1;
+				rc->is_door = 1;
+			}
+			else
+			{
+				rc->hit = 0;
+			}
+		}
 		draw_map(data, x);
 		x++;
 	}

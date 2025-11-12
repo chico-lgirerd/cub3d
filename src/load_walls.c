@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/31 11:51:36 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:15:18 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	load_north(t_data *d, char *mapline)
 				&n->bpp, &n->length, &n->endian);
 	if (!n->img || !n->addr)
 		n->loaded = 0;
-	n->loaded = 1;
+	else
+		n->loaded = 1;
 }
 
 void	load_south(t_data *d, char *mapline)
@@ -41,7 +42,8 @@ void	load_south(t_data *d, char *mapline)
 				&s->bpp, &s->length, &s->endian);
 	if (!s->img || !s->addr)
 		s->loaded = 0;
-	s->loaded = 1;
+	else
+		s->loaded = 1;
 }
 
 void	load_west(t_data *d, char *mapline)
@@ -56,7 +58,8 @@ void	load_west(t_data *d, char *mapline)
 				&we->bpp, &we->length, &we->endian);
 	if (!we->img || !we->addr)
 		we->loaded = 0;
-	we->loaded = 1;
+	else
+		we->loaded = 1;
 }
 
 void	load_east(t_data *d, char *mapline)
@@ -71,5 +74,22 @@ void	load_east(t_data *d, char *mapline)
 				&e->bpp, &e->length, &e->endian);
 	if (!e->img || !e->addr)
 		e->loaded = 0;
-	e->loaded = 1;
+	else
+		e->loaded = 1;
+}
+
+void	load_door(t_data *d, char *mapline)
+{
+	t_wall	*door;
+
+	door = &d->textures.door;
+	door->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &door->width, &door->height);
+	if (door->img)
+		door->addr = mlx_get_data_addr(door->img,
+				&door->bpp, &door->length, &door->endian);
+	if (!door->img || !door->addr)
+		door->loaded = 0;
+	else
+		door->loaded = 1;
 }
