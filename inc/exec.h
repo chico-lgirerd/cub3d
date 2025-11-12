@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 11:29:30 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 16:01:03 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define KEY_SENSI 1.5
 # define MOUSE_SENSI 0.0015
 # define MINIMAP_ZOOM 25
+# define INTERACT_RADIUS 1.8
 
 typedef struct s_player
 {
@@ -174,7 +175,6 @@ int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
 void	draw_cases(t_data *data, int x, int y);
 void	draw_empty_cases(t_data *data, int x, int y);
 void	draw_player(t_data *data);
-void	draw_pause(t_data *data, int *image);
 
 int		rgb_to_int(int r, int g, int b);
 int		color_to_int(t_color color);

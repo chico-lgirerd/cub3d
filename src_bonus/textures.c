@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/05 12:13:38 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 16:00:43 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	load_texture(t_data *data, char *key, char **mapline)
 		load_west(data, *mapline);
 	else if (!ft_strcmp(key, "EA"))
 		load_east(data, *mapline);
+	else if (!ft_strcmp(key, "DO"))
+		load_door(data, *mapline);
 	else if ((key[0] == 'F' || key[0] == 'C') && (!key[1] || key[1] == ' '))
 		fill_rgb(data, key, mapline);
 	else

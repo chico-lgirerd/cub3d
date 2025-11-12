@@ -6,13 +6,14 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/11 15:32:54 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 15:22:28 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
 #include <stdlib.h>
+#include <math.h>
 
 void	init_mouse(t_data *data)
 {
@@ -69,4 +70,31 @@ int	mouse_handler(int x, int y, t_data *data)
 		ingame_mouse(x, y, data);
 	}
 	return (0);
+}
+
+int	mouse_button_handler(int button, int x, int y, t_data *data)
+{
+	double	step;
+	double	i;
+	int		map_x;
+	int		map_y;
+
+	(void)x, (void)y;
+	step = 0.01;
+	i = 0;
+	if (button == 1)
+	{
+		while (i < INTERACT_RADIUS)
+		{
+			map_x = (int)floor(data->player.pos_x + data->player.dir_x * i);
+			map_y = (int)floor(data->player.pos_y + data->player.dir_y * i);
+			if (data->map[map_y][map_x] == 'D')
+			{
+				data->raycasting.door.is_open = !data->raycasting.door.is_open;
+				break ;
+			}
+			i += step;
+		}
+	}
+	return (1);
 }

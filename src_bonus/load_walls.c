@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/31 11:51:36 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:53:18 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,20 @@ void	load_east(t_data *d, char *mapline)
 	if (!e->img || !e->addr)
 		e->loaded = 0;
 	e->loaded = 1;
+}
+
+void	load_door(t_data *d, char *mapline)
+{
+	t_wall	*door;
+
+	door = &d->textures.door;
+	door->img = mlx_xpm_file_to_image(d->mlx_ptr,
+			mapline, &door->width, &door->height);
+	if (door->img)
+		door->addr = mlx_get_data_addr(door->img,
+				&door->bpp, &door->length, &door->endian);
+	if (!door->img || !door->addr)
+		door->loaded = 0;
+	else
+		door->loaded = 1;
 }

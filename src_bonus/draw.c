@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/11 14:53:42 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 15:54:35 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 
 void	draw_map(t_data *data, int x)
 {
-	t_raycasting	rc;
+	t_raycasting	*rc;
 	t_draw			*draw;
 
-	rc = data->raycasting;
+	rc = &data->raycasting;
 	draw = &data->raycasting.draw;
-	draw->line_height = (int)data->win_height / rc.perp_walldist;
+	draw->line_height = (int)data->win_height / rc->perp_walldist;
 	draw->start = -draw->line_height / 2 + data->win_height / 2;
 	if (draw->start < 0)
 		draw->start = 0;
@@ -125,11 +125,13 @@ void	draw_map(t_data *data, int x)
 	if (draw->end > data->win_height)
 		draw->end = data->win_height - 1;
 	draw_ceiling_floor(data, x, draw->start, draw->end);
-	if (rc.side == 0 && rc.raydir_x < 0)
+	if (rc->is_door == 1)
+		draw->wall_tex = data->textures.door;
+	else if (rc->side == 0 && rc->raydir_x < 0)
 		draw->wall_tex = data->textures.east;
-	else if (rc.side == 0 && rc.raydir_x > 0)
+	else if (rc->side == 0 && rc->raydir_x > 0)
 		draw->wall_tex = data->textures.west;
-	else if (rc.side == 1 && rc.raydir_y < 0)
+	else if (rc->side == 1 && rc->raydir_y < 0)
 		draw->wall_tex = data->textures.north;
 	else
 		draw->wall_tex = data->textures.south;
