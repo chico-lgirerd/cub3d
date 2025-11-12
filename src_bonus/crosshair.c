@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:00:11 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/10 11:08:58 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/11 14:54:48 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	draw_crosshair(t_data *data)
 	phase += 0.02f;
 	while (offset <= length)
 	{
-		my_mlx_pixel_put(&data->game_img, px, py - offset, 0xFF0000);
-		my_mlx_pixel_put(&data->game_img, px, py + offset, 0xFF0000);
-		my_mlx_pixel_put(&data->game_img, px - offset, py, 0xFF0000);
-		my_mlx_pixel_put(&data->game_img, px + offset, py, 0xFF0000);
+		my_mlx_pixel_put(&data->buffer, px, py - offset, 0xFF0000);
+		my_mlx_pixel_put(&data->buffer, px, py + offset, 0xFF0000);
+		my_mlx_pixel_put(&data->buffer, px - offset, py, 0xFF0000);
+		my_mlx_pixel_put(&data->buffer, px + offset, py, 0xFF0000);
 		offset++;
 	}
 }

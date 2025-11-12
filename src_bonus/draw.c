@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 17:42:17 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:53:42 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 			draw->tex_y = data->textures.height - 1;
 		tex_pos += step;
 		color = get_texture_color(&draw->wall_tex, draw->tex_x, draw->tex_y);
-		my_mlx_pixel_put(&data->game_img, x, y, color);
+		my_mlx_pixel_put(&data->buffer, x, y, color);
 		y++;
 	}
 }
@@ -99,13 +99,13 @@ void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 	y = 0;
 	while (y < start)
 	{
-		my_mlx_pixel_put(&data->game_img, x, y, ceiling_color);
+		my_mlx_pixel_put(&data->buffer, x, y, ceiling_color);
 		y++;
 	}
 	y = end;
 	while (y < data->win_height)
 	{
-		my_mlx_pixel_put(&data->game_img, x, y, floor_color);
+		my_mlx_pixel_put(&data->buffer, x, y, floor_color);
 		y++;
 	}
 }

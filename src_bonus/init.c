@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 16:01:57 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:38:59 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,17 @@ void	init_player(t_player *player)
 
 void	init_image(t_data *data)
 {
-	data->game_img.img_ptr = mlx_new_image(data->mlx_ptr,
-			data->win_width, data->win_height);
-	data->game_img.addr = mlx_get_data_addr(data->game_img.img_ptr,
-			&data->game_img.bits_per_pixel,
-			&data->game_img.size_line,
-			&data->game_img.endian);
-	data->game_img.width = data->win_width;
-	data->game_img.height = data->win_height;
-	data->minimap_img.img_ptr = mlx_new_image(data->mlx_ptr,
-			data->minimap.width, data->minimap.height);
-	data->minimap_img.addr = mlx_get_data_addr(data->minimap_img.img_ptr,
-			&data->minimap_img.bits_per_pixel,
-			&data->minimap_img.size_line,
-			&data->minimap_img.endian);
-	data->minimap_img.width = data->minimap.width;
-	data->minimap_img.height = data->minimap.height;
+	data->buffer.width = 1920;
+	data->buffer.height = 1080;
+	data->buffer.img_ptr = mlx_new_image(data->mlx_ptr,
+			data->buffer.width, data->buffer.height);
+	data->buffer.addr = mlx_get_data_addr(data->buffer.img_ptr,
+			&data->buffer.bits_per_pixel,
+			&data->buffer.size_line,
+			&data->buffer.endian);
+	data->pause.width = 1920;
+	data->pause.height = 1080;
+	data->pause.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			"assets/pause.xpm",
+			&data->pause.width, &data->pause.height);
 }

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 22:24:57 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/11 16:12:20 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_data
 	t_img			pickaxe;
 	t_img			totem;
 	t_img			pause;
+	t_img			buffer;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;
@@ -161,6 +162,7 @@ int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
 void	draw_cases(t_data *data, int x, int y);
 void	draw_empty_cases(t_data *data, int x, int y);
 void	draw_player(t_data *data);
+void	draw_pause(t_data *data, int *image);
 
 int		rgb_to_int(int r, int g, int b);
 int		color_to_int(t_color color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 18:57:01 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:32:54 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_mouse(t_data *data)
 	data->mouse.recentered = 1;
 }
 
-int	mouse_handler(int x, int y, t_data *data)
+int	ingame_mouse(int x, int y, t_data *data)
 {
 	int		dx;
 	double	sensi;
@@ -49,6 +49,24 @@ int	mouse_handler(int x, int y, t_data *data)
 	{
 		data->mouse.last_x = x;
 		data->mouse.recentered = 0;
+	}
+	return (0);
+}
+
+int	inpause_mouse(t_data *data)
+{
+	mlx_mouse_show(data->mlx_ptr, data->win_ptr);
+	return (0);
+}
+
+int	mouse_handler(int x, int y, t_data *data)
+{
+	if (data->key.key_pause)
+		inpause_mouse(data);
+	else
+	{
+		mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
+		ingame_mouse(x, y, data);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:27 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/10 19:47:18 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/12 10:44:26 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_totem(t_data *data)
 			&data->totem.endian);
 }
 
-void	draw_totem(t_data *data, int pos_x, int pos_y, int *game_data)
+void	draw_totem(t_data *data, int pos_x, int pos_y, int *image)
 {
 	int	x;
 	int	y;
@@ -43,9 +43,9 @@ void	draw_totem(t_data *data, int pos_x, int pos_y, int *game_data)
 			color = totem_data[y * (data->totem.size_line / 4) + x];
 			if ((color & 0x00FFFFFF) != 0x000000)
 			{
-				if (pos_x + x >= 0 && pos_x + x < data->game_img.width
-					&& pos_y + y >= 0 && pos_y + y < data->game_img.height)
-					game_data[(pos_y + y) * (data->game_img.size_line / 4)
+				if (pos_x + x >= 0 && pos_x + x < data->buffer.width
+					&& pos_y + y >= 0 && pos_y + y < data->buffer.height)
+					image[(pos_y + y) * (data->buffer.size_line / 4)
 						+ (pos_x + x)] = color;
 			}
 			x++;
@@ -70,5 +70,5 @@ void	animate_totem(t_data *data, int base_x, int base_y)
 		phase += 0.04f;
 	if (phase > 6.283185f)
 		phase -= 6.283185f;
-	draw_totem(data, base_x, anim_pos_y, (int *)data->game_img.addr);
+	draw_totem(data, base_x, anim_pos_y, (int *)data->buffer.addr);
 }

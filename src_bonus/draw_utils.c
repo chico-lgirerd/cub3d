@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/04 16:40:31 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:58:33 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	draw_empty_cases(t_data *data, int x, int y)
 		py = 0;
 		while (py < case_h)
 		{
-			my_mlx_pixel_put(&data->minimap_img,
-				x * case_w + px, y * case_h + py, color);
+			my_mlx_pixel_put(&data->buffer,
+				x * case_w + px + 10, y * case_h + py + 10, color);
 			py++;
 		}
 		px++;
@@ -84,8 +84,8 @@ void	draw_cases(t_data *data, int x, int y)
 		py = 0;
 		while (py < case_h)
 		{
-			my_mlx_pixel_put(&data->minimap_img,
-				x * case_w + px, y * case_h + py, color);
+			my_mlx_pixel_put(&data->buffer,
+				x * case_w + px + 10, y * case_h + py + 10, color);
 			py++;
 		}
 		px++;
@@ -109,8 +109,8 @@ void	draw_player(t_data *data)
 		py = -2;
 		while (py <= 1)
 		{
-			my_mlx_pixel_put(&data->minimap_img,
-				player_x + px, player_y + py, color);
+			my_mlx_pixel_put(&data->buffer,
+				player_x + px + 10, player_y + py + 10, color);
 			py++;
 		}
 		px++;
