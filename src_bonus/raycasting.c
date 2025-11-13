@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 15:32:57 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/13 15:33:44 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	perform_dda(t_data *data)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'D')
+		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'C')
 			rc->hit = 1;
 	}
 }
@@ -96,10 +96,12 @@ int	perform_raycasting(t_data *data)
 {
 	t_player		*player;
 	t_raycasting	*rc;
+	t_
 	int				x;
 
 	player = &data->player;
 	rc = &data->raycasting;
+	rc->doors = &data->doors;
 	x = 0;
 	while (x < data->win_width)
 	{
@@ -131,9 +133,7 @@ int	perform_raycasting(t_data *data)
 				rc->is_door = 1;
 			}
 			else
-			{
 				rc->hit = 0;
-			}
 		}
 		draw_map(data, x);
 		x++;

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 16:01:03 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/13 15:30:45 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_player
 
 typedef struct s_door
 {
+	int		x;
+	int		y;
 	double	pos;
 	int		is_open;
 	double	open_pos;
@@ -70,7 +72,7 @@ typedef struct s_raycasting
 	int		hit;
 	int		side;
 	int		is_door;
-	t_door	door;
+	t_door	**doors;
 	t_draw	draw;
 }	t_raycasting;
 
@@ -129,6 +131,7 @@ typedef struct s_data
 	int				map_height;
 	int				map_start;
 	int				map_end;
+	int				door_count;
 	char			**map;
 	t_player		player;
 	t_raycasting	raycasting;
@@ -140,6 +143,7 @@ typedef struct s_data
 	t_img			totem;
 	t_img			pause;
 	t_img			buffer;
+	t_door			*doors;
 	t_key			key;
 	t_mouse			mouse;
 	t_textures		textures;

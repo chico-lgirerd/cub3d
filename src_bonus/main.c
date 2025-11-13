@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/06 17:18:55 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:09:39 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	main(int ac, char **av)
 	if (!check_args(ac, av))
 		return (1);
 	ft_memset(&data, 0, sizeof(t_data));
+	data.doors = malloc(100 * sizeof(t_door));
+	if (!data.doors)
+		return (1);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 15:51:42 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/13 15:25:23 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,24 @@ int	offset_spaces(char *line)
 	return (i);
 }
 
-int	is_map_char(char c, int *player_count)
+int	is_map_char(t_data *data, int i, int j, int *player_count)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' || data->map[i][j] == 'W')
 	{
 		(*player_count)++;
 		return (1);
 	}
-	if (c == '0' || c == '1' || c == 'D')
+	if (data->map[i][j] == '0' || data->map[i][j] == '1')
 		return (1);
-	if (ft_isspace(c))
+	if (data->map[i][j] == 'D')
+	{
+		data->doors[data->door_count].x = j;
+		data->doors[data->door_count].y = i;
+		data->doors[data->door_count].is_open = 0;
+		data->door_count++;
+		return (1);
+	}
+	if (ft_isspace(data->map[i][j]))
 		return (1);
 	return (0);
 }
@@ -67,7 +75,7 @@ int	is_valid_map(t_data *data, char **map, int start)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (!is_map_char(map[i][j], &player_count))
+			if (!is_map_char(data, i, j, &player_count))
 				return (3);
 			if (player_count > 1)
 				return (1);
