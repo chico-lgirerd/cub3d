@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/13 15:25:23 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 13:13:43 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_map_char(t_data *data, int i, int j, int *player_count)
 	if (data->map[i][j] == 'D')
 	{
 		data->doors[data->door_count].x = j;
-		data->doors[data->door_count].y = i;
+		data->doors[data->door_count].y = i - data->map_start + 1;;
 		data->doors[data->door_count].is_open = 0;
 		data->door_count++;
 		return (1);

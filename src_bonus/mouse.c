@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 15:22:28 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 14:03:59 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,12 @@ int	mouse_button_handler(int button, int x, int y, t_data *data)
 			map_y = (int)floor(data->player.pos_y + data->player.dir_y * i);
 			if (data->map[map_y][map_x] == 'D')
 			{
-				data->raycasting.door.is_open = !data->raycasting.door.is_open;
+				data->raycasting.tmpdoor = malloc(sizeof(t_door));
+				data->raycasting.tmpdoor = get_door_from_pos(data, map_y - data->map_start + 1, map_x);
+				#include <stdio.h>
+				if (!data->raycasting.tmpdoor)
+					printf("%d, %d\n", map_y - data->map_start + 1, map_x);
+				data->raycasting.tmpdoor->is_open = !data->raycasting.tmpdoor->is_open;
 				break ;
 			}
 			i += step;

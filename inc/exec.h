@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/13 15:30:45 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 13:28:32 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_raycasting
 	int		side;
 	int		is_door;
 	t_door	**doors;
+	t_door	*tmpdoor;
 	t_draw	draw;
 }	t_raycasting;
 
@@ -194,5 +195,11 @@ void	animate_totem(t_data *data, int base_x, int base_y);
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
 int		secure_free(t_data *data);
 void	free_map(char **map);
+
+int		get_door_state(t_data *data, int x, int y);
+void	init_doors_pos(t_data *data);
+t_door	*get_door_from_pos(t_data *data, int x, int y);
+
+void	print_doors(t_data *data);
 
 #endif

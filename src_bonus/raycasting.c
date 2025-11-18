@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/13 15:33:44 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 11:00:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static void	init_raycasting(t_data *data, int x)
 	rc = &data->raycasting;
 	rc->hit = 0;
 	rc->is_door = 0;
-	rc->door.open_pos = 0.0;
-	rc->door.width = 0.06;
+	init_doors_pos(data);
 	rc->map_x = (int)player->pos_x;
 	rc->map_y = (int)player->pos_y;
 	rc->camera_x = 2 * x / (double)data->win_width - 1;
@@ -96,7 +95,6 @@ int	perform_raycasting(t_data *data)
 {
 	t_player		*player;
 	t_raycasting	*rc;
-	t_
 	int				x;
 
 	player = &data->player;
@@ -116,18 +114,19 @@ int	perform_raycasting(t_data *data)
 					+ (1 - rc->step_y) / 2) / rc->raydir_y;
 		if (data->map[rc->map_y][rc->map_x] == 'D')
 		{
+			rc->tmpdoor = get_door_from_pos(data, rc->map_x, rc->map_x);
 			if (rc->side == 0)
 			{
-				rc->door.pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
-				rc->door.pos -= floor(rc->door.pos);
+				rc->tmpdoor->pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
+				rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
 			}
 			else
 			{
-				rc->door.pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
-				rc->door.pos -= floor(rc->door.pos);
+				rc->tmpdoor->pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
+				rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
 			}
-			if (!rc->door.is_open || (rc->door.pos >= rc->door.open_pos
-				&& rc->door.pos <= rc->door.open_pos + rc->door.width))
+			if (!rc->tmpdoor->is_open || (rc->tmpdoor->pos >= rc->tmpdoor->open_pos
+				&& rc->tmpdoor->pos <= rc->tmpdoor->open_pos + rc->tmpdoor->width))
 			{
 				rc->hit = 1;
 				rc->is_door = 1;

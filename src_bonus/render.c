@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 16:01:08 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 13:45:25 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int	render(t_data *data)
 	else
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->buffer.img_ptr, 0, 0);
+	// print_doors(data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:22:44 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/13 15:32:32 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 14:02:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_door	*get_door_from_pos(t_data *data, int x, int y)
 {
 	int	i;
 
+	#include <stdio.h>
+	printf("Searching for : %d, %d\n", x, y);
 	i = 0;
 	while (i < data->door_count)
 	{
@@ -39,4 +41,17 @@ t_door	*get_door_from_pos(t_data *data, int x, int y)
 		i++;
 	}
 	return (NULL);
+}
+
+void	init_doors_pos(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->door_count)
+	{
+		data->doors[i].open_pos = 0.0;
+		data->doors[i].width = 0.06;
+		i++;
+	}
 }
