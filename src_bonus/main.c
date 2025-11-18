@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 13:01:11 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 14:53:10 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_doors(t_data *data)
 	int	i = 0;
 	while (i < data->door_count)
 	{
-		printf("%d, %d\n", data->doors[i].y, data->doors[i].x);
+		printf("Door number %d : %d, %d\n", i, data->doors[i].y, data->doors[i].x);
 		i++;
 	}
 }
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 		secure_free(&data);
 		return (1);
 	}
-	print_doors(&data);
+	// print_doors(&data);
 	init_player(&data.player);
 	exec_game(&data);
 	return (0);
