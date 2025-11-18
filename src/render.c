@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 15:23:04 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:47:58 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 #include "mlx.h"
 #include <X11/X.h>
 #include <stdlib.h>
-#include <stdio.h>
-
-static void	fps_counter(t_data *data, struct timeval curr_time)
-{
-	static int				frame_count;
-	static struct timeval	last_check;
-	double					elapsed;
-
-	(void)data;
-	if (last_check.tv_sec == 0 && last_check.tv_usec == 0)
-		last_check = curr_time;
-	frame_count++;
-	elapsed = (curr_time.tv_sec - last_check.tv_sec)
-		+ (curr_time.tv_usec - last_check.tv_usec) / 1000000.0;
-	if (elapsed >= 1.0)
-	{
-		printf("FPS: %d\n", frame_count);
-		frame_count = 0;
-		last_check = curr_time;
-	}
-}
 
 static int	render(t_data *data)
 {
@@ -42,7 +21,6 @@ static int	render(t_data *data)
 	static struct timeval	last_time;
 
 	gettimeofday(&curr_time, NULL);
-	fps_counter(data, curr_time);
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
 	draw_minimap(data);
@@ -65,11 +43,8 @@ void	exec_game(t_data *data)
 	if (!data->win_ptr)
 		secure_free(data);
 	init_image(data);
-	init_mouse(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, key_press, data);
 	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, key_release, data);
-	mlx_hook(data->win_ptr, MotionNotify, 1L << 6, mouse_handler, data);
-	mlx_mouse_hook(data->win_ptr, &mouse_button_handler, data);
 	mlx_hook(data->win_ptr, DestroyNotify, 0, &secure_free, data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);

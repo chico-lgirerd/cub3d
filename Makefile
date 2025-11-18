@@ -37,7 +37,6 @@ SRCS    	=	$(SRCS_DIR)main.c \
 				$(SRCS_DIR)init.c \
 				$(SRCS_DIR)load_walls.c \
 				$(SRCS_DIR)map.c \
-				$(SRCS_DIR)mouse.c \
 				$(SRCS_DIR)move.c \
 				$(SRCS_DIR)parse.c \
 				$(SRCS_DIR)raycasting.c \
