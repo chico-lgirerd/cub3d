@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:22:44 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/18 14:53:01 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 16:06:07 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,16 @@ int	get_door_state(t_data *data, int x, int y)
 	return (-1);
 }
 
-t_door	*get_door_from_pos(t_data *data, int x, int y)
+t_door	*get_door_from_pos(t_data *data, int i, int j)
 {
-	int	i;
+	int	idx;
 
-	// #include <stdio.h>
-	// printf("Searching for : %d, %d\n", x, y);
-	// printf("Door Count : %d\n", data->door_count);
-	i = 0;
-	while (i < data->door_count)
+	idx = 0;
+	while (idx < data->door_count)
 	{
-		// printf("my x : %d door[%d] x : %d my y : %d door[%d] y : %d\n", x, i, data->doors[i].x, y, i, data->doors[i].y);
-		if (data->doors[i].x == y && data->doors[i].y == x)
-		{
-			// printf("Returning %p\n", &data->doors[i]);
-			return (&data->doors[i]);
-		}
-		i++;
+		if (data->doors[idx].x == j && data->doors[idx].y == i)
+			return (&data->doors[idx]);
+		idx++;
 	}
 	return (NULL);
 }
