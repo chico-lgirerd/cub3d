@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/07 16:29:34 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 21:24:12 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_textures
 	t_wall	east;
 	t_wall	west;
 	t_wall	door;
+	t_wall	open_door;
 	t_color	floor;
 	t_color	ceiling;
 }	t_textures;

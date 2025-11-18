@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 15:38:05 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/10 21:17:20 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_raycasting
 	int		step_y;
 	int		hit;
 	int		side;
-	int		is_door;
+	int		door_seen;
 	t_door	door;
 	t_draw	draw;
 }	t_raycasting;

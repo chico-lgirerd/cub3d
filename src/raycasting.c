@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 19:11:35 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:28:20 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_raycasting(t_data *data, int x)
 	player = &data->player;
 	rc = &data->raycasting;
 	rc->hit = 0;
-	rc->is_door = 0;
+	rc->door_seen = 0;
 	rc->door.open_pos = 0.0;
 	rc->door.width = 0.06;
 	rc->map_x = (int)player->pos_x;
@@ -115,20 +115,15 @@ int	perform_raycasting(t_data *data)
 		if (data->map[rc->map_y][rc->map_x] == 'D')
 		{
 			if (rc->side == 0)
-			{
 				rc->door.pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
-				rc->door.pos -= floor(rc->door.pos);
-			}
 			else
-			{
 				rc->door.pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
-				rc->door.pos -= floor(rc->door.pos);
-			}
+			rc->door.pos -= floor(rc->door.pos);
 			if (!rc->door.is_open || (rc->door.pos >= rc->door.open_pos
 				&& rc->door.pos <= rc->door.open_pos + rc->door.width))
 			{
 				rc->hit = 1;
-				rc->is_door = 1;
+				rc->door_seen = 1;
 			}
 			else
 			{
