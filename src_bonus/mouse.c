@@ -6,12 +6,13 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 20:29:54 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:35:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -88,12 +89,17 @@ int	mouse_button_handler(int button, int x, int y, t_data *data)
 		{
 			map_x = (int)floor(data->player.pos_x + data->player.dir_x * i);
 			map_y = (int)floor(data->player.pos_y + data->player.dir_y * i);
-			if (data->map[map_y][map_x] == 'D')
+			if (map_y >= data->map_start && map_y <= data->map_end
+				&& map_x >= 0 && map_x < (int)ft_strlen(data->map[map_y]))
 			{
-				data->rays.tmpdoor = get_door_from_pos(data,
-						map_y - data->map_start + 1, map_x);
-				data->rays.tmpdoor->is_open = !data->rays.tmpdoor->is_open;
-				break ;
+				if (data->map[map_y][map_x] == 'D')
+				{
+					data->rays.tmpdoor = get_door_from_pos(data,
+							map_y - data->map_start + 1, map_x);
+					if (data->rays.tmpdoor != NULL)
+						data->rays.tmpdoor->is_open = !data->rays.tmpdoor->is_open;
+					break ;
+				}
 			}
 			i += step;
 		}
