@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 15:03:56 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 17:15:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs)
 		mlx_destroy_image(mlx_ptr, data->pause.img_ptr);
 	if (txs->door.img)
 		mlx_destroy_image(mlx_ptr, txs->door.img);
+	if (data->buffer.img_ptr)
+		mlx_destroy_image(mlx_ptr, data->buffer.img_ptr);
 }
 
 void	free_map(char **map)

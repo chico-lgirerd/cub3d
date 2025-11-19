@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:14:02 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 16:59:07 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,6 @@
 #include "mlx.h"
 #include "libft.h"
 #include <math.h>
-
-void	draw_minimap(t_data *data)
-{
-	int	x;
-	int	y;
-
-	data->minimap.start_x = (int)data->player.pos_x - MINIMAP_ZOOM / 2;
-	data->minimap.start_y = (int)data->player.pos_y - MINIMAP_ZOOM / 2;
-	x = 0;
-	while (x < MINIMAP_ZOOM)
-	{
-		y = 0;
-		while (y < MINIMAP_ZOOM)
-		{
-			data->minimap.map_x = data->minimap.start_x + x;
-			data->minimap.map_y = data->minimap.start_y + y;
-			if (data->minimap.map_y >= data->map_start
-				&& data->minimap.map_y <= data->map_end
-				&& data->minimap.map_x >= 0 && data->minimap.map_x
-				< (int)ft_strlen(data->map[data->minimap.map_y]))
-				draw_cases(data, x, y);
-			else
-				draw_empty_cases(data, x, y);
-			y++;
-		}
-		x++;
-	}
-	draw_player(data);
-}
 
 int	compute_tex_x(t_data *data)
 {

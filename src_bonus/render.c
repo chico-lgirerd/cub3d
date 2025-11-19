@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:21:17 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 18:01:28 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	render(t_data *data)
 	gettimeofday(&curr_time, NULL);
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
-	perform_rays(data);
+	perform_raycasting(data);
 	draw_minimap(data);
 	draw_crosshair(data);
 	animate_pickaxe(data, 1300, 600);

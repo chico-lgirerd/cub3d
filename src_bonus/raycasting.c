@@ -112,7 +112,7 @@ static int	ray_hit_door(t_data *data)
 		return (0);
 }
 
-int	perform_rays(t_data *data)
+int	perform_raycasting(t_data *data)
 {
 	t_player	*player;
 	t_rays		*rc;

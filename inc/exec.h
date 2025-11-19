@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:16:39 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 16:59:50 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,10 +154,9 @@ void	init_player(t_player *player);
 void	init_image(t_data *data);
 void	init_pickaxe(t_data *data);
 void	init_totem(t_data *data);
-void	init_pause(t_data *data);
 
 void	exec_game(t_data *data);
-int		perform_rays(t_data *data);
+int		perform_raycasting(t_data *data);
 void	update_player(t_data *data, struct timeval curr_time,
 			struct timeval last_time);
 

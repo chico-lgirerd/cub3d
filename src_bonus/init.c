@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/13 15:04:27 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 17:17:17 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ void	init_player(t_player *player)
 
 void	init_image(t_data *data)
 {
-	data->buffer.width = 1920;
-	data->buffer.height = 1080;
+	data->buffer.width = data->win_width;
+	data->buffer.height = data->win_height;
 	data->buffer.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->buffer.width, data->buffer.height);
 	data->buffer.addr = mlx_get_data_addr(data->buffer.img_ptr,
 			&data->buffer.bits_per_pixel,
 			&data->buffer.size_line,
 			&data->buffer.endian);
-	data->pause.width = 1920;
-	data->pause.height = 1080;
+	data->pause.width = data->win_width;
+	data->pause.height = data->win_height;
 	data->pause.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/pause.xpm",
 			&data->pause.width, &data->pause.height);
