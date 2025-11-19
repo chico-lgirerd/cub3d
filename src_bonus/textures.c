@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 16:00:43 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 17:04:21 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	get_textures(t_data *data, char *mapline)
 int	have_textures(t_textures textures)
 {
 	if (!textures.east.loaded || !textures.north.loaded
-		|| !textures.south.loaded || !textures.west.loaded)
+		|| !textures.south.loaded || !textures.west.loaded
+		|| !textures.door.loaded)
 	{
 		printf("Error\nMissing texture, please check its path\n");
 		return (0);
