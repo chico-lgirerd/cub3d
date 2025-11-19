@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pickaxe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 13:45:45 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 15:50:17 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:07:56 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	animate_pickaxe(t_data *data, int base_x, int base_y)
 		;
 	else
 		phase += 0.04f;
-	if (phase > 6.283185f)
-		phase -= 6.283185f;
+	if (phase > 6.0)
+		phase -= 6.0f;
 	draw_pickaxe(data, base_x, anim_pos_y, (int *)data->buffer.addr);
 }
 

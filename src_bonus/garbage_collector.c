@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/11 13:12:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:03:56 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs)
 		mlx_destroy_image(mlx_ptr, data->totem.img_ptr);
 	if (data->pause.img_ptr)
 		mlx_destroy_image(mlx_ptr, data->pause.img_ptr);
+	if (txs->door.img)
+		mlx_destroy_image(mlx_ptr, txs->door.img);
 }
 
 void	free_map(char **map)
@@ -54,6 +56,7 @@ void	free_map(char **map)
 
 int	secure_free(t_data *data)
 {
+	free(data->doors);
 	destroy_images(data, data->mlx_ptr, &data->textures);
 	if (data->map)
 		free_map(data->map);
