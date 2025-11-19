@@ -6,23 +6,23 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:22:44 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/18 16:06:07 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 13:59:53 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <stdlib.h>
 
-int	get_door_state(t_data *data, int x, int y)
+int	get_door_state(t_data *data, int i, int j)
 {
-	int	i;
+	int	idx;
 	
-	i = 0;
-	while (i < data->door_count)
+	idx = 0;
+	while (idx < data->door_count)
 	{
-		if (data->doors[i].x == x && data->doors[i].y == y)
-			return (data->doors[i].is_open);
-		i++;
+		if (data->doors[idx].x == j && data->doors[idx].y == i)
+			return (data->doors[idx].is_open);
+		idx++;
 	}
 	return (-1);
 }

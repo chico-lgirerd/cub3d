@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:24:51 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 13:46:18 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:00:00 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_walkable(t_data *data, int x, int y)
 	if (data->map[y][x] == '0')
 		return (1);
 	if (data->map[y][x] == 'D')
-		if (get_door_state(data, x, y) == 1)
+		if (get_door_state(data, y - data->map_start + 1, x) == 1)
 			return (1);
 	return (0);
 }
