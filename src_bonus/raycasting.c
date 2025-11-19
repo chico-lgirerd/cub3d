@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   rays.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,13 +13,13 @@
 #include "exec.h"
 #include <math.h>
 
-static void	init_raycasting(t_data *data, int x)
+static void	init_rays(t_data *data, int x)
 {
-	t_player		*player;
-	t_raycasting	*rc;
+	t_player	*player;
+	t_rays		*rc;
 
 	player = &data->player;
-	rc = &data->raycasting;
+	rc = &data->rays;
 	rc->hit = 0;
 	rc->door_seen = 0;
 	rc->map_x = (int)player->pos_x;
@@ -39,11 +39,11 @@ static void	init_raycasting(t_data *data, int x)
 
 static void	calcul_dist_next_cases(t_data *data)
 {
-	t_player		*player;
-	t_raycasting	*rc;
+	t_player	*player;
+	t_rays		*rc;
 
 	player = &data->player;
-	rc = &data->raycasting;
+	rc = &data->rays;
 	if (rc->raydir_x < 0)
 	{
 		rc->step_x = -1;
@@ -68,9 +68,9 @@ static void	calcul_dist_next_cases(t_data *data)
 
 static void	perform_dda(t_data *data)
 {
-	t_raycasting	*rc;
+	t_rays	*rc;
 
-	rc = &data->raycasting;
+	rc = &data->rays;
 	while (rc->hit == 0)
 	{
 		if (rc->walldist_x < rc->walldist_y)
@@ -93,11 +93,11 @@ static void	perform_dda(t_data *data)
 
 static int	ray_hit_door(t_data *data)
 {
-	t_player		*player;
-	t_raycasting	*rc;
+	t_player	*player;
+	t_rays		*rc;
 
 	player = &data->player;
-	rc = &data->raycasting;
+	rc = &data->rays;
 	rc->tmpdoor = get_door_from_pos(data,
 			rc->map_y - data->map_start + 1, rc->map_x);
 	if (rc->side == 0)
@@ -112,18 +112,18 @@ static int	ray_hit_door(t_data *data)
 		return (0);
 }
 
-int	perform_raycasting(t_data *data)
+int	perform_rays(t_data *data)
 {
-	t_player		*player;
-	t_raycasting	*rc;
-	int				x;
+	t_player	*player;
+	t_rays		*rc;
+	int			x;
 
 	player = &data->player;
-	rc = &data->raycasting;
+	rc = &data->rays;
 	x = 0;
 	while (x < data->win_width)
 	{
-		init_raycasting(data, x);
+		init_rays(data, x);
 		calcul_dist_next_cases(data);
 		perform_dda(data);
 		if (rc->side == 0)

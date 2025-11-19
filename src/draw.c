@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 11:35:33 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:14:02 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	draw_minimap(t_data *data)
 
 int	compute_tex_x(t_data *data)
 {
-	double			wall_x;
-	int				tex_x;
-	t_player		player;
-	t_raycasting	rc;
+	double		wall_x;
+	int			tex_x;
+	t_player	player;
+	t_rays		rc;
 
 	player = data->player;
-	rc = data->raycasting;
+	rc = data->rays;
 	if (rc.side == 0)
 		wall_x = player.pos_y + rc.perp_walldist * rc.raydir_y;
 	else
@@ -112,11 +112,11 @@ void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 
 void	draw_map(t_data *data, int x)
 {
-	t_raycasting	*rc;
-	t_draw			*draw;
+	t_rays	*rc;
+	t_draw	*draw;
 
-	rc = &data->raycasting;
-	draw = &data->raycasting.draw;
+	rc = &data->rays;
+	draw = &data->rays.draw;
 	draw->line_height = (int)data->win_height / rc->perp_walldist;
 	draw->start = -draw->line_height / 2 + data->win_height / 2;
 	if (draw->start < 0)

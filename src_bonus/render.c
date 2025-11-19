@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:08:32 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 16:13:12 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	render(t_data *data)
 	gettimeofday(&curr_time, NULL);
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
-	perform_raycasting(data);
+	perform_rays(data);
 	draw_minimap(data);
 	draw_crosshair(data);
 	animate_pickaxe(data, 1300, 600);

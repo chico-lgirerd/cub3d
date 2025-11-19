@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 15:41:21 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:16:39 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,26 @@ typedef struct s_draw
 	t_wall	wall_tex;
 }	t_draw;
 
-typedef struct s_raycasting
+typedef struct s_rays
 {
 	double	camera_x;
 	double	raydir_x;
 	double	raydir_y;
 	int		map_x;
 	int		map_y;
-	double	walldist_x; // dist ray travel for the 1st x_side case
+	double	walldist_x;
 	double	walldist_y;
-	double	deltadist_x; // dist horizontal to next case
-	double	deltadist_y; // dist vertical to next case
+	double	deltadist_x;
+	double	deltadist_y;
 	double	perp_walldist;
-	int		step_x;	//next step of DDA algo
+	int		step_x;
 	int		step_y;
 	int		hit;
 	int		side;
 	int		door_seen;
 	t_door	*tmpdoor;
 	t_draw	draw;
-}	t_raycasting;
+}	t_rays;
 
 typedef struct s_minimap
 {
@@ -123,30 +123,30 @@ typedef struct s_mouse
 
 typedef struct s_data
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	int				win_width;
-	int				win_height;
-	int				map_width;
-	int				map_height;
-	int				map_start;
-	int				map_end;
-	int				door_count;
-	char			**map;
-	t_player		player;
-	t_raycasting	raycasting;
-	t_minimap		minimap;
-	t_img			game_img;
-	t_img			minimap_img;
-	t_img			door_img;
-	t_img			pickaxe;
-	t_img			totem;
-	t_img			pause;
-	t_img			buffer;
-	t_door			*doors;
-	t_key			key;
-	t_mouse			mouse;
-	t_textures		textures;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			win_width;
+	int			win_height;
+	int			map_width;
+	int			map_height;
+	int			map_start;
+	int			map_end;
+	int			door_count;
+	char		**map;
+	t_player	player;
+	t_rays		rays;
+	t_minimap	minimap;
+	t_img		game_img;
+	t_img		minimap_img;
+	t_img		door_img;
+	t_img		pickaxe;
+	t_img		totem;
+	t_img		pause;
+	t_img		buffer;
+	t_door		*doors;
+	t_key		key;
+	t_mouse		mouse;
+	t_textures	textures;
 }	t_data;
 
 int		init_map(t_data *data, char *filename);
@@ -157,7 +157,7 @@ void	init_totem(t_data *data);
 void	init_pause(t_data *data);
 
 void	exec_game(t_data *data);
-int		perform_raycasting(t_data *data);
+int		perform_rays(t_data *data);
 void	update_player(t_data *data, struct timeval curr_time,
 			struct timeval last_time);
 
@@ -197,6 +197,5 @@ void	free_map(char **map);
 
 int		get_door_state(t_data *data, int x, int y);
 t_door	*get_door_from_pos(t_data *data, int i, int j);
-
 
 #endif

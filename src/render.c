@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 18:47:58 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:13:12 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	render(t_data *data)
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
 	draw_minimap(data);
-	perform_raycasting(data);
+	perform_rays(data);
 	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->game_img.img_ptr, 0, 0);
