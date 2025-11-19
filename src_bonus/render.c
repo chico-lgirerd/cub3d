@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:21:17 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 18:00:54 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static int	render(t_data *data)
 	static struct timeval	last_time;
 
 	gettimeofday(&curr_time, NULL);
+	if (last_time.tv_sec == 0 && last_time.tv_usec == 0)
+	{
+		last_time = curr_time;
+		return (0);
+	}
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
 	perform_rays(data);
