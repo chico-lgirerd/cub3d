@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/19 17:45:47 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:30:09 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "get_next_line.h"
-#include "libft.h"
 
 int	is_map_line(char *line)
 {

@@ -6,14 +6,12 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 17:17:17 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:28:36 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
-#include "parsing.h"
-#include <stdlib.h>
 #include <stdio.h>
 
 void	init_colors(t_color *ceiling, t_color *floor)

@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 18:04:36 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:29:54 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_mouse(t_data *data)
 	data->mouse.recentered = 1;
 }
 
-int	ingame_mouse(int x, int y, t_data *data)
+static int	ingame_mouse(int x, int y, t_data *data)
 {
 	int		dx;
 	double	sensi;
@@ -54,7 +54,7 @@ int	ingame_mouse(int x, int y, t_data *data)
 	return (0);
 }
 
-int	inpause_mouse(t_data *data)
+static int	inpause_mouse(t_data *data)
 {
 	mlx_mouse_show(data->mlx_ptr, data->win_ptr);
 	return (0);

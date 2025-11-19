@@ -6,13 +6,12 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/18 18:33:22 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:19:29 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "exec.h"
-#include "parsing.h"
 
 int	get_map_rows(char **map)
 {

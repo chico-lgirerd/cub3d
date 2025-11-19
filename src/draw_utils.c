@@ -6,13 +6,11 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:06:00 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:58:53 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:15:59 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "mlx.h"
-#include <stdlib.h>
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {

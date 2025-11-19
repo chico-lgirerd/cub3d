@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   load_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 17:53:18 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:28:51 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "exec.h"
 #include "mlx.h"
 

@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 18:35:03 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:35:27 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define MOUSE_SENSI 0.0015
 # define MINIMAP_ZOOM 25
 # define INTERACT_RADIUS 1.8
+# define MAX_DOOR 100
 
 typedef struct s_player
 {
@@ -152,6 +153,7 @@ typedef struct s_data
 int		init_map(t_data *data, char *filename);
 void	init_player(t_player *player);
 void	init_image(t_data *data);
+void	init_mouse(t_data *data);
 void	init_pickaxe(t_data *data);
 void	init_totem(t_data *data);
 
@@ -161,40 +163,34 @@ void	update_player(t_data *data, struct timeval curr_time,
 int		perform_raycasting(t_data *data);
 
 void	draw_minimap(t_data *data);
+void	draw_crosshair(t_data *data);
+void	animate_pickaxe(t_data *data, int base_x, int base_y);
+void	animate_totem(t_data *data, int base_x, int base_y);
 void	draw_map(t_data *data, int x);
 
+int		is_moving(t_data *data);
 void	move_forward(t_data *data, t_player *player, float speed);
 void	move_backward(t_data *data, t_player *player, float speed);
 void	move_left(t_data *data, t_player *player, float speed);
 void	move_right(t_data *data, t_player *player, float speed);
-void	turn_camera(t_player *player, double rot);
 
-int		is_moving(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
+void	turn_camera(t_player *player, double rot);
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
-void	draw_cases(t_data *data, int x, int y);
-void	draw_empty_cases(t_data *data, int x, int y);
-void	draw_player(t_data *data);
-
-int		rgb_to_int(int r, int g, int b);
-int		color_to_int(t_color color);
-
-void	init_mouse(t_data *data);
 int		mouse_handler(int x, int y, t_data *data);
 int		mouse_button_handler(int button, int x, int y, t_data *data);
 
-void	draw_crosshair(t_data *data);
-void	animate_pickaxe(t_data *data, int base_x, int base_y);
-void	animate_totem(t_data *data, int base_x, int base_y);
+int		get_door_state(t_data *data, int x, int y);
+t_door	*get_door_from_pos(t_data *data, int i, int j);
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
+int		rgb_to_int(int r, int g, int b);
+int		color_to_int(t_color color);
 
 void	destroy_images(t_data *data, void *mlx_ptr, t_textures *txs);
 int		secure_free(t_data *data);
 void	free_map(char **map);
-
-int		get_door_state(t_data *data, int x, int y);
-t_door	*get_door_from_pos(t_data *data, int i, int j);
 
 #endif

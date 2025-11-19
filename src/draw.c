@@ -6,16 +6,14 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:59:07 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:16:22 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "mlx.h"
-#include "libft.h"
 #include <math.h>
 
-int	compute_tex_x(t_data *data)
+static int	compute_tex_x(t_data *data)
 {
 	double		wall_x;
 	int			tex_x;
@@ -35,7 +33,7 @@ int	compute_tex_x(t_data *data)
 	return (tex_x);
 }
 
-void	draw_textured_wall(t_data *data, int x, t_draw *draw)
+static void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 {
 	int		y;
 	int		color;
@@ -59,7 +57,7 @@ void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 	}
 }
 
-void	draw_ceiling_floor(t_data *data, int x, int start, int end)
+static void	draw_ceiling_floor(t_data *data, int x, int start, int end)
 {
 	int	y;
 	int	ceiling_color;

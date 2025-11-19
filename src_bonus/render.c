@@ -6,14 +6,13 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 18:16:18 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:31:34 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
 #include <X11/X.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 static void	fps_counter(t_data *data, struct timeval curr_time)

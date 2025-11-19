@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:45:46 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 17:30:27 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:35:46 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
-	data.doors = malloc(100 * sizeof(t_door));
+	data.doors = malloc(MAX_DOOR * sizeof(t_door));
 	if (!data.doors)
 		return (1);
 	if (init_map(&data, av[1]))

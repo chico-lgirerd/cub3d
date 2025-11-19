@@ -6,15 +6,12 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/18 18:34:01 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:25:39 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "exec.h"
 #include "libft.h"
-#include "mlx.h"
-
 #include <stdio.h>
 
 void	skip_spaces(char **str)

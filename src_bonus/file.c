@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:15:27 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/10/02 17:05:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:27:43 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "libft.h"
 
 int	check_filename(char	*filename)

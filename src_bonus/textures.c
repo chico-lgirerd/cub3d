@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 17:04:21 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:32:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "exec.h"
 #include "libft.h"
-#include "mlx.h"
-
 #include <stdio.h>
 
 void	skip_spaces(char **str)

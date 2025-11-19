@@ -6,11 +6,10 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/18 18:33:38 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:18:28 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "exec.h"
 #include "mlx.h"
 

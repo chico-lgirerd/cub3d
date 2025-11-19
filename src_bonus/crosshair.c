@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   crosshair.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:00:11 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/11 14:54:48 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:26:55 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "mlx.h"
 #include <math.h>
 
 void	draw_crosshair(t_data *data)

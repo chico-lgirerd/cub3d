@@ -68,6 +68,7 @@ SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
 				$(SRCS_BONUS_DIR)render.c \
 				$(SRCS_BONUS_DIR)textures.c \
 				$(SRCS_BONUS_DIR)trim.c \
+				$(SRCS_BONUS_DIR)minimap.c \
 				$(SRCS_BONUS_DIR)mouse.c \
 				$(SRCS_BONUS_DIR)crosshair.c \
 				$(SRCS_BONUS_DIR)pickaxe.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:22:21 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 16:03:03 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 20:17:16 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
