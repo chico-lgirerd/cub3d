@@ -6,14 +6,19 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:24:51 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 15:38:16 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:48:49 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "libft.h"
 
 static int	is_walkable(t_data *data, int x, int y)
 {
+	if (y < data->map_start || y > data->map_end)
+		return (0);
+	if (x < 0 || x >= (int)ft_strlen(data->map[y]))
+		return (0);
 	if (data->map[y][x] == '0')
 		return (1);
 	if (data->map[y][x] == 'D')
