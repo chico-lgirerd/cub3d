@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 13:24:51 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 14:00:00 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:38:16 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	move_forward(t_data *data, t_player *player, float speed)
 	if (is_walkable(data, (int)new_x, (int)player->pos_y))
 		player->pos_x = new_x;
 	if (is_walkable(data, (int)player->pos_x, (int)new_y))
-		player->pos_y = new_y; 
+		player->pos_y = new_y;
 }
 
 void	move_backward(t_data *data, t_player *player, float speed)
@@ -71,11 +71,5 @@ void	move_right(t_data *data, t_player *player, float speed)
 	if (is_walkable(data, (int)new_x, (int)player->pos_y))
 		player->pos_x = new_x;
 	if (is_walkable(data, (int)player->pos_x, (int)new_y))
-		player->pos_y = new_y; 
-}
-
-int	is_moving(t_data *data)
-{
-	return (data->key.key_forward || data->key.key_backward
-		|| data->key.key_left || data->key.key_right);
+		player->pos_y = new_y;
 }

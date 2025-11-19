@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:22:44 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 13:59:53 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:27:11 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	get_door_state(t_data *data, int i, int j)
 {
 	int	idx;
-	
+
 	idx = 0;
 	while (idx < data->door_count)
 	{
@@ -39,17 +39,4 @@ t_door	*get_door_from_pos(t_data *data, int i, int j)
 		idx++;
 	}
 	return (NULL);
-}
-
-void	init_doors_pos(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->door_count)
-	{
-		data->doors[i].open_pos = 0.0;
-		data->doors[i].width = 0.06;
-		i++;
-	}
 }

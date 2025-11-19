@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 15:40:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 11:52:03 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:48:37 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	offset_spaces(char *line)
 
 int	is_map_char(t_data *data, int i, int j, int *player_count)
 {
-	if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' || data->map[i][j] == 'W')
+	if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+		|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 	{
 		(*player_count)++;
 		return (1);

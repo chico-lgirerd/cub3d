@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 12:44:02 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:20:09 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,31 @@ static void	perform_dda(t_data *data)
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'D')
+		if (data->map[rc->map_y][rc->map_x] == '1'
+				|| data->map[rc->map_y][rc->map_x] == 'D')
 			rc->hit = 1;
 	}
+}
+
+static int	ray_hit_door(t_data *data)
+{
+	t_player		*player;
+	t_raycasting	*rc;
+
+	player = &data->player;
+	rc = &data->raycasting;
+	rc->tmpdoor = get_door_from_pos(data,
+			rc->map_y - data->map_start + 1, rc->map_x);
+	if (rc->side == 0)
+		rc->tmpdoor->pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
+	else
+		rc->tmpdoor->pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
+	rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
+	if (!rc->tmpdoor->is_open || (rc->tmpdoor->pos >= rc->tmpdoor->open_pos
+			&& rc->tmpdoor->pos <= rc->tmpdoor->open_pos + rc->tmpdoor->width))
+		return (1);
+	else
+		return (0);
 }
 
 int	perform_raycasting(t_data *data)
@@ -110,18 +132,8 @@ int	perform_raycasting(t_data *data)
 		else
 			rc->perp_walldist = (rc->map_y - player->pos_y
 					+ (1 - rc->step_y) / 2) / rc->raydir_y;
-		if (data->map[rc->map_y][rc->map_x] == 'D')
-		{
-			rc->tmpdoor = get_door_from_pos(data, rc->map_y - data->map_start + 1, rc->map_x);
-			if (rc->side == 0)
-				rc->tmpdoor->pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
-			else
-				rc->tmpdoor->pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
-			rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
-			if (!rc->tmpdoor->is_open || (rc->tmpdoor->pos >= rc->tmpdoor->open_pos
-					&& rc->tmpdoor->pos <= rc->tmpdoor->open_pos + rc->tmpdoor->width))
-				rc->door_seen = 1;
-		}
+		if (data->map[rc->map_y][rc->map_x] == 'D' && ray_hit_door(data))
+			rc->door_seen = 1;
 		draw_map(data, x);
 		x++;
 	}

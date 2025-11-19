@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 14:01:34 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:24:44 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	mouse_button_handler(int button, int x, int y, t_data *data)
 			map_y = (int)floor(data->player.pos_y + data->player.dir_y * i);
 			if (data->map[map_y][map_x] == 'D')
 			{
-				data->raycasting.tmpdoor = get_door_from_pos(data, map_y - data->map_start + 1, map_x);
+				data->raycasting.tmpdoor = get_door_from_pos(data,
+						map_y - data->map_start + 1, map_x);
 				data->raycasting.tmpdoor->is_open = !data->raycasting.tmpdoor->is_open;
 				break ;
 			}

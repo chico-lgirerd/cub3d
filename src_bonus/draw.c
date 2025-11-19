@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 20:50:04 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:44:44 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	compute_tex_x(t_data *data)
 		wall_x = player.pos_x + rc.perp_walldist * rc.raydir_x;
 	wall_x -= floor(wall_x);
 	tex_x = wall_x * data->textures.width;
-	if (!rc.door_seen && ((rc.side == 0 && rc.raydir_x > 0) || (rc.side == 1 && rc.raydir_y > 0)))
+	if (!rc.door_seen && ((rc.side == 0 && rc.raydir_x > 0)
+			|| (rc.side == 1 && rc.raydir_y > 0)))
 		tex_x = data->textures.width - tex_x - 1;
 	return (tex_x);
 }

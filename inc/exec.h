@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 12:17:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:41:21 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,8 @@ void	move_backward(t_data *data, t_player *player, float speed);
 void	move_left(t_data *data, t_player *player, float speed);
 void	move_right(t_data *data, t_player *player, float speed);
 void	turn_camera(t_player *player, double rot);
-int		is_moving(t_data *data);
 
+int		is_moving(t_data *data);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
 
@@ -196,9 +196,7 @@ int		secure_free(t_data *data);
 void	free_map(char **map);
 
 int		get_door_state(t_data *data, int x, int y);
-void	init_doors_pos(t_data *data);
 t_door	*get_door_from_pos(t_data *data, int i, int j);
 
-void	print_doors(t_data *data);
 
 #endif
