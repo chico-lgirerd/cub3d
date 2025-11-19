@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 13:45:45 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 15:22:22 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:32:50 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	animate_pickaxe(t_data *data, int base_x, int base_y)
 		;
 	else
 		phase += 0.04f;
-	if (phase > 6.283185f)
-		phase -= 6.283185f;
+	if (phase > 6.0)
+		phase -= 6.0f;
 	draw_pickaxe(data, base_x, anim_pos_y, (int *)data->buffer.addr);
 }

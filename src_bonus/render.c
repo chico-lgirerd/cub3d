@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 13:45:25 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:42:28 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static void	fps_counter(t_data *data, struct timeval curr_time)
 	static int				frame_count;
 	static struct timeval	last_check;
 	double					elapsed;
+	char					fps_str[32];
+	static int				fps;
 
-	(void)data;
 	if (last_check.tv_sec == 0 && last_check.tv_usec == 0)
 		last_check = curr_time;
 	frame_count++;
@@ -30,10 +31,12 @@ static void	fps_counter(t_data *data, struct timeval curr_time)
 		+ (curr_time.tv_usec - last_check.tv_usec) / 1000000.0;
 	if (elapsed >= 1.0)
 	{
-		printf("FPS: %d\n", frame_count);
+		fps = frame_count;
 		frame_count = 0;
 		last_check = curr_time;
 	}
+	snprintf(fps_str, sizeof(fps_str), "FPS : %d", fps);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 1870, 15, 0xFFFFFF, fps_str);
 }
 
 static int	render(t_data *data)
@@ -42,7 +45,6 @@ static int	render(t_data *data)
 	static struct timeval	last_time;
 
 	gettimeofday(&curr_time, NULL);
-	fps_counter(data, curr_time);
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
 	perform_raycasting(data);
@@ -56,7 +58,8 @@ static int	render(t_data *data)
 	else
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->buffer.img_ptr, 0, 0);
-	// print_doors(data);
+			// print_doors(data);
+	fps_counter(data, curr_time);
 	return (0);
 }
 

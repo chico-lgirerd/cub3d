@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:27 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/12 10:44:26 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 15:32:38 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	animate_totem(t_data *data, int base_x, int base_y)
 		;
 	else
 		phase += 0.04f;
-	if (phase > 6.283185f)
-		phase -= 6.283185f;
+	if (phase > 6.0f)
+		phase -= 6.0f;
 	draw_totem(data, base_x, anim_pos_y, (int *)data->buffer.addr);
 }
