@@ -1,6 +1,6 @@
 NAME    		= cub3D
 CC      		= cc
-CFLAGS  		= -Wall -Wextra -Werror -g3
+CFLAGS  		= -Wall -Wextra -Werror
 LIBFT			= ./libft/libft.a
 INC				= -I$(LIBFT_HDR_DIR) -I$(HDR_DIR)
 HDR_DIR			= inc
@@ -28,7 +28,6 @@ SRCS    	=	$(SRCS_DIR)main.c \
 				$(SRCS_DIR)check_map.c \
 				$(SRCS_DIR)colors.c \
 				$(SRCS_DIR)controls.c \
-				$(SRCS_DIR)crosshair.c \
 				$(SRCS_DIR)draw_utils.c \
 				$(SRCS_DIR)draw.c \
 				$(SRCS_DIR)errors.c \
@@ -55,7 +54,6 @@ SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
 				$(SRCS_BONUS_DIR)check_map.c \
 				$(SRCS_BONUS_DIR)colors.c \
 				$(SRCS_BONUS_DIR)controls.c \
-				$(SRCS_BONUS_DIR)crosshair.c \
 				$(SRCS_BONUS_DIR)draw_utils.c \
 				$(SRCS_BONUS_DIR)draw.c \
 				$(SRCS_BONUS_DIR)errors.c \
@@ -64,13 +62,14 @@ SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
 				$(SRCS_BONUS_DIR)init.c \
 				$(SRCS_BONUS_DIR)load_walls.c \
 				$(SRCS_BONUS_DIR)map.c \
-				$(SRCS_BONUS_DIR)mouse.c \
 				$(SRCS_BONUS_DIR)move.c \
 				$(SRCS_BONUS_DIR)parse.c \
 				$(SRCS_BONUS_DIR)raycasting.c \
 				$(SRCS_BONUS_DIR)render.c \
 				$(SRCS_BONUS_DIR)textures.c \
 				$(SRCS_BONUS_DIR)trim.c \
+				$(SRCS_BONUS_DIR)mouse.c \
+				$(SRCS_BONUS_DIR)crosshair.c \
 				$(SRCS_BONUS_DIR)pickaxe.c \
 				$(SRCS_BONUS_DIR)totem.c \
 				$(SRCS_BONUS_DIR)doors.c

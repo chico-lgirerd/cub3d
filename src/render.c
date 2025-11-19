@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:56:51 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:44:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ static int	render(t_data *data)
 	static struct timeval	last_time;
 
 	gettimeofday(&curr_time, NULL);
+	if (last_time.tv_sec == 0 && last_time.tv_usec == 0)
+	{
+		last_time = curr_time;
+		return (0);
+	}
 	update_player(data, curr_time, last_time);
 	last_time = curr_time;
 	perform_raycasting(data);
-	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->game_img.img_ptr, 0, 0);
 	return (0);
