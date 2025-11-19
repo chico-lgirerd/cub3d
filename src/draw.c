@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/10 15:07:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/19 11:35:33 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	draw_map(t_data *data, int x)
 	if (draw->end > data->win_height)
 		draw->end = data->win_height - 1;
 	draw_ceiling_floor(data, x, draw->start, draw->end);
-	if (rc->is_door == 1)
+	if (rc->door_seen == 1)
 		draw->wall_tex = data->textures.door;
 	else if (rc->side == 0 && rc->raydir_x < 0)
 		draw->wall_tex = data->textures.east;

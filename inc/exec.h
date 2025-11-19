@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 14:20:24 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 12:17:10 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ typedef struct s_raycasting
 	int		step_y;
 	int		hit;
 	int		side;
-	int		is_door;
-	t_door	**doors;
+	int		door_seen;
 	t_door	*tmpdoor;
 	t_draw	draw;
 }	t_raycasting;
@@ -198,7 +197,7 @@ void	free_map(char **map);
 
 int		get_door_state(t_data *data, int x, int y);
 void	init_doors_pos(t_data *data);
-t_door	*get_door_from_pos(t_data *data, int x, int y);
+t_door	*get_door_from_pos(t_data *data, int i, int j);
 
 void	print_doors(t_data *data);
 

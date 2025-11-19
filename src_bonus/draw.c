@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/12 15:54:35 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/18 20:50:04 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	compute_tex_x(t_data *data)
 		wall_x = player.pos_x + rc.perp_walldist * rc.raydir_x;
 	wall_x -= floor(wall_x);
 	tex_x = wall_x * data->textures.width;
-	if ((rc.side == 0 && rc.raydir_x > 0) || (rc.side == 1 && rc.raydir_y > 0))
+	if (!rc.door_seen && ((rc.side == 0 && rc.raydir_x > 0) || (rc.side == 1 && rc.raydir_y > 0)))
 		tex_x = data->textures.width - tex_x - 1;
 	return (tex_x);
 }
@@ -125,7 +125,7 @@ void	draw_map(t_data *data, int x)
 	if (draw->end > data->win_height)
 		draw->end = data->win_height - 1;
 	draw_ceiling_floor(data, x, draw->start, draw->end);
-	if (rc->is_door == 1)
+	if (rc->door_seen)
 		draw->wall_tex = data->textures.door;
 	else if (rc->side == 0 && rc->raydir_x < 0)
 		draw->wall_tex = data->textures.east;

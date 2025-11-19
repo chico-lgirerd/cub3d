@@ -1,6 +1,6 @@
 NO  assets/walls/north.xpm
 SO	 assets/walls/south.xpm
-WE	 assets/walls/west.xpm
+WE	 assets/walls/west256.xpm
 EA	 assets/walls/east.xpm
 
 F 20,30,50

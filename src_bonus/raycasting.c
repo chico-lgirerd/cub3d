@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/18 15:02:13 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 12:44:02 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static void	init_raycasting(t_data *data, int x)
 	player = &data->player;
 	rc = &data->raycasting;
 	rc->hit = 0;
-	rc->is_door = 0;
-	init_doors_pos(data);
+	rc->door_seen = 0;
 	rc->map_x = (int)player->pos_x;
 	rc->map_y = (int)player->pos_y;
 	rc->camera_x = 2 * x / (double)data->win_width - 1;
@@ -80,35 +79,13 @@ static void	perform_dda(t_data *data)
 			rc->map_x += rc->step_x;
 			rc->side = 0;
 		}
-		else if (data->map[rc->map_y][rc->map_x] == 'D')
-		{
-			rc->tmpdoor = get_door_from_pos(data, rc->map_y - data->map_start + 1, rc->map_x);
-			if (rc->side == 0)
-			{
-				rc->tmpdoor->pos = data->player.pos_y + rc->perp_walldist * rc->raydir_y;
-				rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
-			}
-			else
-			{
-				rc->tmpdoor->pos = data->player.pos_x + rc->perp_walldist * rc->raydir_x;
-				rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
-			}
-			if (!rc->tmpdoor->is_open || (rc->tmpdoor->pos >= rc->tmpdoor->open_pos
-				&& rc->tmpdoor->pos <= rc->tmpdoor->open_pos + rc->tmpdoor->width))
-			{
-				rc->hit = 1;
-				rc->is_door = 1;
-			}
-			else
-				rc->hit = 0;
-		}
 		else
 		{
 			rc->walldist_y += rc->deltadist_y;
 			rc->map_y += rc->step_y;
 			rc->side = 1;
 		}
-		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'C')
+		if (data->map[rc->map_y][rc->map_x] == '1' || data->map[rc->map_y][rc->map_x] == 'D')
 			rc->hit = 1;
 	}
 }
@@ -121,7 +98,6 @@ int	perform_raycasting(t_data *data)
 
 	player = &data->player;
 	rc = &data->raycasting;
-	rc->doors = &data->doors;
 	x = 0;
 	while (x < data->win_width)
 	{
@@ -134,6 +110,18 @@ int	perform_raycasting(t_data *data)
 		else
 			rc->perp_walldist = (rc->map_y - player->pos_y
 					+ (1 - rc->step_y) / 2) / rc->raydir_y;
+		if (data->map[rc->map_y][rc->map_x] == 'D')
+		{
+			rc->tmpdoor = get_door_from_pos(data, rc->map_y - data->map_start + 1, rc->map_x);
+			if (rc->side == 0)
+				rc->tmpdoor->pos = player->pos_y + rc->perp_walldist * rc->raydir_y;
+			else
+				rc->tmpdoor->pos = player->pos_x + rc->perp_walldist * rc->raydir_x;
+			rc->tmpdoor->pos -= floor(rc->tmpdoor->pos);
+			if (!rc->tmpdoor->is_open || (rc->tmpdoor->pos >= rc->tmpdoor->open_pos
+					&& rc->tmpdoor->pos <= rc->tmpdoor->open_pos + rc->tmpdoor->width))
+				rc->door_seen = 1;
+		}
 		draw_map(data, x);
 		x++;
 	}
