@@ -39,7 +39,7 @@ SRCS    	=	$(SRCS_DIR)main.c \
 				$(SRCS_DIR)map.c \
 				$(SRCS_DIR)move.c \
 				$(SRCS_DIR)parse.c \
-				$(SRCS_DIR)raysing.c \
+				$(SRCS_DIR)raycasting.c \
 				$(SRCS_DIR)render.c \
 				$(SRCS_DIR)textures.c \
 				$(SRCS_DIR)trim.c
@@ -67,7 +67,7 @@ SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
 				$(SRCS_BONUS_DIR)mouse.c \
 				$(SRCS_BONUS_DIR)move.c \
 				$(SRCS_BONUS_DIR)parse.c \
-				$(SRCS_BONUS_DIR)raysing.c \
+				$(SRCS_BONUS_DIR)raycasting.c \
 				$(SRCS_BONUS_DIR)render.c \
 				$(SRCS_BONUS_DIR)textures.c \
 				$(SRCS_BONUS_DIR)trim.c \

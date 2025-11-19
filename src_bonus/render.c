@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 16:13:12 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/19 16:21:17 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	render(t_data *data)
 	else
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->buffer.img_ptr, 0, 0);
-	fps_counter(data, curr_time)
+	fps_counter(data, curr_time);
 	return (0);
 }
 
