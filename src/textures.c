@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:25:39 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:33:03 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ int	fill_rgb(t_data *d, char *key, char **mapline)
 		d->textures.floor.red = color_until_comma(mapline);
 		d->textures.floor.green = color_until_comma(mapline);
 		d->textures.floor.blue = color_until_comma(mapline);
+		if (color_until_comma(mapline) != -1)
+			return (0);
 	}
 	else if (key[0] == 'C')
 	{
 		d->textures.ceiling.red = color_until_comma(mapline);
 		d->textures.ceiling.green = color_until_comma(mapline);
 		d->textures.ceiling.blue = color_until_comma(mapline);
+		if (color_until_comma(mapline) != -1)
+			return (0);		
 	}
 	return (1);
 }
@@ -48,7 +52,13 @@ int	load_texture(t_data *data, char *key, char **mapline)
 	else if (!ft_strcmp(key, "EA"))
 		load_east(data, *mapline);
 	else if ((key[0] == 'F' || key[0] == 'C') && (!key[1] || key[1] == ' '))
-		fill_rgb(data, key, mapline);
+	{
+		if (!fill_rgb(data, key, mapline))
+		{
+			printf("Error\nToo much colors\n");
+			return (0);
+		}
+	}
 	else
 	{
 		printf("Error\nKey not recognized\n");
