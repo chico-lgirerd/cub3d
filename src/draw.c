@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 20:16:22 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:34:02 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ void	draw_map(t_data *data, int x)
 	if (rc->door_seen == 1)
 		draw->wall_tex = data->textures.door;
 	else if (rc->side == 0 && rc->raydir_x < 0)
-		draw->wall_tex = data->textures.east;
-	else if (rc->side == 0 && rc->raydir_x > 0)
 		draw->wall_tex = data->textures.west;
+	else if (rc->side == 0 && rc->raydir_x > 0)
+		draw->wall_tex = data->textures.east;
 	else if (rc->side == 1 && rc->raydir_y < 0)
-		draw->wall_tex = data->textures.north;
-	else
 		draw->wall_tex = data->textures.south;
+	else
+		draw->wall_tex = data->textures.north;
 	draw_textured_wall(data, x, draw);
 }

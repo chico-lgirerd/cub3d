@@ -50,30 +50,30 @@ SRCS    	=	$(SRCS_DIR)main.c \
 
 
 SRCS_BONUS_DIR 	= src_bonus/
-SRCS_BONUS    = $(SRCS_BONUS_DIR)main.c \
-				$(SRCS_BONUS_DIR)check_map.c \
-				$(SRCS_BONUS_DIR)colors.c \
-				$(SRCS_BONUS_DIR)controls.c \
-				$(SRCS_BONUS_DIR)draw_utils.c \
-				$(SRCS_BONUS_DIR)draw.c \
-				$(SRCS_BONUS_DIR)errors.c \
-				$(SRCS_BONUS_DIR)file.c \
- 				$(SRCS_BONUS_DIR)garbage_collector.c \
-				$(SRCS_BONUS_DIR)init.c \
-				$(SRCS_BONUS_DIR)load_walls.c \
-				$(SRCS_BONUS_DIR)map.c \
-				$(SRCS_BONUS_DIR)move.c \
-				$(SRCS_BONUS_DIR)parse.c \
-				$(SRCS_BONUS_DIR)raycasting.c \
-				$(SRCS_BONUS_DIR)render.c \
-				$(SRCS_BONUS_DIR)textures.c \
-				$(SRCS_BONUS_DIR)trim.c \
-				$(SRCS_BONUS_DIR)minimap.c \
-				$(SRCS_BONUS_DIR)mouse.c \
-				$(SRCS_BONUS_DIR)crosshair.c \
-				$(SRCS_BONUS_DIR)pickaxe.c \
-				$(SRCS_BONUS_DIR)totem.c \
-				$(SRCS_BONUS_DIR)doors.c
+SRCS_BONUS    = $(SRCS_BONUS_DIR)main_bonus.c \
+				$(SRCS_BONUS_DIR)check_map_bonus.c \
+				$(SRCS_BONUS_DIR)colors_bonus.c \
+				$(SRCS_BONUS_DIR)controls_bonus.c \
+				$(SRCS_BONUS_DIR)draw_utils_bonus.c \
+				$(SRCS_BONUS_DIR)draw_bonus.c \
+				$(SRCS_BONUS_DIR)errors_bonus.c \
+				$(SRCS_BONUS_DIR)file_bonus.c \
+ 				$(SRCS_BONUS_DIR)garbage_collector_bonus.c \
+				$(SRCS_BONUS_DIR)init_bonus.c \
+				$(SRCS_BONUS_DIR)load_walls_bonus.c \
+				$(SRCS_BONUS_DIR)map_bonus.c \
+				$(SRCS_BONUS_DIR)move_bonus.c \
+				$(SRCS_BONUS_DIR)parse_bonus.c \
+				$(SRCS_BONUS_DIR)raycasting_bonus.c \
+				$(SRCS_BONUS_DIR)render_bonus.c \
+				$(SRCS_BONUS_DIR)textures_bonus.c \
+				$(SRCS_BONUS_DIR)trim_bonus.c \
+				$(SRCS_BONUS_DIR)minimap_bonus.c \
+				$(SRCS_BONUS_DIR)mouse_bonus.c \
+				$(SRCS_BONUS_DIR)crosshair_bonus.c \
+				$(SRCS_BONUS_DIR)pickaxe_bonus.c \
+				$(SRCS_BONUS_DIR)totem_bonus.c \
+				$(SRCS_BONUS_DIR)doors_bonus.c
 
 ############################# DIRECTORIES ##############################
 
