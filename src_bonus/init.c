@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 20:28:36 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:54:05 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	init_map(t_data *data, char *filename)
 		line_idx++;
 	}
 	data->map_start = line_idx;
-	if (handle_map_error(is_valid_map(data, data->map, data->map_start)))
-		return (1);
 	if (!have_textures(data->textures))
+		return (1);
+	if (handle_map_error(is_valid_map(data, data->map, data->map_start)))
 		return (1);
 	return (0);
 }
@@ -84,6 +84,11 @@ void	init_image(t_data *data)
 	data->buffer.height = data->win_height;
 	data->buffer.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->buffer.width, data->buffer.height);
+	if (!data->buffer.img_ptr)
+	{
+		printf("Error\nCould not create game image\n");
+		secure_free(data);
+	}
 	data->buffer.addr = mlx_get_data_addr(data->buffer.img_ptr,
 			&data->buffer.bits_per_pixel,
 			&data->buffer.size_line,
@@ -93,4 +98,9 @@ void	init_image(t_data *data)
 	data->pause.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/pause.xpm",
 			&data->pause.width, &data->pause.height);
+	if (!data->pause.img_ptr)
+	{
+		printf("Error\nCould not load pause image\n");
+		secure_free(data);
+	}
 }

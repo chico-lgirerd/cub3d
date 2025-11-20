@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pickaxe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 13:45:45 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:31:04 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:51:04 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
 #include <math.h>
+#include <stdio.h>
 
 void	init_pickaxe(t_data *data)
 {
@@ -21,6 +22,11 @@ void	init_pickaxe(t_data *data)
 	data->pickaxe.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/pickaxe500.xpm",
 			&data->pickaxe.width, &data->pickaxe.height);
+	if (!data->pickaxe.img_ptr)
+	{
+		printf("Error\nCould not load pickaxe\n");
+		secure_free(data);
+	}
 	data->pickaxe.addr = mlx_get_data_addr(data->pickaxe.img_ptr,
 			&data->pickaxe.bits_per_pixel, &data->pickaxe.size_line,
 			&data->pickaxe.endian);

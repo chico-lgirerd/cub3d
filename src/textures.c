@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/20 11:33:03 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 11:59:35 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	fill_rgb(t_data *d, char *key, char **mapline)
 		d->textures.ceiling.green = color_until_comma(mapline);
 		d->textures.ceiling.blue = color_until_comma(mapline);
 		if (color_until_comma(mapline) != -1)
-			return (0);		
+			return (0);
 	}
 	return (1);
 }

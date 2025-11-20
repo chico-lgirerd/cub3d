@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   totem.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 19:25:27 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:32:20 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:52:09 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "mlx.h"
 #include <math.h>
+#include <stdio.h>
 
 void	init_totem(t_data *data)
 {
@@ -21,6 +22,11 @@ void	init_totem(t_data *data)
 	data->totem.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/totem.xpm",
 			&data->totem.width, &data->totem.height);
+	if (!data->totem.img_ptr)
+	{
+		printf("Error\nCould not load totem\n");
+		secure_free(data);
+	}
 	data->totem.addr = mlx_get_data_addr(data->totem.img_ptr,
 			&data->totem.bits_per_pixel, &data->totem.size_line,
 			&data->totem.endian);

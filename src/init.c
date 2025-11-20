@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 20:17:58 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 11:58:35 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	init_map(t_data *data, char *filename)
 		line_idx++;
 	}
 	data->map_start = line_idx;
-	if (handle_map_error(is_valid_map(data, data->map, data->map_start)))
-		return (1);
 	if (!have_textures(data->textures))
+		return (1);
+	if (handle_map_error(is_valid_map(data, data->map, data->map_start)))
 		return (1);
 	return (0);
 }
@@ -82,6 +82,11 @@ void	init_image(t_data *data)
 {
 	data->game_img.img_ptr = mlx_new_image(data->mlx_ptr,
 			data->win_width, data->win_height);
+	if (!data->game_img.img_ptr)
+	{
+		printf("Error\nCould not create game image\n");
+		secure_free(data);
+	}
 	data->game_img.addr = mlx_get_data_addr(data->game_img.img_ptr,
 			&data->game_img.bits_per_pixel,
 			&data->game_img.size_line,
