@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:37:25 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/04 14:09:10 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 12:23:15 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	check_below(char **map, int i, int j)
 	int	below_cols;
 
 	below_cols = ft_strlen(map[i + 1]);
-	if (j >= below_cols - 1 || map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
+	if (j >= below_cols - 1)
+		return (1);
+	if (map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
 		return (0);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:18:28 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:16:17 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	load_north(t_data *d, char *mapline)
 	t_wall	*n;
 
 	n = &d->textures.north;
+	if (n->img)
+		return ;
 	n->img = mlx_xpm_file_to_image(d->mlx_ptr,
 			mapline, &d->textures.width, &d->textures.height);
 	if (n->img)
@@ -34,6 +36,8 @@ void	load_south(t_data *d, char *mapline)
 	t_wall	*s;
 
 	s = &d->textures.south;
+	if (s->img)
+		return ;
 	s->img = mlx_xpm_file_to_image(d->mlx_ptr,
 			mapline, &d->textures.width, &d->textures.height);
 	if (s->img)
@@ -50,6 +54,8 @@ void	load_west(t_data *d, char *mapline)
 	t_wall	*we;
 
 	we = &d->textures.west;
+	if (we->img)
+		return ;
 	we->img = mlx_xpm_file_to_image(d->mlx_ptr,
 			mapline, &d->textures.width, &d->textures.height);
 	if (we->img)
@@ -66,6 +72,8 @@ void	load_east(t_data *d, char *mapline)
 	t_wall	*e;
 
 	e = &d->textures.east;
+	if (e->img)
+		return ;
 	e->img = mlx_xpm_file_to_image(d->mlx_ptr,
 			mapline, &d->textures.width, &d->textures.height);
 	if (e->img)
