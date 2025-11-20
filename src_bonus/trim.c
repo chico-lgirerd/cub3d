@@ -6,7 +6,7 @@
 /*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:29:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/20 17:08:21 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 17:29:49 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	empty(char *str)
 
 void	put_spaces(char *dst, int *i)
 {
-	dst[(*i++)] = ' ';
-	dst[(*i++)] = ' ';
-	dst[(*i++)] = ' ';
-	dst[(*i++)] = ' ';
+	dst[(*i)++] = ' ';
+	dst[(*i)++] = ' ';
+	dst[(*i)++] = ' ';
+	dst[(*i)++] = ' ';
 }
