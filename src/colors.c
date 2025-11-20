@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 15:45:36 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:15:18 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:45:47 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	color_until_comma(char **color)
 	{
 		(*color)++;
 		skip_spaces(color);
+		if (!**color)
+			return (-1);
+		if (**color < '0' || **color > '9')
+			return (-1);
 	}
 	return (value);
 }
