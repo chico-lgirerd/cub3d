@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:54:34 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/07 16:29:34 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:02:00 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_world
 
 int		check_args(int ac, char **av);
 void	trim_map(char **map);
+void	put_spaces(char *dst, int *i);
 int		empty(char *str);
 char	**map_from_file(char *filename);
 int		color_until_comma(char **color);

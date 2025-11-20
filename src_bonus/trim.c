@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:29:24 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:32:30 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:08:21 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ int	empty(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	put_spaces(char *dst, int *i)
+{
+	dst[(*i++)] = ' ';
+	dst[(*i++)] = ' ';
+	dst[(*i++)] = ' ';
+	dst[(*i++)] = ' ';
 }

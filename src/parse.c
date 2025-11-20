@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:57:14 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/19 20:21:57 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:08:33 by lgirerd          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parsing.h"
 #include "get_next_line.h"
 
 int	is_map_line(char *line)
@@ -54,15 +55,15 @@ char	*expand_tabs(char *str)
 	j = 0;
 	exp = malloc((ft_strlen(str) * 4) + 1);
 	if (!exp)
+	{
+		free(str);
 		return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] == '\t')
 		{
-			exp[j++] = ' ';
-			exp[j++] = ' ';
-			exp[j++] = ' ';
-			exp[j++] = ' ';
+			put_spaces(exp, &j);
 			i++;
 		}
 		else
