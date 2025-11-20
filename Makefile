@@ -89,7 +89,7 @@ DEPS_BONUS        := $(OBJS_BONUS:.o=.d)
 
 all: $(LIBFT) $(NAME)
 
-$(LIBFT):	force $(LIBFT_HDR_DIR)
+$(LIBFT): force $(LIBFT_HDR_DIR)
 	@make --no-print-directory -C ./libft
 
 mlx:
@@ -98,7 +98,7 @@ mlx:
 		git clone $(MLX_REPO) $(MLX_DIR) && cd $(MLX_DIR) && ./configure && make; \
 	else \
 		echo "MiniLibX already present."; \
-fi
+	fi
 
 force:
 $(NAME):	mlx $(OBJS) libft/libft.a
