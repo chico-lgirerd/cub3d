@@ -6,7 +6,7 @@
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:57:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 21:35:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:35:44 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <math.h>
-
-void	init_mouse(t_data *data)
-{
-	data->mouse.center_x = data->win_width / 2;
-	data->mouse.center_y = data->win_height / 2;
-	data->mouse.square_radius = 80;
-	mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
-	mlx_mouse_move(data->mlx_ptr, data->win_ptr,
-		data->mouse.center_x, data->mouse.center_y);
-	data->mouse.recentered = 1;
-}
 
 static int	ingame_mouse(int x, int y, t_data *data)
 {
@@ -73,6 +62,21 @@ int	mouse_handler(int x, int y, t_data *data)
 	return (0);
 }
 
+int	door_in_radius(t_data *data, int map_x, int map_y)
+{
+	if (map_y >= data->map_start && map_y <= data->map_end
+		&& map_x >= 0 && map_x < (int)ft_strlen(data->map[map_y]))
+	{
+		if (data->map[map_y][map_x] == 'D')
+		{
+			data->rays.tmpdoor = get_door_from_pos(data,
+					map_y - data->map_start + 1, map_x);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	mouse_button_handler(int button, int x, int y, t_data *data)
 {
 	double	step;
@@ -89,17 +93,11 @@ int	mouse_button_handler(int button, int x, int y, t_data *data)
 		{
 			map_x = (int)floor(data->player.pos_x + data->player.dir_x * i);
 			map_y = (int)floor(data->player.pos_y + data->player.dir_y * i);
-			if (map_y >= data->map_start && map_y <= data->map_end
-				&& map_x >= 0 && map_x < (int)ft_strlen(data->map[map_y]))
+			if (door_in_radius(data, map_x, map_y))
 			{
-				if (data->map[map_y][map_x] == 'D')
-				{
-					data->rays.tmpdoor = get_door_from_pos(data,
-							map_y - data->map_start + 1, map_x);
-					if (data->rays.tmpdoor != NULL)
-						data->rays.tmpdoor->is_open = !data->rays.tmpdoor->is_open;
-					break ;
-				}
+				if (data->rays.tmpdoor != NULL)
+					data->rays.tmpdoor->is_open = !data->rays.tmpdoor->is_open;
+				break ;
 			}
 			i += step;
 		}

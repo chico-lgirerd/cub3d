@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:04:43 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/20 11:54:05 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 13:34:59 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,15 @@ void	init_image(t_data *data)
 		printf("Error\nCould not load pause image\n");
 		secure_free(data);
 	}
+}
+
+void	init_mouse(t_data *data)
+{
+	data->mouse.center_x = data->win_width / 2;
+	data->mouse.center_y = data->win_height / 2;
+	data->mouse.square_radius = 80;
+	mlx_mouse_hide(data->mlx_ptr, data->win_ptr);
+	mlx_mouse_move(data->mlx_ptr, data->win_ptr,
+		data->mouse.center_x, data->mouse.center_y);
+	data->mouse.recentered = 1;
 }
