@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:09:39 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/20 11:54:14 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/24 17:08:18 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int	render(t_data *data)
 void	exec_game(t_data *data)
 {
 	mlx_get_screen_size(data->mlx_ptr, &data->win_width, &data->win_height);
+	data->win_width = 1800;
+	data->win_height = 1000;
 	data->minimap.width = data->win_height / 6;
 	data->minimap.height = data->win_height / 6;
 	data->win_ptr = mlx_new_window(data->mlx_ptr,

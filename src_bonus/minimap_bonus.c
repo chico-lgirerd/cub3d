@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 19:43:27 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/19 21:34:10 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:28:49 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "libft.h"
 
 static void	draw_empty_cases(t_data *data, int x, int y)
 {
@@ -21,8 +20,8 @@ static void	draw_empty_cases(t_data *data, int x, int y)
 	int		py;
 	int		color;
 
-	case_w = (double)data->minimap.width / MINIMAP_ZOOM;
-	case_h = (double)data->minimap.height / MINIMAP_ZOOM;
+	case_w = (double)data->minimap.width / 15;
+	case_h = (double)data->minimap.height / 15;
 	color = rgb_to_int(30, 30, 30);
 	px = 0;
 	while (px < case_w)
@@ -46,8 +45,8 @@ static void	draw_cases(t_data *data, int x, int y)
 	int		py;
 	int		color;
 
-	case_w = (double)data->minimap.width / MINIMAP_ZOOM;
-	case_h = (double)data->minimap.height / MINIMAP_ZOOM;
+	case_w = (double)data->minimap.width / 15;
+	case_h = (double)data->minimap.height / 15;
 	if (data->map[data->minimap.map_y][data->minimap.map_x] == '1')
 		color = rgb_to_int(128, 128, 128);
 	else
@@ -91,25 +90,52 @@ static void	draw_player(t_data *data)
 	}
 }
 
+void	draw_minimap_border(t_data *data, int x, int y)
+{
+	int	i;
+	int	color;
+	int	offset;
+
+	color = rgb_to_int(180, 150, 0);
+	offset = 0;
+	while (offset < 4)
+	{
+		i = -1;
+		while (i++ < data->minimap.width)
+		{
+			my_mlx_pixel_put(&data->buffer, x + i, y + offset, color);
+			my_mlx_pixel_put(&data->buffer,
+				x + i, y + data->minimap.height - 1 - offset, color);
+		}
+		i = -1;
+		while (i++ < data->minimap.height)
+		{
+			my_mlx_pixel_put(&data->buffer, x + offset, y + i, color);
+			my_mlx_pixel_put(&data->buffer,
+				x + data->minimap.width - 1 - offset, y + i, color);
+		}
+		offset++;
+	}
+}
+
 void	draw_minimap(t_data *data)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	t_minimap	*minimap;
 
-	data->minimap.start_x = (int)data->player.pos_x - MINIMAP_ZOOM / 2;
-	data->minimap.start_y = (int)data->player.pos_y - MINIMAP_ZOOM / 2;
+	minimap = &data->minimap;
+	minimap->start_x = (int)data->player.pos_x - 15 / 2;
+	minimap->start_y = (int)data->player.pos_y - 15 / 2;
 	x = 0;
-	while (x < MINIMAP_ZOOM)
+	while (x < 15)
 	{
 		y = 0;
-		while (y < MINIMAP_ZOOM)
+		while (y < 15)
 		{
-			data->minimap.map_x = data->minimap.start_x + x;
-			data->minimap.map_y = data->minimap.start_y + y;
-			if (data->minimap.map_y >= data->map_start
-				&& data->minimap.map_y <= data->map_end
-				&& data->minimap.map_x >= 0 && data->minimap.map_x
-				< (int)ft_strlen(data->map[data->minimap.map_y]))
+			minimap->map_x = data->minimap.start_x + x;
+			minimap->map_y = data->minimap.start_y + y;
+			if (map_in_border(data, minimap->map_x, minimap->map_y))
 				draw_cases(data, x, y);
 			else
 				draw_empty_cases(data, x, y);
@@ -118,4 +144,5 @@ void	draw_minimap(t_data *data)
 		x++;
 	}
 	draw_player(data);
+	draw_minimap_border(data, 10, 10);
 }

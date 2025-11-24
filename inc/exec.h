@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 11:51:25 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/20 11:53:02 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/24 19:21:44 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define BASE_SPEED 2.5
 # define KEY_SENSI 1.5
 # define MOUSE_SENSI 0.0015
-# define MINIMAP_ZOOM 25
 # define INTERACT_RADIUS 1.8
 # define MAX_DOOR 100
 
@@ -184,6 +183,7 @@ int		mouse_button_handler(int button, int x, int y, t_data *data);
 int		get_door_state(t_data *data, int x, int y);
 t_door	*get_door_from_pos(t_data *data, int i, int j);
 
+int		map_in_border(t_data *data, int map_x, int map_y);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		get_texture_color(t_wall *texture, int tex_x, int tex_y);
 int		rgb_to_int(int r, int g, int b);

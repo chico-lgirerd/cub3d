@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:55:57 by tiaperei          #+#    #+#             */
-/*   Updated: 2025/11/20 17:36:21 by tiaperei         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:59:53 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include <math.h>
 
-static int	compute_tex_x(t_data *data)
+static int	compute_tex_x(t_data *data, t_draw *draw)
 {
 	double		wall_x;
 	int			tex_x;
@@ -27,10 +27,10 @@ static int	compute_tex_x(t_data *data)
 	else
 		wall_x = player.pos_x + rc.perp_walldist * rc.raydir_x;
 	wall_x -= floor(wall_x);
-	tex_x = wall_x * data->textures.width;
+	tex_x = wall_x * draw->wall_tex.width;
 	if (!rc.door_seen && ((rc.side == 0 && rc.raydir_x > 0)
 			|| (rc.side == 1 && rc.raydir_y > 0)))
-		tex_x = data->textures.width - tex_x - 1;
+		tex_x = draw->wall_tex.width - tex_x - 1;
 	return (tex_x);
 }
 
@@ -41,16 +41,16 @@ static void	draw_textured_wall(t_data *data, int x, t_draw *draw)
 	double	step;
 	double	tex_pos;
 
-	draw->tex_x = compute_tex_x(data);
-	step = 1.0 * data->textures.height / draw->line_height;
+	draw->tex_x = compute_tex_x(data, draw);
+	step = 1.0 * draw->wall_tex.height / draw->line_height;
 	tex_pos = (draw->start - data->win_height / 2 + draw->line_height / 2)
 		* step;
 	y = draw->start;
 	while (y < draw->end)
 	{
 		draw->tex_y = (int)tex_pos;
-		if (draw->tex_y >= data->textures.height)
-			draw->tex_y = data->textures.height - 1;
+		if (draw->tex_y >= draw->wall_tex.height)
+			draw->tex_y = draw->wall_tex.height - 1;
 		tex_pos += step;
 		color = get_texture_color(&draw->wall_tex, draw->tex_x, draw->tex_y);
 		my_mlx_pixel_put(&data->buffer, x, y, color);

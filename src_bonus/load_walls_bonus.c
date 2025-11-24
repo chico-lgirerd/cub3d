@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_walls.c                                       :+:      :+:    :+:   */
+/*   load_walls_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgirerd <lgirerd@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: tiaperei <tiaperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:11:51 by lgirerd           #+#    #+#             */
-/*   Updated: 2025/11/20 13:22:08 by lgirerd          ###   ########lyon.fr   */
+/*   Updated: 2025/11/24 14:30:57 by tiaperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void	load_north(t_data *d, char *mapline)
 	if (n->img)
 		return ;
 	n->img = mlx_xpm_file_to_image(d->mlx_ptr,
-			mapline, &d->textures.width, &d->textures.height);
+			mapline, &n->width, &n->height);
 	if (n->img)
 		n->addr = mlx_get_data_addr(n->img,
 				&n->bpp, &n->length, &n->endian);
 	if (!n->img || !n->addr)
 		n->loaded = 0;
-	n->loaded = 1;
+	else
+		n->loaded = 1;
 }
 
 void	load_south(t_data *d, char *mapline)
@@ -38,13 +39,14 @@ void	load_south(t_data *d, char *mapline)
 	if (s->img)
 		return ;
 	s->img = mlx_xpm_file_to_image(d->mlx_ptr,
-			mapline, &d->textures.width, &d->textures.height);
+			mapline, &s->width, &s->height);
 	if (s->img)
 		s->addr = mlx_get_data_addr(s->img,
 				&s->bpp, &s->length, &s->endian);
 	if (!s->img || !s->addr)
 		s->loaded = 0;
-	s->loaded = 1;
+	else
+		s->loaded = 1;
 }
 
 void	load_west(t_data *d, char *mapline)
@@ -55,13 +57,14 @@ void	load_west(t_data *d, char *mapline)
 	if (we->img)
 		return ;
 	we->img = mlx_xpm_file_to_image(d->mlx_ptr,
-			mapline, &d->textures.width, &d->textures.height);
+			mapline, &we->width, &we->height);
 	if (we->img)
 		we->addr = mlx_get_data_addr(we->img,
 				&we->bpp, &we->length, &we->endian);
 	if (!we->img || !we->addr)
 		we->loaded = 0;
-	we->loaded = 1;
+	else
+		we->loaded = 1;
 }
 
 void	load_east(t_data *d, char *mapline)
@@ -72,13 +75,14 @@ void	load_east(t_data *d, char *mapline)
 	if (e->img)
 		return ;
 	e->img = mlx_xpm_file_to_image(d->mlx_ptr,
-			mapline, &d->textures.width, &d->textures.height);
+			mapline, &e->width, &e->height);
 	if (e->img)
 		e->addr = mlx_get_data_addr(e->img,
 				&e->bpp, &e->length, &e->endian);
 	if (!e->img || !e->addr)
 		e->loaded = 0;
-	e->loaded = 1;
+	else
+		e->loaded = 1;
 }
 
 void	load_door(t_data *d, char *mapline)

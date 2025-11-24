@@ -1,15 +1,15 @@
-NO assets/walls/north.xpm
-SO assets/walls/south.xpm
+NO assets/walls/north256.xpm
+SO assets/walls/south256.xpm
 
 
-F 255,255,255
+F 20,20,20
 
 
-WE assets/walls/west.xpm
+WE assets/walls/west256.xpm
 
-					EA assets/walls/east.xpm
+					EA assets/walls/east256.xpm
 
-C 255,0,0
+C 0,0,50
  111111111111111111		 
 10000000000000000001			
 10000000000000000001			
